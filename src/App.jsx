@@ -15,6 +15,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/style-guide' element={<StyleGuide />} />
+            <Route path='/style-guide/:section' element={<StyleGuide />} />
           </Routes>
         </main>
       </div>
