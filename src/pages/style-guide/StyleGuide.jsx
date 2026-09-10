@@ -73,7 +73,7 @@ const sections = [
   },
   {
     slug: "accessibility",
-    title: "Accessibility features",
+    title: "Accessibility",
     description: "Built-in choices that make the foundation more inclusive.",
     Component: Accessibility,
   },
@@ -131,10 +131,11 @@ function PageAnchors({ variant }) {
 
   useEffect(() => {
     const updateActiveAnchor = () => {
-      const navigationBottom = document.querySelector(".guide-navigation")?.getBoundingClientRect().bottom ?? 0;
+      const navigationTop = document.querySelector(".guide-navigation")?.getBoundingClientRect().top ?? 0;
+      const activationOffset = navigationTop + 10 * 16;
       const currentAnchor = [...typographyAnchors]
         .reverse()
-        .find(({ id }) => document.getElementById(id)?.getBoundingClientRect().top <= navigationBottom + 32);
+        .find(({ id }) => document.getElementById(id)?.getBoundingClientRect().top <= activationOffset);
 
       setActiveAnchor(currentAnchor?.id ?? typographyAnchors[0].id);
     };

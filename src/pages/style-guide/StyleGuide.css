@@ -111,7 +111,7 @@
 }
 
 .page-anchors {
-  margin: 0.25rem 0 0.5rem 1rem;
+  margin: 0.75rem 0 0.5rem 1rem;
 }
 
 .page-anchors--mobile {
@@ -121,10 +121,16 @@
 .page-anchors--desktop .page-anchors__links a {
   border: 0;
   border-radius: 0;
+  padding: 0.375rem 0.5rem;
+  font-size: 0.75rem;
 }
 
 .page-anchors--desktop .page-anchors__links a.active {
   color: var(--accent);
+}
+
+.page-anchors--desktop .page-anchors__links {
+  gap: 0.25rem;
 }
 
 .preview {
