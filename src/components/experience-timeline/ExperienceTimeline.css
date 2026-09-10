@@ -1,9 +1,7 @@
 .experience-timeline {
   display: grid;
   gap: 1.5rem;
-  max-width: 64rem;
-  margin-inline: auto;
-  padding: 5rem 1.5rem;
+  padding: 5rem var(--page-gutter);
   border-top: 1px solid var(--border);
 }
 
@@ -53,6 +51,6 @@
   .experience-timeline {
     grid-template-columns: minmax(10rem, 1fr) minmax(0, 3fr);
     gap: 3rem;
-    padding: 7rem 2rem;
+    padding: 7rem var(--page-gutter);
   }
 }

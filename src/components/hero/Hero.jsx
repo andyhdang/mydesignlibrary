@@ -25,14 +25,12 @@ export default function Hero({
           </div>
         )}
       </div>
-      {(imageSrc || children) && (
+      {imageSrc && (
         <div className="hero__visual">
-          {imageSrc && (
-            <img className="hero__image" src={imageSrc} alt={imageAlt} />
-          )}
-          {children}
+          <img className="hero__image" src={imageSrc} alt={imageAlt} />
         </div>
       )}
+      {children && <div className="hero__supplementary">{children}</div>}
     </section>
   );
 }

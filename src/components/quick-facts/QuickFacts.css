@@ -1,0 +1,31 @@
+.quick-facts {
+  display: grid;
+  gap: 1.25rem;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.quick-facts__item {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.quick-facts dt {
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.quick-facts dd {
+  margin: 0;
+  font-weight: 400;
+}
+
+@media (min-width: 1280px) {
+  .quick-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
