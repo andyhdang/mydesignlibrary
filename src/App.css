@@ -1,5 +1,6 @@
 .App {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr);
   width: min(90%, 120rem);
   height: 100svh;
@@ -11,6 +12,7 @@
 
 main {
   min-height: 0;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {

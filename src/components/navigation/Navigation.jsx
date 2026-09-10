@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import "./Navigation.css";
 
@@ -14,6 +15,7 @@ export default function Navigation() {
       ? "dark"
       : "light";
   });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -28,12 +30,22 @@ export default function Navigation() {
         <span>Andy Dang</span>
         <span className="navigation__role">Digital Product Designer</span>
       </Link>
-      <ul>
+      <button
+        className="navigation__menu-toggle"
+        type="button"
+        aria-expanded={isMenuOpen}
+        aria-controls="main-navigation-links"
+        onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+      >
+        <Bars3Icon className="navigation__menu-icon" aria-hidden="true" />
+        <span className="sr-only">Menu</span>
+      </button>
+      <ul id="main-navigation-links" className={isMenuOpen ? "is-open" : undefined}>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
         </li>
         <li>
-          <Link to="/style-guide">Style Guide</Link>
+          <Link to="/style-guide" onClick={() => setIsMenuOpen(false)}>Style Guide</Link>
         </li>
       </ul>
       <button
