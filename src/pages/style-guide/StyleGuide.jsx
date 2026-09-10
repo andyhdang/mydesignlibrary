@@ -1,4 +1,6 @@
 import { NavLink, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import "./StyleGuide.css";
 
 export default function StyleGuide() {
@@ -7,22 +9,7 @@ export default function StyleGuide() {
 
   return (
     <main className="docs">
-      <aside className="docs-sidebar" aria-label="Style guide sections">
-        <p>On this page</p>
-        <nav>
-          {sections.map(({ slug, title }) => (
-            <NavLink
-              key={slug}
-              to={`/style-guide/${slug}`}
-              end
-              className={({ isActive }) => (isActive ? "active" : undefined)}
-            >
-              {title}
-            </NavLink>
-          ))}
-        </nav>
-      </aside>
-
+      <GuideNavigation activeSection={activeSection} />
       <div className="docs-content">
         {activeSection.slug === "overview" && (
           <header className="docs-header">
@@ -100,6 +87,87 @@ const sections = [
 
 function Overview() {
   return null;
+}
+
+function GuideNavigation({ activeSection }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <div className="guide-navigation">
+      <nav className="guide-section-nav" aria-label="Style guide sections">
+        <button
+          className="guide-section-nav__toggle"
+          type="button"
+          aria-expanded={isMenuOpen}
+          aria-controls="style-guide-sections"
+          onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+        >
+          {activeSection.title}
+          <ChevronDownIcon className="guide-section-nav__icon" aria-hidden="true" />
+        </button>
+        <div id="style-guide-sections" className={`guide-section-nav__links${isMenuOpen ? " is-open" : ""}`}>
+          {sections.map(({ slug, title }) => (
+            <div key={slug}>
+              <NavLink
+                to={`/style-guide/${slug}`}
+                end
+                className={({ isActive }) => (isActive ? "active" : undefined)}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {title}
+              </NavLink>
+              {slug === "typography" && activeSection.slug === "typography" && <PageAnchors variant="desktop" />}
+            </div>
+          ))}
+        </div>
+      </nav>
+      {activeSection.slug === "typography" && <PageAnchors variant="mobile" />}
+    </div>
+  );
+}
+
+function PageAnchors({ variant }) {
+  const [activeAnchor, setActiveAnchor] = useState(typographyAnchors[0].id);
+
+  useEffect(() => {
+    const updateActiveAnchor = () => {
+      const navigationBottom = document.querySelector(".guide-navigation")?.getBoundingClientRect().bottom ?? 0;
+      const currentAnchor = [...typographyAnchors]
+        .reverse()
+        .find(({ id }) => document.getElementById(id)?.getBoundingClientRect().top <= navigationBottom + 32);
+
+      setActiveAnchor(currentAnchor?.id ?? typographyAnchors[0].id);
+    };
+
+    updateActiveAnchor();
+    window.addEventListener("scroll", updateActiveAnchor, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateActiveAnchor);
+  }, []);
+
+  const scrollToSection = (event, id) => {
+    event.preventDefault();
+    setActiveAnchor(id);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <nav className={`page-anchors page-anchors--${variant}`} aria-label="Typography sections">
+      <div className="page-anchors__links">
+        {typographyAnchors.map(({ id, label }) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            className={activeAnchor === id ? "active" : undefined}
+            aria-current={activeAnchor === id ? "location" : undefined}
+            onClick={(event) => scrollToSection(event, id)}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
 }
 
 function Typography() {
@@ -247,20 +315,6 @@ function Typography() {
         </div>
       </section>
 
-      <section className="type-group" aria-labelledby="inline-styles">
-        <div className="type-group-heading">
-          <span className="docs-eyebrow">Inline styles</span>
-          <h2 id="inline-styles">Monospace treatments</h2>
-        </div>
-        <div className="preview stack-preview">
-          <p>Keyboard shortcut: <kbd>⌘</kbd> + <kbd>K</kbd></p>
-          <p>Terminal output: <samp>npm run dev</samp></p>
-          <pre><code>{`npm create vite@latest my-app -- --template react
-cd my-app
-npm install
-npm run dev`}</code></pre>
-        </div>
-      </section>
     </>
   );
 }
@@ -299,6 +353,14 @@ const fontSizes = [
   { name: "600", token: "--font-size-600", value: "clamp(1.5rem, 1.3rem + 1vw, 2rem)" },
   { name: "700", token: "--font-size-700", value: "clamp(2.25rem, 1.85rem + 2vw, 3.5rem)" },
   { name: "800", token: "--font-size-800", value: "clamp(3rem, 2rem + 4vw, 5rem)" },
+];
+
+const typographyAnchors = [
+  { id: "font-families", label: "Font families" },
+  { id: "font-shorthands", label: "Font shorthands" },
+  { id: "type-scale", label: "Responsive scale" },
+  { id: "line-heights", label: "Line heights" },
+  { id: "font-weights", label: "Font weights" },
 ];
 
 function TypeScaleItem({ name, token, clamp }) {
