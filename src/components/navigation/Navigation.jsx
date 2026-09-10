@@ -25,7 +25,8 @@ export default function Navigation() {
   return (
     <nav className="navigation" aria-label="Main navigation">
       <Link className="navigation__brand" to="/">
-        Your Name
+        <span>Andy Dang</span>
+        <span className="navigation__role">Digital Product Designer</span>
       </Link>
       <ul>
         <li>

@@ -2,9 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 64rem;
-  margin-inline: auto;
-  padding: 1.5rem;
+  width: 100%;
+  padding: 1.5rem var(--page-gutter);
 }
 
 .navigation ul {
@@ -22,7 +21,14 @@
 }
 
 .navigation__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
   letter-spacing: -0.03em;
+}
+
+.navigation__role {
+  font-weight: 300;
 }
 
 .navigation__theme-toggle {

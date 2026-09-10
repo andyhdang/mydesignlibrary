@@ -1,4 +1,20 @@
 .App {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(90%, 120rem);
+  height: 100svh;
+  margin-inline: auto;
   position: relative;
   z-index: 1;
+  --page-gutter: 1.5rem;
+}
+
+main {
+  min-height: 0;
+}
+
+@media (min-width: 768px) {
+  .App {
+    --page-gutter: 2rem;
+  }
 }
