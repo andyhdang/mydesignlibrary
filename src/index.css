@@ -46,6 +46,35 @@
   --sans: "Geologica", system-ui, sans-serif;
   --heading: "Geologica", system-ui, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
+  --font-size-100: 0.75rem;
+  --font-size-200: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
+  --font-size-300: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --font-size-400: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --font-size-500: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --font-size-600: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --font-size-700: clamp(2.25rem, 1.85rem + 2vw, 3.5rem);
+  --font-size-800: clamp(3rem, 2rem + 4vw, 5rem);
+  --line-height-display: 1;
+  --line-height-heading: 1.18;
+  --line-height-label: 1.2;
+  --line-height-subtitle: 1.35;
+  --line-height-caption: 1.4;
+  --line-height-body: 1.5;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-body-small: var(--font-weight-regular) var(--font-size-200) / var(--line-height-body) var(--sans);
+  --font-body-medium: var(--font-weight-regular) var(--font-size-300) / var(--line-height-body) var(--sans);
+  --font-body-large: var(--font-weight-regular) var(--font-size-400) / var(--line-height-body) var(--sans);
+  --font-title-small: var(--font-weight-medium) var(--font-size-500) / var(--line-height-heading) var(--heading);
+  --font-title-medium: var(--font-weight-medium) var(--font-size-600) / var(--line-height-heading) var(--heading);
+  --font-title-large: var(--font-weight-bold) var(--font-size-700) / var(--line-height-heading) var(--heading);
+  --font-caption: var(--font-weight-regular) var(--font-size-100) / var(--line-height-caption) var(--sans);
+  --font-subtitle: var(--font-weight-medium) var(--font-size-300) / var(--line-height-subtitle) var(--sans);
+  --font-display: var(--font-weight-bold) var(--font-size-800) / var(--line-height-display) var(--heading);
+  --font-code-block: var(--font-weight-regular) var(--font-size-200) / var(--line-height-body) var(--mono);
+  --font-label: var(--font-weight-bold) var(--font-size-100) / var(--line-height-label) var(--mono);
 }
 
 /* Dark Mode (System preference OR manual toggle) */
@@ -98,10 +127,6 @@ ol {
 html {
   color-scheme: light dark;
   font-size: 100%; /* Default browser size, usually 16px */
-
-  @media (max-width: 1024px) {
-    font-size: 93.75%; /* Scales 1rem down to 15px on smaller screens */
-  }
 }
 
 /* Accessibility: Respect user motion preferences */
@@ -124,8 +149,8 @@ body {
   color: var(--text);
   background-color: var(--bg);
   font-family: var(--sans);
-  font-size: 1.125rem;
-  line-height: 1.5;
+  font-size: var(--font-size-300);
+  line-height: var(--line-height-body);
 
   /* Font smoothing */
   font-synthesis: none;
@@ -171,29 +196,20 @@ h4,
 h5,
 h6 {
   font-family: var(--heading);
+  line-height: var(--line-height-heading);
   text-wrap: balance; /* Modern CSS: prevents uneven hanging words in titles */
 }
 
 h1 {
-  font-size: 3.5rem; /* ~56px */
+  font-size: var(--font-size-700);
   letter-spacing: -0.03em;
-  margin: 2rem 0;
-
-  @media (max-width: 1024px) {
-    font-size: 2.25rem; /* ~36px */
-    margin: 1.25rem 0;
-  }
+  margin: clamp(1.25rem, 0.9rem + 1.5vw, 2rem) 0;
 }
 
 h2 {
-  font-size: 1.5rem; /* ~24px */
-  line-height: 1.18;
+  font-size: var(--font-size-500);
   letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
-
-  @media (max-width: 1024px) {
-    font-size: 1.25rem; /* ~20px */
-  }
 }
 
 code,

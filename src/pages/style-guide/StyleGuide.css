@@ -87,21 +87,6 @@
   margin: 0 0 0.35rem;
 }
 
-.font-family {
-  margin: 0 0 1.25rem;
-  font-family: var(--mono);
-  font-size: 0.8rem;
-}
-
-.font-family strong {
-  color: var(--text);
-}
-
-.font-family span {
-  color: var(--accent);
-  padding-inline: 0.25rem;
-}
-
 .preview {
   padding: clamp(1.25rem, 4vw, 2.5rem);
   border: 1px solid var(--border);
@@ -110,23 +95,141 @@
   overflow-x: auto;
 }
 
-.type-preview {
+.type-group + .type-group {
+  margin-top: 3.5rem;
+}
+
+.type-group-heading {
+  margin-bottom: 1.25rem;
+}
+
+.type-group-heading h2 {
+  margin: 0.5rem 0;
+}
+
+.type-group-heading p {
+  max-width: 42rem;
+  opacity: 0.8;
+}
+
+.font-family-sample {
+  display: block;
+  min-width: 16rem;
+  color: var(--text);
+  font-size: 1.125rem;
+  line-height: 1.2;
+}
+
+.font-heading {
+  font-family: var(--heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-family: var(--mono);
+  font-size: 1rem;
+}
+
+.font-size-table table,
+.font-shorthand-table table {
+  min-width: 52rem;
+  border: 0;
+  border-radius: 0;
+}
+
+.font-shorthand-table table {
+  min-width: 58rem;
+}
+
+.font-size-table th,
+.font-size-table td,
+.font-shorthand-table th,
+.font-shorthand-table td {
+  white-space: nowrap;
+}
+
+.font-size-table th,
+.font-shorthand-table th {
+  border-top: 0;
+}
+
+.font-size-table th:first-child,
+.font-size-table td:first-child,
+.font-shorthand-table th:first-child,
+.font-shorthand-table td:first-child {
+  border-left: 0;
+}
+
+.font-size-table th:last-child,
+.font-size-table td:last-child,
+.font-shorthand-table th:last-child,
+.font-shorthand-table td:last-child {
+  border-right: 0;
+}
+
+.font-size-table tbody tr:last-child td,
+.font-shorthand-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.font-size-sample,
+.font-shorthand-sample {
+  color: var(--text);
+}
+
+.font-shorthand-value {
   display: grid;
-  gap: 1rem;
+  gap: 0.25rem;
+  justify-items: start;
 }
 
-.specimen-heading {
-  margin: 2.5rem 0 1rem;
+
+
+.font-size-table,
+.font-shorthand-table {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
 }
 
-.type-preview h1,
-.type-preview h2,
-.type-preview h3,
-.type-preview h4,
-.type-preview h5,
-.type-preview h6,
-.type-preview p {
-  margin: 0;
+.token-table {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.token-table table {
+  min-width: 48rem;
+  border: 0;
+  border-radius: 0;
+}
+
+.token-table th,
+.token-table td {
+  white-space: nowrap;
+}
+
+.token-table th {
+  border-top: 0;
+}
+
+.token-table th:first-child,
+.token-table td:first-child {
+  border-left: 0;
+}
+
+.token-table th:last-child,
+.token-table td:last-child {
+  border-right: 0;
+}
+
+.token-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.token-sample {
+  color: var(--text);
 }
 
 .elevation-card {
