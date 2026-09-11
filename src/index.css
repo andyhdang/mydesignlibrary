@@ -30,22 +30,40 @@
   /* Colors */
   --fg: oklch(51.35% 0.0296 305.45);
   --bg: oklch(100% 0 0);
+  --bg-surface: oklch(from var(--bg) calc(l - 0.02) c h);
+  --fg-inverse: oklch(from var(--bg) calc(l - 0.04) c h);
+  --bg-inverse: oklch(from var(--fg) calc(l - 0.1) c h);
   --border: oklch(92.05% 0.0042 301.42);
   --bg-code: oklch(96.3% 0.0093 99.98);
 
   /* Accents */
   --fg-accent: oklch(60.81% 0.269 305.12);
-  --bg-accent: oklch(from var(--fg-accent) l c h / 0.1);
+  --bg-accent: var(--fg-accent);
+  --bg-surface-accent: oklch(from var(--fg-accent) l c h / 0.1);
   --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
 
   /* Interaction states */
-  --button-bg-hover: oklch(from var(--bg) calc(l - 0.04) c h / 1);
-  --button-accent-bg-hover: oklch(from var(--fg-accent) calc(l + 0.06) c h / 1);
-  --button-fg-active: oklch(from var(--fg) calc(l - 0.14) c h / 1);
-  --button-bg-active: oklch(from var(--bg) calc(l - 0.08) c h / 1);
-  --button-border-active: oklch(from var(--border) calc(l - 0.14) c h / 1);
-  --button-accent-fg-active: oklch(from var(--fg-accent) calc(l - 0.2) c h / 1);
-  --button-accent-bg-active: oklch(from var(--fg-accent) calc(l + 0.18) c h / 1);
+  --button-outline-fg: var(--fg);
+  --button-outline-bg: var(--bg);
+  --button-outline-border: var(--border);
+  --button-outline-bg-hover: oklch(from var(--bg) calc(l - 0.04) c h);
+  --button-accent-bg-hover: oklch(from var(--fg-accent) calc(l + 0.06) c h);
+  --button-outline-fg-active: oklch(from var(--fg) calc(l - 0.14) c h);
+  --button-outline-bg-active: oklch(from var(--bg) calc(l - 0.08) c h);
+  --button-accent-fg: var(--fg-inverse);
+  --button-accent-bg: var(--bg-accent);
+  --button-accent-bg-active: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+  --button-filled-fg: var(--fg-inverse);
+  --button-filled-bg: var(--bg-inverse);
+  --button-filled-bg-hover: oklch(from var(--bg-inverse) calc(l + 0.06) c h);
+  --button-filled-bg-active: oklch(from var(--bg-inverse) calc(l - 0.06) c h);
+  --control-fg: var(--fg);
+  --control-bg: var(--bg);
+  --control-border: var(--border);
+  --control-bg-hover: oklch(from var(--bg) calc(l - 0.04) c h);
+  --control-bg-active: oklch(from var(--bg) calc(l - 0.08) c h);
+  --control-selected-fg: var(--fg-accent);
+  --control-selected-border: var(--fg-accent);
 
   /* Shadows & Elevations */
   --shadow:
@@ -94,18 +112,24 @@
   :root:not([data-theme]) {
     --fg: oklch(71.37% 0.0192 261.32);
     --bg: oklch(20.63% 0.012 277.83);
+    --bg-surface: oklch(from var(--bg) calc(l + 0.04) c h);
+    --fg-inverse: oklch(from var(--bg) calc(l + 0.04) c h);
+    --bg-inverse: oklch(from var(--fg) calc(l + 0.1) c h);
     --border: oklch(31.13% 0.0181 276.38);
     --bg-code: oklch(24.6% 0.0152 279.6);
     --fg-accent: oklch(72.17% 0.1767 305.5);
-    --bg-accent: oklch(from var(--fg-accent) l c h / 0.15);
+    --bg-accent: var(--fg-accent);
+    --bg-surface-accent: oklch(from var(--fg-accent) l c h / 0.15);
     --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
-    --button-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h / 1);
-    --button-accent-bg-hover: oklch(from var(--fg-accent) calc(l - 0.06) c h / 1);
-    --button-fg-active: oklch(from var(--fg) calc(l + 0.14) c h / 1);
-    --button-bg-active: oklch(from var(--bg) calc(l + 0.08) c h / 1);
-    --button-border-active: oklch(from var(--border) calc(l + 0.14) c h / 1);
-    --button-accent-fg-active: oklch(from var(--fg-accent) calc(l + 0.2) c h / 1);
-    --button-accent-bg-active: oklch(from var(--fg-accent) calc(l - 0.18) c h / 1);
+    --button-outline-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);
+    --button-accent-bg-hover: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+    --button-outline-fg-active: oklch(from var(--fg) calc(l + 0.14) c h);
+    --button-outline-bg-active: oklch(from var(--bg) calc(l + 0.08) c h);
+    --button-accent-bg-active: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+    --button-filled-bg-hover: oklch(from var(--bg-inverse) calc(l - 0.06) c h);
+    --button-filled-bg-active: oklch(from var(--bg-inverse) calc(l - 0.12) c h);
+    --control-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);
+    --control-bg-active: oklch(from var(--bg) calc(l + 0.08) c h);
     --shadow:
       oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
   }
@@ -115,18 +139,24 @@
 [data-theme="dark"] {
   --fg: oklch(71.37% 0.0192 261.32);
   --bg: oklch(20.63% 0.012 277.83);
+  --bg-surface: oklch(from var(--bg) calc(l + 0.04) c h);
+  --fg-inverse: oklch(from var(--bg) calc(l + 0.04) c h);
+  --bg-inverse: oklch(from var(--fg) calc(l + 0.1) c h);
   --border: oklch(31.13% 0.0181 276.38);
   --bg-code: oklch(24.6% 0.0152 279.6);
   --fg-accent: oklch(72.17% 0.1767 305.5);
-  --bg-accent: oklch(from var(--fg-accent) l c h / 0.15);
+  --bg-accent: var(--fg-accent);
+  --bg-surface-accent: oklch(from var(--fg-accent) l c h / 0.15);
   --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
-  --button-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h / 1);
-  --button-accent-bg-hover: oklch(from var(--fg-accent) calc(l - 0.06) c h / 1);
-  --button-fg-active: oklch(from var(--fg) calc(l + 0.14) c h / 1);
-  --button-bg-active: oklch(from var(--bg) calc(l + 0.08) c h / 1);
-  --button-border-active: oklch(from var(--border) calc(l + 0.14) c h / 1);
-  --button-accent-fg-active: oklch(from var(--fg-accent) calc(l + 0.2) c h / 1);
-  --button-accent-bg-active: oklch(from var(--fg-accent) calc(l - 0.18) c h / 1);
+  --button-outline-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);
+  --button-accent-bg-hover: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+  --button-outline-fg-active: oklch(from var(--fg) calc(l + 0.14) c h);
+  --button-outline-bg-active: oklch(from var(--bg) calc(l + 0.08) c h);
+  --button-accent-bg-active: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+  --button-filled-bg-hover: oklch(from var(--bg-inverse) calc(l - 0.06) c h);
+  --button-filled-bg-active: oklch(from var(--bg-inverse) calc(l - 0.12) c h);
+  --control-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);
+  --control-bg-active: oklch(from var(--bg) calc(l + 0.08) c h);
   --shadow:
     oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
 }

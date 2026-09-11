@@ -52,7 +52,7 @@
   padding: 1rem;
   border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: color-mix(in srgb, var(--bg) 94%, var(--bg-accent));
+  background: color-mix(in srgb, var(--bg) 94%, var(--bg-surface-accent));
 }
 
 .guide-section-nav {
@@ -135,7 +135,7 @@
   padding: clamp(1.25rem, 4vw, 2.5rem);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: color-mix(in srgb, var(--bg) 94%, var(--bg-accent));
+  background: color-mix(in srgb, var(--bg) 94%, var(--bg-surface-accent));
   overflow-x: auto;
 }
 
@@ -370,6 +370,16 @@
   gap: 1rem;
 }
 
+.color-groups {
+  display: grid;
+  gap: 2rem;
+}
+
+.color-group h3 {
+  margin-bottom: 0.75rem;
+  font: var(--font-label-medium);
+}
+
 .state-color-demo {
   display: flex;
   flex-wrap: wrap;
@@ -380,7 +390,7 @@
   padding: 1.5rem;
   border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: color-mix(in srgb, var(--bg) 94%, var(--bg-accent));
+  background: color-mix(in srgb, var(--bg) 94%, var(--bg-surface-accent));
 }
 
 .state-color-button {
@@ -394,20 +404,25 @@
   transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
-.state-color-button:hover {
-  background: var(--button-bg-hover);
+.state-color-button--outline {
+  border-color: var(--button-outline-border);
+  background: var(--button-outline-bg);
+  color: var(--button-outline-fg);
 }
 
-.state-color-button:active {
-  border-color: var(--button-border-active);
-  background: var(--button-bg-active);
-  color: var(--button-fg-active);
+.state-color-button--outline:hover {
+  background: var(--button-outline-bg-hover);
+}
+
+.state-color-button--outline:active {
+  background: var(--button-outline-bg-active);
+  color: var(--button-outline-fg-active);
 }
 
 .state-color-button--accent {
   border-color: var(--fg-accent);
-  background: var(--fg-accent);
-  color: var(--bg);
+  background: var(--button-accent-bg);
+  color: var(--button-accent-fg);
 }
 
 .state-color-button--accent:hover {
@@ -415,9 +430,66 @@
 }
 
 .state-color-button--accent:active {
-  border-color: var(--button-border-active);
   background: var(--button-accent-bg-active);
-  color: var(--button-accent-fg-active);
+}
+
+.state-color-button--filled {
+  border-color: transparent;
+  background: var(--button-filled-bg);
+  color: var(--button-filled-fg);
+}
+
+.state-color-button--filled:hover {
+  background: var(--button-filled-bg-hover);
+}
+
+.state-color-button--filled:active {
+  background: var(--button-filled-bg-active);
+}
+
+.button-token-tables {
+  display: grid;
+  gap: 1rem;
+}
+
+.state-color-subheading {
+  margin: 1.75rem 0 0.75rem;
+  font: var(--font-label-medium);
+}
+
+.control-color-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--bg) 94%, var(--bg-surface-accent));
+}
+
+.control-color-pill {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--control-bg);
+  color: var(--control-fg);
+  font: var(--font-label-small);
+  transition: background-color 150ms ease;
+}
+
+.control-color-pill:hover {
+  background: var(--control-bg-hover);
+}
+
+.control-color-pill:active {
+  background: var(--control-bg-active);
+}
+
+.control-color-pill.is-selected {
+  border-color: var(--control-selected-border);
+  color: var(--control-selected-fg);
 }
 
 .color-card {
