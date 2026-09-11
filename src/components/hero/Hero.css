@@ -16,8 +16,7 @@
 .hero__eyebrow {
   margin-bottom: 1rem;
   color: green;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font: var(--font-label-eyebrow);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }

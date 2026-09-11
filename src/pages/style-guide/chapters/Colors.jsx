@@ -20,6 +20,16 @@ const baseColors = [
   { name: "Accent border", variable: "--border-accent", sampleType: "border" },
 ];
 
+const stateColors = [
+  { token: "--button-bg-hover", light: "oklch(from var(--bg) calc(l - 0.04) c h / 1)", dark: "oklch(from var(--bg) calc(l + 0.04) c h / 1)", sampleType: "fill" },
+  { token: "--button-accent-bg-hover", light: "oklch(from var(--fg-accent) calc(l + 0.06) c h / 1)", dark: "oklch(from var(--fg-accent) calc(l - 0.06) c h / 1)", sampleType: "fill" },
+  { token: "--button-fg-active", light: "oklch(from var(--fg) calc(l - 0.14) c h / 1)", dark: "oklch(from var(--fg) calc(l + 0.14) c h / 1)", sampleType: "text" },
+  { token: "--button-bg-active", light: "oklch(from var(--bg) calc(l - 0.08) c h / 1)", dark: "oklch(from var(--bg) calc(l + 0.08) c h / 1)", sampleType: "fill" },
+  { token: "--button-border-active", light: "oklch(from var(--border) calc(l - 0.14) c h / 1)", dark: "oklch(from var(--border) calc(l + 0.14) c h / 1)", sampleType: "border" },
+  { token: "--button-accent-fg-active", light: "oklch(from var(--fg-accent) calc(l - 0.2) c h / 1)", dark: "oklch(from var(--fg-accent) calc(l + 0.2) c h / 1)", sampleType: "text" },
+  { token: "--button-accent-bg-active", light: "oklch(from var(--fg-accent) calc(l + 0.18) c h / 1)", dark: "oklch(from var(--fg-accent) calc(l - 0.18) c h / 1)", sampleType: "fill" },
+];
+
 export default function Colors() {
   return (
     <>
@@ -29,8 +39,18 @@ export default function Colors() {
       </section>
       <section className="type-group" aria-labelledby="color-token-values">
         <div className="type-group-heading"><span className="docs-eyebrow">Theme reference</span><h2 id="color-token-values">Color token values</h2><p>Token values for the light and dark themes.</p></div>
-        <div className="token-table color-token-table"><Table><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
+        <div className="token-table color-token-table"><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
           {colorTokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{token}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
+        </tbody></Table></div>
+      </section>
+      <section className="type-group" aria-labelledby="state-colors">
+        <div className="type-group-heading"><span className="docs-eyebrow">Interaction</span><h2 id="state-colors">State colors</h2><p>Hover and active states use fully opaque relative OKLCH values, preserving base hue and chroma while adjusting lightness.</p></div>
+        <div className="state-color-demo" aria-label="State color button examples">
+          <button className="state-color-button" type="button">Neutral button</button>
+          <button className="state-color-button state-color-button--accent" type="button">Accent button</button>
+        </div>
+        <div className="token-table color-token-table"><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
+          {stateColors.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{token}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
         </tbody></Table></div>
       </section>
     </>

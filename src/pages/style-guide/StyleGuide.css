@@ -17,9 +17,7 @@
 
 .docs-eyebrow {
   color: var(--fg-accent);
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  font-weight: 700;
+  font: var(--font-label-eyebrow);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -48,7 +46,7 @@
 
 .guide-navigation {
   position: sticky;
-  z-index: 1;
+  z-index: 4;
   top: 1rem;
   align-self: start;
   padding: 1rem;
@@ -372,6 +370,56 @@
   gap: 1rem;
 }
 
+.state-color-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 7rem;
+  margin-bottom: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--bg) 94%, var(--bg-accent));
+}
+
+.state-color-button {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: var(--font-label-medium);
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.state-color-button:hover {
+  background: var(--button-bg-hover);
+}
+
+.state-color-button:active {
+  border-color: var(--button-border-active);
+  background: var(--button-bg-active);
+  color: var(--button-fg-active);
+}
+
+.state-color-button--accent {
+  border-color: var(--fg-accent);
+  background: var(--fg-accent);
+  color: var(--bg);
+}
+
+.state-color-button--accent:hover {
+  background: var(--button-accent-bg-hover);
+}
+
+.state-color-button--accent:active {
+  border-color: var(--button-border-active);
+  background: var(--button-accent-bg-active);
+  color: var(--button-accent-fg-active);
+}
+
 .color-card {
   display: grid;
   grid-template-columns: 4.5rem minmax(0, 1fr);
@@ -443,9 +491,33 @@
 .docs table {
   width: 100%;
   border-collapse: collapse;
-  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
+}
+
+.table--sticky-first-column th:first-child,
+.table--sticky-first-column td:first-child {
+  position: sticky;
+  z-index: 2;
+  left: 0;
+  background: var(--bg);
+  background-clip: padding-box;
+}
+
+.table--sticky-first-column th:first-child {
+  z-index: 3;
+  background: var(--bg-code);
+}
+
+.table--sticky-first-column td:first-child::after,
+.table--sticky-first-column th:first-child::after {
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+  content: "";
 }
 
 .docs th,

@@ -1,3 +1,3 @@
-export default function Table({ children }) {
-  return <table>{children}</table>;
+export default function Table({ children, stickyFirstColumn = true }) {
+  return <table className={stickyFirstColumn ? "table--sticky-first-column" : undefined}>{children}</table>;
 }
