@@ -101,3 +101,27 @@
     grid-row: 3;
   }
 }
+
+@media (max-width: 30rem) {
+  .hero {
+    padding-block: 2.5rem;
+  }
+
+  .hero__title {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+  }
+
+  .hero__description {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .hero__actions {
+    margin-top: 2rem;
+  }
+
+  .hero__visual {
+    margin-top: 2.5rem;
+  }
+}
