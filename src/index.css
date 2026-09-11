@@ -20,7 +20,7 @@
    - [ ] 5. Theme Logic: Decide on dark mode behavior. 
          -> If using a manual React toggle switch, keep the [data-theme="dark"] block.
          -> If relying strictly on OS settings, delete the [data-theme="dark"] block.
-   - [ ] 6. Accessibility: Double-check contrast ratios between --text and --bg.
+   - [ ] 6. Accessibility: Double-check contrast ratios between --fg and --bg.
    ========================================================================== */
 
 /* =========================================
@@ -28,15 +28,15 @@
    ========================================= */
 :root {
   /* Colors */
-  --text: oklch(51.35% 0.0296 305.45);
+  --fg: oklch(51.35% 0.0296 305.45);
   --bg: oklch(100% 0 0);
   --border: oklch(92.05% 0.0042 301.42);
-  --code-bg: oklch(96.3% 0.0093 99.98);
+  --bg-code: oklch(96.3% 0.0093 99.98);
 
   /* Accents */
-  --accent: oklch(60.81% 0.269 305.12);
-  --accent-bg: oklch(from var(--accent) l c h / 0.1);
-  --accent-border: oklch(from var(--accent) l c h / 0.5);
+  --fg-accent: oklch(60.81% 0.269 305.12);
+  --bg-accent: oklch(from var(--fg-accent) l c h / 0.1);
+  --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
 
   /* Shadows & Elevations */
   --shadow:
@@ -80,13 +80,13 @@
 /* Dark Mode (System preference OR manual toggle) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --text: oklch(71.37% 0.0192 261.32);
+    --fg: oklch(71.37% 0.0192 261.32);
     --bg: oklch(20.63% 0.012 277.83);
     --border: oklch(31.13% 0.0181 276.38);
-    --code-bg: oklch(24.6% 0.0152 279.6);
-    --accent: oklch(72.17% 0.1767 305.5);
-    --accent-bg: oklch(from var(--accent) l c h / 0.15);
-    --accent-border: oklch(from var(--accent) l c h / 0.5);
+    --bg-code: oklch(24.6% 0.0152 279.6);
+    --fg-accent: oklch(72.17% 0.1767 305.5);
+    --bg-accent: oklch(from var(--fg-accent) l c h / 0.15);
+    --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
     --shadow:
       oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
   }
@@ -94,13 +94,13 @@
 
 /* Optional: Allows for manual theme toggling via React state */
 [data-theme="dark"] {
-  --text: oklch(71.37% 0.0192 261.32);
+  --fg: oklch(71.37% 0.0192 261.32);
   --bg: oklch(20.63% 0.012 277.83);
   --border: oklch(31.13% 0.0181 276.38);
-  --code-bg: oklch(24.6% 0.0152 279.6);
-  --accent: oklch(72.17% 0.1767 305.5);
-  --accent-bg: oklch(from var(--accent) l c h / 0.15);
-  --accent-border: oklch(from var(--accent) l c h / 0.5);
+  --bg-code: oklch(24.6% 0.0152 279.6);
+  --fg-accent: oklch(72.17% 0.1767 305.5);
+  --bg-accent: oklch(from var(--fg-accent) l c h / 0.15);
+  --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
   --shadow:
     oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
 }
@@ -145,7 +145,7 @@ html {
    ========================================= */
 body {
   min-height: 100svh;
-  color: var(--text);
+  color: var(--fg);
   background-color: var(--bg);
   font-family: var(--sans);
   font-size: var(--font-size-300);
@@ -220,13 +220,13 @@ pre {
 
 code {
   padding: 0.125em 0.25em;
-  background: var(--code-bg);
+  background: var(--bg-code);
   border-radius: 0.25rem;
 }
 
 pre {
   padding: 1rem;
-  background: var(--code-bg);
+  background: var(--bg-code);
   border-radius: 0.5rem;
   overflow-x: auto;
 }

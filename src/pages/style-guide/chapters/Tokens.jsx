@@ -1,9 +1,9 @@
 import Table from "../../../components/table/Table";
 
 const tokens = [
-  ["--text", "Primary text color"],
+  ["--fg", "Primary text color"],
   ["--bg", "Page background color"],
-  ["--accent", "Primary accent color"],
+  ["--fg-accent", "Primary accent color"],
   ["--shadow", "Elevation token"],
   ["--sans", "Body font family"],
   ["--heading", "Heading font family"],

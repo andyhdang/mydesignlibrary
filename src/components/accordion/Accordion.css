@@ -19,7 +19,7 @@
   width: 100%;
   padding-block: 1rem;
   border: 0;
-  color: var(--text);
+  color: var(--fg);
   background: transparent;
   font-weight: 500;
   text-align: left;
@@ -54,7 +54,7 @@
 }
 
 .accordion__trigger:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--fg-accent);
   outline-offset: -2px;
 }
 
