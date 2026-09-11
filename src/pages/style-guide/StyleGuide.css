@@ -530,11 +530,12 @@
   .page-anchors--mobile {
     display: block;
     margin: 0;
+    max-width: 100%;
     min-width: 0;
-  }
-
-  .page-anchors--mobile {
     overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
   }
 
   .page-anchors__links {
@@ -542,6 +543,7 @@
     flex-wrap: nowrap;
     width: max-content;
     padding-bottom: 0.25rem;
+    scroll-padding-inline: 1rem;
   }
 
   .page-anchors--mobile .page-anchors__links a {

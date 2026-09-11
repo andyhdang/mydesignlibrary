@@ -15,6 +15,13 @@ main {
   min-width: 0;
 }
 
+@media (max-width: 30rem) {
+  .App {
+    width: 100%;
+    --page-gutter: 1rem;
+  }
+}
+
 @media (min-width: 768px) {
   .App {
     --page-gutter: 2rem;

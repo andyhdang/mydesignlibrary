@@ -54,3 +54,20 @@
     padding: 7rem var(--page-gutter);
   }
 }
+
+@media (max-width: 30rem) {
+  .experience-timeline {
+    gap: 1rem;
+    padding-block: 4rem;
+  }
+
+  .experience-timeline__item {
+    display: grid;
+    gap: 0.35rem;
+    padding-block: 1rem;
+  }
+
+  .experience-timeline__item time {
+    margin-top: 0;
+  }
+}

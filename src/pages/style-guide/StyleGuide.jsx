@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { NavLink, useParams } from "react-router-dom";
 import Accessibility from "./chapters/Accessibility";
@@ -57,13 +57,17 @@ function GuideNavigation({ activeChapter }) {
 
 function PageAnchors({ variant, anchors, label }) {
   const [activeAnchor, setActiveAnchor] = useState(anchors[0].id);
+  const linksRef = useRef(null);
 
   useEffect(() => {
     const updateActiveAnchor = () => {
-      const navigationTop = document.querySelector(".guide-navigation")?.getBoundingClientRect().top ?? 0;
-      const activationOffset = navigationTop + 10 * 16;
+      const activationOffset = Math.min(window.innerHeight * 0.35, 320);
       const currentAnchor = [...anchors].reverse().find(({ id }) => document.getElementById(id)?.getBoundingClientRect().top <= activationOffset);
-      setActiveAnchor(currentAnchor?.id ?? anchors[0].id);
+      const nextAnchor = currentAnchor?.id ?? anchors[0].id;
+
+      setActiveAnchor((previousAnchor) => (
+        previousAnchor === nextAnchor ? previousAnchor : nextAnchor
+      ));
     };
 
     updateActiveAnchor();
@@ -71,13 +75,36 @@ function PageAnchors({ variant, anchors, label }) {
     return () => window.removeEventListener("scroll", updateActiveAnchor);
   }, [anchors]);
 
+  useLayoutEffect(() => {
+    if (variant !== "mobile") {
+      return;
+    }
+
+    const links = linksRef.current;
+    const activeLink = links?.querySelector('[aria-current="location"]');
+
+    if (!links || !activeLink) {
+      return;
+    }
+
+    const linksBounds = links.getBoundingClientRect();
+    const activeLinkBounds = activeLink.getBoundingClientRect();
+    const targetScrollLeft =
+      links.scrollLeft +
+      activeLinkBounds.left -
+      linksBounds.left -
+      (links.clientWidth - activeLinkBounds.width) / 2;
+
+    links.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+  }, [activeAnchor, variant]);
+
   const scrollToSection = (event, id) => {
     event.preventDefault();
     setActiveAnchor(id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  return <nav className={`page-anchors page-anchors--${variant}`} aria-label={label}><div className="page-anchors__links">
+  return <nav ref={linksRef} className={`page-anchors page-anchors--${variant}`} aria-label={label}><div className="page-anchors__links">
     {anchors.map(({ id, label: anchorLabel }) => <a key={id} href={`#${id}`} className={activeAnchor === id ? "active" : undefined} aria-current={activeAnchor === id ? "location" : undefined} onClick={(event) => scrollToSection(event, id)}>{anchorLabel}</a>)}
   </div></nav>;
 }
