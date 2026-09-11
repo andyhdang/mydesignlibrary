@@ -28,19 +28,19 @@
    ========================================= */
 :root {
   /* Colors */
-  --text: #6b6375;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
+  --text: oklch(51.35% 0.0296 305.45);
+  --bg: oklch(100% 0 0);
+  --border: oklch(92.05% 0.0042 301.42);
+  --code-bg: oklch(96.3% 0.0093 99.98);
 
   /* Accents */
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+  --accent: oklch(60.81% 0.269 305.12);
+  --accent-bg: oklch(from var(--accent) l c h / 0.1);
+  --accent-border: oklch(from var(--accent) l c h / 0.5);
 
   /* Shadows & Elevations */
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    oklch(0% 0 0 / 0.1) 0 10px 15px -3px, oklch(0% 0 0 / 0.05) 0 4px 6px -2px;
 
   /* Typography */
   --sans: "Geologica", system-ui, sans-serif;
@@ -80,30 +80,29 @@
 /* Dark Mode (System preference OR manual toggle) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --text: #9ca3af;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
+    --text: oklch(71.37% 0.0192 261.32);
+    --bg: oklch(20.63% 0.012 277.83);
+    --border: oklch(31.13% 0.0181 276.38);
+    --code-bg: oklch(24.6% 0.0152 279.6);
+    --accent: oklch(72.17% 0.1767 305.5);
+    --accent-bg: oklch(from var(--accent) l c h / 0.15);
+    --accent-border: oklch(from var(--accent) l c h / 0.5);
     --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+      oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
   }
 }
 
 /* Optional: Allows for manual theme toggling via React state */
 [data-theme="dark"] {
-  --text: #9ca3af;
-  --bg: #16171d;
-  --border: #2e303a;
-  --code-bg: #1f2028;
-  --accent: #c084fc;
-  --accent-bg: rgba(192, 132, 252, 0.15);
-  --accent-border: rgba(192, 132, 252, 0.5);
+  --text: oklch(71.37% 0.0192 261.32);
+  --bg: oklch(20.63% 0.012 277.83);
+  --border: oklch(31.13% 0.0181 276.38);
+  --code-bg: oklch(24.6% 0.0152 279.6);
+  --accent: oklch(72.17% 0.1767 305.5);
+  --accent-bg: oklch(from var(--accent) l c h / 0.15);
+  --accent-border: oklch(from var(--accent) l c h / 0.5);
   --shadow:
-    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
 }
 
 /* =========================================

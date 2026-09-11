@@ -255,6 +255,20 @@
   border-radius: 0;
 }
 
+.docs .color-token-table table {
+  width: 72rem;
+  min-width: 72rem;
+}
+
+.color-token-table col:first-child {
+  width: 12rem;
+}
+
+.color-token-table col:nth-child(2),
+.color-token-table col:nth-child(3) {
+  width: 30rem;
+}
+
 .token-table th,
 .token-table td {
   white-space: nowrap;
@@ -280,6 +294,19 @@
 
 .token-sample {
   color: var(--text);
+}
+
+.color-token-sample {
+  flex: 0 0 1.5rem;
+  min-height: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+}
+
+.color-value {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .elevation-card {
