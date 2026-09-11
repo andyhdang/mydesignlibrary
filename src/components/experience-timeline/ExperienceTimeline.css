@@ -6,7 +6,7 @@
 }
 
 .experience-timeline__eyebrow {
-  color: var(--text);
+  color: var(--fg);
   font-size: 0.875rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -14,7 +14,7 @@
 
 .experience-timeline__content h2 {
   margin: 0;
-  color: var(--text);
+  color: var(--fg);
 }
 
 .experience-timeline__list {
@@ -32,7 +32,7 @@
 }
 
 .experience-timeline__item h3 {
-  color: var(--text);
+  color: var(--fg);
   font-size: 1rem;
   font-weight: 500;
 }

@@ -16,7 +16,7 @@
 }
 
 .docs-eyebrow {
-  color: var(--accent);
+  color: var(--fg-accent);
   font-family: var(--mono);
   font-size: 0.75rem;
   font-weight: 700;
@@ -29,7 +29,7 @@
 }
 
 .section-heading p {
-  color: var(--text);
+  color: var(--fg);
   opacity: 0.8;
 }
 
@@ -54,7 +54,7 @@
   padding: 1rem;
   border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: color-mix(in srgb, var(--bg) 94%, var(--accent-bg));
+  background: color-mix(in srgb, var(--bg) 94%, var(--bg-accent));
 }
 
 .guide-section-nav {
@@ -70,26 +70,26 @@
 .guide-section-nav__links > div > a {
   padding: 0.625rem 0.75rem;
   border-left: 2px solid transparent;
-  color: var(--text);
+  color: var(--fg);
   font-size: 0.875rem;
   text-decoration: none;
 }
 
 .page-anchors__links a {
   padding: 0.625rem 0.75rem;
-  color: var(--text);
+  color: var(--fg);
   font-size: 0.875rem;
   text-decoration: none;
 }
 
 .guide-section-nav__links > div > a.active {
-  border-left-color: var(--accent);
-  color: var(--accent);
+  border-left-color: var(--fg-accent);
+  color: var(--fg-accent);
 }
 
 .guide-section-nav__links > div > a:hover,
 .guide-section-nav__links > div > a:focus-visible {
-  border-left-color: var(--accent);
+  border-left-color: var(--fg-accent);
 }
 
 .guide-section-nav__links > div > a:hover,
@@ -97,7 +97,7 @@
 .page-anchors--mobile .page-anchors__links a.active,
 .page-anchors--mobile .page-anchors__links a:hover,
 .page-anchors--mobile .page-anchors__links a:focus-visible {
-  color: var(--accent);
+  color: var(--fg-accent);
   outline: none;
 }
 
@@ -126,7 +126,7 @@
 }
 
 .page-anchors--desktop .page-anchors__links a.active {
-  color: var(--accent);
+  color: var(--fg-accent);
 }
 
 .page-anchors--desktop .page-anchors__links {
@@ -137,7 +137,7 @@
   padding: clamp(1.25rem, 4vw, 2.5rem);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: color-mix(in srgb, var(--bg) 94%, var(--accent-bg));
+  background: color-mix(in srgb, var(--bg) 94%, var(--bg-accent));
   overflow-x: auto;
 }
 
@@ -165,7 +165,7 @@
 .font-family-sample {
   display: block;
   min-width: 16rem;
-  color: var(--text);
+  color: var(--fg);
   font-size: 1.125rem;
   line-height: 1.2;
 }
@@ -225,7 +225,7 @@
 
 .font-size-sample,
 .font-shorthand-sample {
-  color: var(--text);
+  color: var(--fg);
 }
 
 .font-shorthand-value {
@@ -255,6 +255,24 @@
   border-radius: 0;
 }
 
+.docs .color-token-table table {
+  width: 72rem;
+  min-width: 72rem;
+}
+
+.color-token-table col:first-child {
+  width: 12rem;
+}
+
+.color-token-table col:nth-child(2),
+.color-token-table col:nth-child(3) {
+  width: 26rem;
+}
+
+.color-token-table col:last-child {
+  width: 8rem;
+}
+
 .token-table th,
 .token-table td {
   white-space: nowrap;
@@ -279,7 +297,27 @@
 }
 
 .token-sample {
-  color: var(--text);
+  color: var(--fg);
+}
+
+.color-token-sample {
+  display: grid;
+  width: 5rem;
+  min-height: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+}
+
+.color-token-sample--fg {
+  place-items: center;
+  background: var(--bg);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.color-token-sample--border {
+  border-width: 2px;
+  background: var(--bg);
 }
 
 .elevation-card {
@@ -312,8 +350,8 @@
 }
 
 .form-preview button {
-  border-color: var(--accent);
-  background: var(--accent);
+  border-color: var(--fg-accent);
+  background: var(--fg-accent);
   color: white;
 }
 
@@ -351,6 +389,19 @@
   border-radius: 0.35rem;
 }
 
+.color-swatch--text {
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.color-swatch--border {
+  border-width: 2px;
+  background: var(--bg);
+}
+
 .color-card strong,
 .color-card code {
   display: block;
@@ -385,7 +436,7 @@
   content: "✓";
   position: absolute;
   left: 1rem;
-  color: var(--accent);
+  color: var(--fg-accent);
   font-weight: 700;
 }
 
@@ -405,7 +456,7 @@
 }
 
 .docs th {
-  background: var(--code-bg);
+  background: var(--bg-code);
   font-family: var(--mono);
   font-size: 0.8rem;
   letter-spacing: 0.04em;
@@ -440,8 +491,8 @@
     border-radius: 999px;
     padding: 0.35rem 0.875rem;
     background: var(--bg);
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: var(--fg-accent);
+    color: var(--fg-accent);
     font: inherit;
     font-size: 0.875rem;
   }
@@ -505,7 +556,7 @@
   .page-anchors--mobile .page-anchors__links a.active,
   .page-anchors--mobile .page-anchors__links a:hover,
   .page-anchors--mobile .page-anchors__links a:focus-visible {
-    border-color: var(--accent);
+    border-color: var(--fg-accent);
   }
 
 

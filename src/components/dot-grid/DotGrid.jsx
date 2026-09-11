@@ -17,7 +17,7 @@ export default function DotGrid() {
       isScheduled = false;
       context.clearRect(0, 0, width, height);
       context.fillStyle = getComputedStyle(document.documentElement)
-        .getPropertyValue("--text")
+        .getPropertyValue("--fg")
         .trim();
       context.globalAlpha = 0.2;
 
