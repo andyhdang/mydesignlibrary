@@ -18,7 +18,7 @@
 .navigation a {
   text-decoration: none;
   color: var(--fg);
-  font-weight: 500;
+  font: var(--font-label-medium);
 }
 
 .navigation__brand {
@@ -29,7 +29,8 @@
 }
 
 .navigation__role {
-  font-weight: 300;
+  color: var(--fg-muted);
+  font: var(--font-body-small);
 }
 
 .navigation__theme-toggle {
@@ -38,7 +39,7 @@
   border-bottom: 1px solid var(--border);
   color: var(--fg);
   background: transparent;
-  font-size: 0.875rem;
+  font: var(--font-label-medium);
   white-space: nowrap;
 }
 
@@ -137,7 +138,6 @@
 
   .navigation__role {
     flex-basis: 100%;
-    font-size: 0.875rem;
   }
 
   .navigation__menu-toggle {
@@ -146,6 +146,6 @@
   }
 
   .navigation__theme-toggle {
-    font-size: 0.75rem;
+    font: var(--font-label-small);
   }
 }

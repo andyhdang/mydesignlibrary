@@ -3,8 +3,9 @@ import Table from "../../../components/table/Table";
 
 const colorTokens = [
   { token: "--fg", light: "oklch(51.35% 0.0296 305.45)", dark: "oklch(71.37% 0.0192 261.32)", sampleType: "text" },
+  { token: "--fg-muted", light: "oklch(from var(--fg) calc(l + 0.2) c h)", dark: "oklch(from var(--fg) calc(l - 0.2) c h)", sampleType: "text" },
   { token: "--bg", light: "oklch(100% 0 0)", dark: "oklch(20.63% 0.012 277.83)", sampleType: "fill" },
-  { token: "--bg-surface", light: "oklch(from var(--bg) calc(l - 0.02) c h)", dark: "oklch(from var(--bg) calc(l + 0.04) c h)", sampleType: "fill" },
+  { token: "--bg-surface", light: "oklch(from var(--bg) calc(l - 0.01) c h)", dark: "oklch(from var(--bg) calc(l + 0.02) c h)", sampleType: "fill" },
   { token: "--fg-inverse", light: "oklch(from var(--bg) calc(l - 0.04) c h)", dark: "oklch(from var(--bg) calc(l + 0.04) c h)", sampleType: "text" },
   { token: "--bg-inverse", light: "oklch(from var(--fg) calc(l - 0.1) c h)", dark: "oklch(from var(--fg) calc(l + 0.1) c h)", sampleType: "fill" },
   { token: "--border", light: "oklch(92.05% 0.0042 301.42)", dark: "oklch(31.13% 0.0181 276.38)", sampleType: "border" },
@@ -20,6 +21,7 @@ const baseColorGroups = [
     name: "Foreground",
     colors: [
       { name: "Foreground", variable: "--fg", sampleType: "text" },
+      { name: "Muted foreground", variable: "--fg-muted", sampleType: "text" },
       { name: "Inverse foreground", variable: "--fg-inverse", sampleType: "text" },
       { name: "Accent foreground", variable: "--fg-accent", sampleType: "text" },
     ],
@@ -80,18 +82,19 @@ const controlStateColors = [
 export default function Colors() {
   return (
     <>
+      <ColorIntroVisual />
       <section className="type-group" aria-labelledby="base-set-colors">
-        <div className="type-group-heading"><span className="docs-eyebrow">Core palette</span><h2 id="base-set-colors">Base set colors</h2><p>The most frequently used colors throughout the site.</p></div>
+        <div className="section-header"><h2 id="base-set-colors" className="section-title">Base set colors</h2><p>The most frequently used colors throughout the site.</p></div>
         <div className="color-groups">{baseColorGroups.map(({ name, colors }) => <section className="color-group" key={name}><h3>{name}</h3><div className="color-grid">{colors.map(({ name: colorName, variable, sampleType }) => <ColorSwatch key={variable} name={colorName} variable={variable} sampleType={sampleType} />)}</div></section>)}</div>
       </section>
       <section className="type-group" aria-labelledby="color-token-values">
-        <div className="type-group-heading"><span className="docs-eyebrow">Theme reference</span><h2 id="color-token-values">Base set color tokens</h2><p>Token values for the light and dark themes.</p></div>
+        <div className="section-header"><h2 id="color-token-values" className="section-title">Base set color tokens</h2><p>Token values for the light and dark themes.</p></div>
         <div className="token-table color-token-table"><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
           {colorTokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{token}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="state-colors">
-        <div className="type-group-heading"><span className="docs-eyebrow">Interaction</span><h2 id="state-colors">State colors</h2><p>Hover and active states use fully opaque relative OKLCH values, preserving base hue and chroma while adjusting lightness.</p></div>
+        <div className="section-header"><h2 id="state-colors" className="section-title">State colors</h2><p>Hover and active states use fully opaque relative OKLCH values, preserving base hue and chroma while adjusting lightness.</p></div>
         <h3 className="state-color-subheading">Button states</h3>
         <div className="state-color-demo" aria-label="State color button examples">
           <button className="state-color-button state-color-button--outline" type="button">Outline button</button>
@@ -111,6 +114,24 @@ export default function Colors() {
       </section>
     </>
   );
+}
+
+function ColorIntroVisual() {
+  return <div className="color-intro-visual" aria-hidden="true">
+    <div className="color-intro-visual__ui">
+      <div className="color-intro-visual__topbar"><span /><span /><span /></div>
+      <div className="color-intro-visual__body">
+        <div className="color-intro-visual__sidebar"><span /><span /><span /></div>
+        <div className="color-intro-visual__content">
+          <span className="color-intro-visual__title" />
+          <span className="color-intro-visual__line" />
+          <span className="color-intro-visual__line color-intro-visual__line--short" />
+          <div className="color-intro-visual__cards"><span /><span /><span /></div>
+          <span className="color-intro-visual__action" />
+        </div>
+      </div>
+    </div>
+  </div>;
 }
 
 function ControlStateDemo() {

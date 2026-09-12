@@ -29,8 +29,9 @@
 :root {
   /* Colors */
   --fg: oklch(51.35% 0.0296 305.45);
+  --fg-muted: oklch(from var(--fg) calc(l + 0.2) c h);
   --bg: oklch(100% 0 0);
-  --bg-surface: oklch(from var(--bg) calc(l - 0.02) c h);
+  --bg-surface: oklch(from var(--bg) calc(l - 0.01) c h);
   --fg-inverse: oklch(from var(--bg) calc(l - 0.04) c h);
   --bg-inverse: oklch(from var(--fg) calc(l - 0.1) c h);
   --border: oklch(92.05% 0.0042 301.42);
@@ -94,9 +95,9 @@
   --font-body-small: var(--font-weight-regular) var(--font-size-200) / var(--line-height-body) var(--sans);
   --font-body-medium: var(--font-weight-regular) var(--font-size-300) / var(--line-height-body) var(--sans);
   --font-body-large: var(--font-weight-regular) var(--font-size-400) / var(--line-height-body) var(--sans);
-  --font-title-small: var(--font-weight-medium) var(--font-size-500) / var(--line-height-heading) var(--heading);
-  --font-title-medium: var(--font-weight-medium) var(--font-size-600) / var(--line-height-heading) var(--heading);
-  --font-title-large: var(--font-weight-bold) var(--font-size-700) / var(--line-height-heading) var(--heading);
+  --font-title-small: var(--font-weight-medium) var(--font-size-400) / var(--line-height-heading) var(--heading);
+  --font-title-medium: var(--font-weight-medium) var(--font-size-500) / var(--line-height-heading) var(--heading);
+  --font-title-large: var(--font-weight-bold) var(--font-size-600) / var(--line-height-heading) var(--heading);
   --font-caption: var(--font-weight-regular) var(--font-size-100) / var(--line-height-caption) var(--sans);
   --font-subtitle: var(--font-weight-medium) var(--font-size-300) / var(--line-height-subtitle) var(--sans);
   --font-display: var(--font-weight-bold) var(--font-size-800) / var(--line-height-display) var(--heading);
@@ -111,8 +112,9 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     --fg: oklch(71.37% 0.0192 261.32);
+    --fg-muted: oklch(from var(--fg) calc(l - 0.2) c h);
     --bg: oklch(20.63% 0.012 277.83);
-    --bg-surface: oklch(from var(--bg) calc(l + 0.04) c h);
+    --bg-surface: oklch(from var(--bg) calc(l + 0.02) c h);
     --fg-inverse: oklch(from var(--bg) calc(l + 0.04) c h);
     --bg-inverse: oklch(from var(--fg) calc(l + 0.1) c h);
     --border: oklch(31.13% 0.0181 276.38);
@@ -138,8 +140,9 @@
 /* Optional: Allows for manual theme toggling via React state */
 [data-theme="dark"] {
   --fg: oklch(71.37% 0.0192 261.32);
+  --fg-muted: oklch(from var(--fg) calc(l - 0.2) c h);
   --bg: oklch(20.63% 0.012 277.83);
-  --bg-surface: oklch(from var(--bg) calc(l + 0.04) c h);
+  --bg-surface: oklch(from var(--bg) calc(l + 0.02) c h);
   --fg-inverse: oklch(from var(--bg) calc(l + 0.04) c h);
   --bg-inverse: oklch(from var(--fg) calc(l + 0.1) c h);
   --border: oklch(31.13% 0.0181 276.38);
@@ -256,15 +259,27 @@ h6 {
 }
 
 h1 {
-  font-size: var(--font-size-700);
-  letter-spacing: -0.03em;
-  margin: clamp(1.25rem, 0.9rem + 1.5vw, 2rem) 0;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: var(--font-size-500);
-  letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
+}
+
+h3 {
+  margin-bottom: 0.75rem;
+}
+
+p {
+  margin: 0;
+}
+
+.section-title {
+  font: var(--font-title-medium);
+}
+
+.page-title {
+  font: var(--font-title-large);
 }
 
 code,

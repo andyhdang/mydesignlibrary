@@ -14,8 +14,7 @@
 }
 
 .hero__eyebrow {
-  margin-bottom: 1rem;
-  color: green;
+  color: var(--fg-accent);
   font: var(--font-label-eyebrow);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -23,19 +22,14 @@
 
 .hero__title {
   max-width: none;
-  margin: 0;
   color: var(--fg);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  font-weight: 500;
+  font: var(--font-title-large);
   letter-spacing: -0.04em;
-  line-height: 1.1;
 }
 
 .hero__description {
   max-width: 36rem;
-  margin-top: 1.5rem;
-  font-size: 1.125rem;
-  line-height: 1.65;
+  font: var(--font-body-large);
 }
 
 .hero__actions {
@@ -111,9 +105,7 @@
   }
 
   .hero__description {
-    margin-top: 1.25rem;
-    font-size: 1rem;
-    line-height: 1.55;
+    font: var(--font-body-medium);
   }
 
   .hero__actions {
