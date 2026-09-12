@@ -29,14 +29,42 @@
 :root {
   /* Colors */
   --fg: oklch(51.35% 0.0296 305.45);
+  --fg-muted: oklch(from var(--fg) calc(l + 0.2) c h);
   --bg: oklch(100% 0 0);
+  --bg-surface: oklch(from var(--bg) calc(l - 0.01) c h);
+  --fg-inverse: oklch(from var(--bg) calc(l - 0.04) c h);
+  --bg-inverse: oklch(from var(--fg) calc(l - 0.1) c h);
   --border: oklch(92.05% 0.0042 301.42);
   --bg-code: oklch(96.3% 0.0093 99.98);
 
   /* Accents */
   --fg-accent: oklch(60.81% 0.269 305.12);
-  --bg-accent: oklch(from var(--fg-accent) l c h / 0.1);
+  --bg-accent: var(--fg-accent);
+  --bg-surface-accent: oklch(from var(--fg-accent) l c h / 0.1);
   --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
+
+  /* Interaction states */
+  --button-outline-fg: var(--fg);
+  --button-outline-bg: var(--bg);
+  --button-outline-border: var(--border);
+  --button-outline-bg-hover: oklch(from var(--bg) calc(l - 0.04) c h);
+  --button-accent-bg-hover: oklch(from var(--fg-accent) calc(l + 0.06) c h);
+  --button-outline-fg-active: oklch(from var(--fg) calc(l - 0.14) c h);
+  --button-outline-bg-active: oklch(from var(--bg) calc(l - 0.08) c h);
+  --button-accent-fg: var(--fg-inverse);
+  --button-accent-bg: var(--bg-accent);
+  --button-accent-bg-active: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+  --button-filled-fg: var(--fg-inverse);
+  --button-filled-bg: var(--bg-inverse);
+  --button-filled-bg-hover: oklch(from var(--bg-inverse) calc(l + 0.06) c h);
+  --button-filled-bg-active: oklch(from var(--bg-inverse) calc(l - 0.06) c h);
+  --control-fg: var(--fg);
+  --control-bg: var(--bg);
+  --control-border: var(--border);
+  --control-bg-hover: oklch(from var(--bg) calc(l - 0.04) c h);
+  --control-bg-active: oklch(from var(--bg) calc(l - 0.08) c h);
+  --control-selected-fg: var(--fg-accent);
+  --control-selected-border: var(--fg-accent);
 
   /* Shadows & Elevations */
   --shadow:
@@ -67,26 +95,43 @@
   --font-body-small: var(--font-weight-regular) var(--font-size-200) / var(--line-height-body) var(--sans);
   --font-body-medium: var(--font-weight-regular) var(--font-size-300) / var(--line-height-body) var(--sans);
   --font-body-large: var(--font-weight-regular) var(--font-size-400) / var(--line-height-body) var(--sans);
-  --font-title-small: var(--font-weight-medium) var(--font-size-500) / var(--line-height-heading) var(--heading);
-  --font-title-medium: var(--font-weight-medium) var(--font-size-600) / var(--line-height-heading) var(--heading);
-  --font-title-large: var(--font-weight-bold) var(--font-size-700) / var(--line-height-heading) var(--heading);
+  --font-title-small: var(--font-weight-medium) var(--font-size-400) / var(--line-height-heading) var(--heading);
+  --font-title-medium: var(--font-weight-medium) var(--font-size-500) / var(--line-height-heading) var(--heading);
+  --font-title-large: var(--font-weight-bold) var(--font-size-600) / var(--line-height-heading) var(--heading);
   --font-caption: var(--font-weight-regular) var(--font-size-100) / var(--line-height-caption) var(--sans);
   --font-subtitle: var(--font-weight-medium) var(--font-size-300) / var(--line-height-subtitle) var(--sans);
   --font-display: var(--font-weight-bold) var(--font-size-800) / var(--line-height-display) var(--heading);
   --font-code-block: var(--font-weight-regular) var(--font-size-200) / var(--line-height-body) var(--mono);
-  --font-label: var(--font-weight-bold) var(--font-size-100) / var(--line-height-label) var(--mono);
+  --font-label-small: var(--font-weight-medium) var(--font-size-100) / var(--line-height-label) var(--sans);
+  --font-label-medium: var(--font-weight-medium) var(--font-size-200) / var(--line-height-label) var(--sans);
+  --font-label-large: var(--font-weight-medium) var(--font-size-300) / var(--line-height-label) var(--sans);
+  --font-label-eyebrow: var(--font-weight-medium) var(--font-size-100) / var(--line-height-label) var(--mono);
 }
 
 /* Dark Mode (System preference OR manual toggle) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     --fg: oklch(71.37% 0.0192 261.32);
+    --fg-muted: oklch(from var(--fg) calc(l - 0.2) c h);
     --bg: oklch(20.63% 0.012 277.83);
+    --bg-surface: oklch(from var(--bg) calc(l + 0.02) c h);
+    --fg-inverse: oklch(from var(--bg) calc(l + 0.04) c h);
+    --bg-inverse: oklch(from var(--fg) calc(l + 0.1) c h);
     --border: oklch(31.13% 0.0181 276.38);
     --bg-code: oklch(24.6% 0.0152 279.6);
     --fg-accent: oklch(72.17% 0.1767 305.5);
-    --bg-accent: oklch(from var(--fg-accent) l c h / 0.15);
+    --bg-accent: var(--fg-accent);
+    --bg-surface-accent: oklch(from var(--fg-accent) l c h / 0.15);
     --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
+    --button-outline-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);
+    --button-accent-bg-hover: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+    --button-outline-fg-active: oklch(from var(--fg) calc(l + 0.14) c h);
+    --button-outline-bg-active: oklch(from var(--bg) calc(l + 0.08) c h);
+    --button-accent-bg-active: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+    --button-filled-bg-hover: oklch(from var(--bg-inverse) calc(l - 0.06) c h);
+    --button-filled-bg-active: oklch(from var(--bg-inverse) calc(l - 0.12) c h);
+    --control-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);
+    --control-bg-active: oklch(from var(--bg) calc(l + 0.08) c h);
     --shadow:
       oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
   }
@@ -95,12 +140,26 @@
 /* Optional: Allows for manual theme toggling via React state */
 [data-theme="dark"] {
   --fg: oklch(71.37% 0.0192 261.32);
+  --fg-muted: oklch(from var(--fg) calc(l - 0.2) c h);
   --bg: oklch(20.63% 0.012 277.83);
+  --bg-surface: oklch(from var(--bg) calc(l + 0.02) c h);
+  --fg-inverse: oklch(from var(--bg) calc(l + 0.04) c h);
+  --bg-inverse: oklch(from var(--fg) calc(l + 0.1) c h);
   --border: oklch(31.13% 0.0181 276.38);
   --bg-code: oklch(24.6% 0.0152 279.6);
   --fg-accent: oklch(72.17% 0.1767 305.5);
-  --bg-accent: oklch(from var(--fg-accent) l c h / 0.15);
+  --bg-accent: var(--fg-accent);
+  --bg-surface-accent: oklch(from var(--fg-accent) l c h / 0.15);
   --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
+  --button-outline-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);
+  --button-accent-bg-hover: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+  --button-outline-fg-active: oklch(from var(--fg) calc(l + 0.14) c h);
+  --button-outline-bg-active: oklch(from var(--bg) calc(l + 0.08) c h);
+  --button-accent-bg-active: oklch(from var(--fg-accent) calc(l - 0.06) c h);
+  --button-filled-bg-hover: oklch(from var(--bg-inverse) calc(l - 0.06) c h);
+  --button-filled-bg-active: oklch(from var(--bg-inverse) calc(l - 0.12) c h);
+  --control-bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);
+  --control-bg-active: oklch(from var(--bg) calc(l + 0.08) c h);
   --shadow:
     oklch(0% 0 0 / 0.4) 0 10px 15px -3px, oklch(0% 0 0 / 0.25) 0 4px 6px -2px;
 }
@@ -200,15 +259,27 @@ h6 {
 }
 
 h1 {
-  font-size: var(--font-size-700);
-  letter-spacing: -0.03em;
-  margin: clamp(1.25rem, 0.9rem + 1.5vw, 2rem) 0;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: var(--font-size-500);
-  letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
+}
+
+h3 {
+  margin-bottom: 0.75rem;
+}
+
+p {
+  margin: 0;
+}
+
+.section-title {
+  font: var(--font-title-medium);
+}
+
+.page-title {
+  font: var(--font-title-large);
 }
 
 code,

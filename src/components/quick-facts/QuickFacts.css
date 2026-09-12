@@ -11,16 +11,16 @@
 }
 
 .quick-facts dt {
-  color: var(--fg);
-  font-size: 0.875rem;
-  font-weight: 300;
+  color: var(--fg-muted);
+  font: var(--font-label-eyebrow);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .quick-facts dd {
   margin: 0;
-  font-weight: 400;
+  color: var(--fg);
+  font: var(--font-body-medium);
 }
 
 @media (min-width: 1280px) {

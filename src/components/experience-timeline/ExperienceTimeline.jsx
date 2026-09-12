@@ -5,7 +5,7 @@ export default function ExperienceTimeline({ items }) {
     <section className="experience-timeline" aria-labelledby="experience-heading">
       <p className="experience-timeline__eyebrow">02 / Experience</p>
       <div className="experience-timeline__content">
-        <h2 id="experience-heading">Selected experience</h2>
+        <h2 id="experience-heading" className="section-title">Selected experience</h2>
         <ol className="experience-timeline__list">
           {items.map(({ company, role, period }) => (
             <li className="experience-timeline__item" key={`${company}-${role}`}>

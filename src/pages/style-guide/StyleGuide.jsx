@@ -29,9 +29,9 @@ export default function StyleGuide() {
   const activeChapter = chapters.find((item) => item.slug === section) ?? chapters[0];
 
   return <main className="docs"><GuideNavigation activeChapter={activeChapter} /><div className="docs-content">
-    {activeChapter.slug === "overview" && <header className="docs-header"><span className="docs-eyebrow">Foundation</span><h1>React Boilerplate Foundations</h1></header>}
+    {activeChapter.slug === "overview" && <header className="docs-header"><span className="docs-eyebrow">Foundation</span><h1 className="page-title">React Boilerplate Foundations</h1></header>}
     <section className="docs-section">
-      {activeChapter.slug !== "overview" && <div className="section-heading"><div><h1>{activeChapter.title}</h1><p>{activeChapter.description}</p></div></div>}
+      {activeChapter.slug !== "overview" && <div className="page-header"><div><h1 className="page-title">{activeChapter.title}</h1><p>{activeChapter.description}</p></div></div>}
       <activeChapter.Component />
     </section>
   </div></main>;

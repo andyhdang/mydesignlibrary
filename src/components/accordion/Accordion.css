@@ -8,10 +8,6 @@
   border-bottom: 1px solid var(--border);
 }
 
-.accordion__heading {
-  margin: 0;
-}
-
 .accordion__trigger {
   display: flex;
   align-items: center;
@@ -21,7 +17,7 @@
   border: 0;
   color: var(--fg);
   background: transparent;
-  font-weight: 500;
+  font: var(--font-label-large);
   text-align: left;
 }
 
