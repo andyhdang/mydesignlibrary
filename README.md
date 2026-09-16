@@ -38,4 +38,4 @@ Notes:
 
 - This project uses `HashRouter` so direct page refreshes work on GitHub Pages.
 - If your repo name changes, update `base` in [vite.config.js](vite.config.js).
-# myportfolio
+# mydesignlibrary

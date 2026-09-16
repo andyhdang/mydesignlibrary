@@ -1,0 +1,19 @@
+.case-study {
+  --fg-accent: oklab(39.569260% -0.029137 -0.151398);
+  --bg-surface-accent: oklab(from var(--fg-accent) l a b / 0.1);
+  --border-accent: oklab(from var(--fg-accent) l a b / 0.5);
+}
+
+.case-study__hero-image {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  background: var(--bg-surface);
+}
+
+.case-study__hero-image img {
+  width: 100%;
+  min-height: clamp(18rem, 48vw, 45rem);
+  max-height: 100svh;
+  object-fit: cover;
+  object-position: center;
+}

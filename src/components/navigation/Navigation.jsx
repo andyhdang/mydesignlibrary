@@ -28,7 +28,7 @@ export default function Navigation() {
     <nav className="navigation" aria-label="Main navigation">
       <Link className="navigation__brand" to="/">
         <span>Andy Dang</span>
-        <span className="navigation__role">Digital Product Designer</span>
+        <span className="navigation__role">Design Library</span>
       </Link>
       <button
         className="navigation__menu-toggle"
@@ -46,6 +46,11 @@ export default function Navigation() {
         </li>
         <li>
           <Link to="/style-guide" onClick={() => setIsMenuOpen(false)}>Style Guide</Link>
+        </li>
+        <li>
+          <Link to="/case-study-template" onClick={() => setIsMenuOpen(false)}>
+            Case Study Template
+          </Link>
         </li>
       </ul>
       <button
