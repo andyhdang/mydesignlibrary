@@ -97,7 +97,7 @@
   --font-body-large: var(--font-weight-regular) var(--font-size-400) / var(--line-height-body) var(--sans);
   --font-title-small: var(--font-weight-medium) var(--font-size-400) / var(--line-height-heading) var(--heading);
   --font-title-medium: var(--font-weight-medium) var(--font-size-500) / var(--line-height-heading) var(--heading);
-  --font-title-large: var(--font-weight-bold) var(--font-size-600) / var(--line-height-heading) var(--heading);
+  --font-title-large: var(--font-weight-medium) var(--font-size-600) / var(--line-height-heading) var(--heading);
   --font-caption: var(--font-weight-regular) var(--font-size-100) / var(--line-height-caption) var(--sans);
   --font-subtitle: var(--font-weight-medium) var(--font-size-300) / var(--line-height-subtitle) var(--sans);
   --font-display: var(--font-weight-bold) var(--font-size-800) / var(--line-height-display) var(--heading);

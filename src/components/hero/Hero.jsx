@@ -11,13 +11,16 @@ export default function Hero({
   children,
 }) {
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section
+      className={`hero${imageSrc ? " hero--with-visual" : ""}${description ? " hero--with-description" : ""}`}
+      aria-labelledby="hero-title"
+    >
       <div className="hero__content">
         {eyebrow && <p className="hero__eyebrow">{eyebrow}</p>}
         <h1 id="hero-title" className="hero__title">
           {title}
         </h1>
-        {description && <p className="hero__description">{description}</p>}
+        {description && <div className="hero__description">{description}</div>}
         {(primaryAction || secondaryAction) && (
           <div className="hero__actions">
             {primaryAction}

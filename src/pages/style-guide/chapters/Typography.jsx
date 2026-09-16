@@ -6,7 +6,7 @@ const fontShorthands = [
   { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "var(--font-size-400)", "/ var(--line-height-body)", "var(--sans)"], sample: "Reading copy" },
   { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "var(--font-size-400)", "/ var(--line-height-heading)", "var(--heading)"], sample: "Section title" },
   { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "var(--font-size-500)", "/ var(--line-height-heading)", "var(--heading)"], sample: "Section title" },
-  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-bold)", "var(--font-size-600)", "/ var(--line-height-heading)", "var(--heading)"], sample: "Page title" },
+  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "var(--font-size-600)", "/ var(--line-height-heading)", "var(--heading)"], sample: "Page title" },
   { name: "Caption", token: "--font-caption", value: ["var(--font-weight-regular)", "var(--font-size-100)", "/ var(--line-height-caption)", "var(--sans)"], sample: "Supporting detail" },
   { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-medium)", "var(--font-size-300)", "/ var(--line-height-subtitle)", "var(--sans)"], sample: "Supporting copy" },
   { name: "Display", token: "--font-display", value: ["var(--font-weight-bold)", "var(--font-size-800)", "/ var(--line-height-display)", "var(--heading)"], sample: "Make impact" },
