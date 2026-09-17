@@ -59,3 +59,23 @@ import PullQuote from "./components/pull-quote/PullQuote";
 
 `quote` is required. Supply `imageSrc` and `imageAlt` to show the portrait, and
 use `attribution` for the speaker's name or a short description.
+
+### CaseStudyNumbers
+
+`CaseStudyNumbers` presents a project metric or group of metrics with optional
+supporting context.
+
+```jsx
+import CaseStudyNumbers from "./components/case-study-numbers/CaseStudyNumbers";
+
+<CaseStudyNumbers
+  title="Results at a glance"
+  items={[
+    { value: "32%", label: "Increase in task completion" },
+    { value: "4.8/5", label: "Average customer rating" },
+  ]}
+/>
+```
+
+Supply each item with a `value` and `label`; an optional `description` adds
+context beneath an individual metric.

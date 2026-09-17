@@ -1,4 +1,6 @@
+import { Fragment } from "react";
 import CaseStudyHeader from "../../components/case-study-header/CaseStudyHeader";
+import CaseStudyNumbers from "../../components/case-study-numbers/CaseStudyNumbers";
 import CaseStudySection from "../../components/case-study-section/CaseStudySection";
 import PullQuote from "../../components/pull-quote/PullQuote";
 import "./CaseStudy.css";
@@ -12,6 +14,12 @@ const facts = [
 
 const placeholderImage = `${import.meta.env.BASE_URL}images/case-study-placeholder.png`;
 const pullQuotePersonImage = `${import.meta.env.BASE_URL}images/pull-quote-person-placeholder.png`;
+
+const impactNumbers = [
+  { value: "32%", label: "Increase in task completion" },
+  { value: "4.8/5", label: "Average customer rating" },
+  { value: "2.4x", label: "Faster time to insight" },
+];
 
 const sections = [
   {
@@ -80,17 +88,25 @@ export default function CaseStudy() {
         />
       </div>
       {sections.map(({ title, body, imageCaption }) => (
-        <CaseStudySection
-          key={title}
-          title={title}
-          imageSrc={placeholderImage}
-          imageAlt="A collage of Dictionary.com product experiences"
-          imageCaption={imageCaption}
-        >
-          {body.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </CaseStudySection>
+        <Fragment key={title}>
+          <CaseStudySection
+            title={title}
+            imageSrc={placeholderImage}
+            imageAlt="A collage of Dictionary.com product experiences"
+            imageCaption={imageCaption}
+          >
+            {body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </CaseStudySection>
+          {title === "Impact and metrics" && (
+            <CaseStudyNumbers
+              title="Results at a glance"
+              description="Use this module to make the project's outcome concrete with the measures that matter most."
+              items={impactNumbers}
+            />
+          )}
+        </Fragment>
       ))}
     </div>
   );
