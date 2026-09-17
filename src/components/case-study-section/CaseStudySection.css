@@ -6,6 +6,7 @@
 
 .case-study-section__content {
   max-width: 38rem;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
 }
 
 .case-study-section__title {
@@ -21,10 +22,28 @@
   font: var(--font-body-large);
 }
 
+.case-study-section__media {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
 .case-study-section__image {
   width: 100%;
   border-radius: 0.75rem;
   object-fit: cover;
+}
+
+.case-study-section__caption {
+  margin-top: 0.75rem;
+  color: var(--fg-muted);
+  font: var(--font-caption);
+}
+
+@media (min-width: 48rem) {
+  .case-study-section__content {
+    margin-inline: auto;
+  }
 }
 
 @media (max-width: 30rem) {

@@ -1,0 +1,52 @@
+.pull-quote {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 4rem);
+  border-inline-start: 0.25rem solid var(--fg-accent);
+  background: var(--bg-surface-accent);
+}
+
+.pull-quote__quote {
+  color: var(--fg);
+  font: var(--font-title-medium);
+  letter-spacing: -0.03em;
+}
+
+.pull-quote__quote p::before {
+  content: "\201C";
+}
+
+.pull-quote__quote p::after {
+  content: "\201D";
+}
+
+.pull-quote__attribution {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  color: var(--fg-muted);
+  font: var(--font-body-small);
+}
+
+.pull-quote__image {
+  flex: 0 0 2.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--fg-accent);
+  object-fit: cover;
+}
+
+.pull-quote__person {
+  font-style: normal;
+}
+
+@media (max-width: 30rem) {
+  .pull-quote {
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+
+}

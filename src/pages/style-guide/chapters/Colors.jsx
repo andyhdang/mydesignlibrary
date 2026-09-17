@@ -10,7 +10,7 @@ const colorTokens = [
   { token: "--bg-inverse", light: "oklch(from var(--fg) calc(l - 0.1) c h)", dark: "oklch(from var(--fg) calc(l + 0.1) c h)", sampleType: "fill" },
   { token: "--border", light: "oklch(92.05% 0.0042 301.42)", dark: "oklch(31.13% 0.0181 276.38)", sampleType: "border" },
   { token: "--bg-code", light: "oklch(96.3% 0.0093 99.98)", dark: "oklch(24.6% 0.0152 279.6)", sampleType: "fill" },
-  { token: "--fg-accent", light: "oklch(60.81% 0.269 305.12)", dark: "oklch(72.17% 0.1767 305.5)", sampleType: "text" },
+  { token: "--fg-accent", light: "oklch(50% 0.12 190)", dark: "oklch(72% 0.12 190)", sampleType: "text" },
   { token: "--bg-accent", light: "var(--fg-accent)", dark: "var(--fg-accent)", sampleType: "fill" },
   { token: "--bg-surface-accent", light: "oklch(from var(--fg-accent) l c h / 0.1)", dark: "oklch(from var(--fg-accent) l c h / 0.15)", sampleType: "fill" },
   { token: "--border-accent", light: "oklch(from var(--fg-accent) l c h / 0.5)", dark: "oklch(from var(--fg-accent) l c h / 0.5)", sampleType: "border" },

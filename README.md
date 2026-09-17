@@ -39,3 +39,43 @@ Notes:
 - This project uses `HashRouter` so direct page refreshes work on GitHub Pages.
 - If your repo name changes, update `base` in [vite.config.js](vite.config.js).
 # mydesignlibrary
+
+## Components
+
+### PullQuote
+
+`PullQuote` displays a quote with an optional circular portrait and attribution.
+
+```jsx
+import PullQuote from "./components/pull-quote/PullQuote";
+
+<PullQuote
+  quote="Great design begins by listening carefully."
+  imageSrc="/images/speaker.jpg"
+  imageAlt="Jane Doe"
+  attribution="Jane Doe, Product Designer"
+/>
+```
+
+`quote` is required. Supply `imageSrc` and `imageAlt` to show the portrait, and
+use `attribution` for the speaker's name or a short description.
+
+### CaseStudyNumbers
+
+`CaseStudyNumbers` presents a project metric or group of metrics with optional
+supporting context.
+
+```jsx
+import CaseStudyNumbers from "./components/case-study-numbers/CaseStudyNumbers";
+
+<CaseStudyNumbers
+  title="Results at a glance"
+  items={[
+    { value: "32%", label: "Increase in task completion" },
+    { value: "4.8/5", label: "Average customer rating" },
+  ]}
+/>
+```
+
+Supply each item with a `value` and `label`; an optional `description` adds
+context beneath an individual metric.
