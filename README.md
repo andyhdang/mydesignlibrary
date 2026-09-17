@@ -39,3 +39,23 @@ Notes:
 - This project uses `HashRouter` so direct page refreshes work on GitHub Pages.
 - If your repo name changes, update `base` in [vite.config.js](vite.config.js).
 # mydesignlibrary
+
+## Components
+
+### PullQuote
+
+`PullQuote` displays a quote with an optional circular portrait and attribution.
+
+```jsx
+import PullQuote from "./components/pull-quote/PullQuote";
+
+<PullQuote
+  quote="Great design begins by listening carefully."
+  imageSrc="/images/speaker.jpg"
+  imageAlt="Jane Doe"
+  attribution="Jane Doe, Product Designer"
+/>
+```
+
+`quote` is required. Supply `imageSrc` and `imageAlt` to show the portrait, and
+use `attribution` for the speaker's name or a short description.
