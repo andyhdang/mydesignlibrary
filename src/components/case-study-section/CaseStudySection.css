@@ -11,7 +11,7 @@
 
 .case-study-section__title {
   color: var(--fg);
-  font: var(--font-title-large);
+  font: var(--font-title-medium);
   letter-spacing: -0.04em;
 }
 

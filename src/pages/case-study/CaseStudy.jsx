@@ -1,19 +1,15 @@
 import { Fragment } from "react";
 import CaseStudyHeader from "../../components/case-study-header/CaseStudyHeader";
+import BeforeAfter from "../../components/before-after/BeforeAfter";
 import CaseStudyNumbers from "../../components/case-study-numbers/CaseStudyNumbers";
 import CaseStudySection from "../../components/case-study-section/CaseStudySection";
 import PullQuote from "../../components/pull-quote/PullQuote";
 import "./CaseStudy.css";
 
-const facts = [
-  { label: "Client", value: "Company name" },
-  { label: "Role", value: "Product Designer" },
-  { label: "Timeline", value: "2025" },
-  { label: "Focus", value: "Product strategy and experience design" },
-];
-
 const placeholderImage = `${import.meta.env.BASE_URL}images/case-study-placeholder.png`;
 const pullQuotePersonImage = `${import.meta.env.BASE_URL}images/pull-quote-person-placeholder.png`;
+const advanceLocalBeforeImage = `${import.meta.env.BASE_URL}images/advance-local-before.png`;
+const advanceLocalAfterImage = `${import.meta.env.BASE_URL}images/advance-local-after.png`;
 
 const impactNumbers = [
   { value: "32%", label: "Increase in task completion" },
@@ -68,10 +64,15 @@ export default function CaseStudy() {
   return (
     <div className="case-study">
       <CaseStudyHeader
-        eyebrow="Case study"
+        label="Case study"
         title="A project title that earns the next scroll."
-        summary="Use this space to make the case for the work: the problem worth solving, the change you drove, and why it mattered."
-        facts={facts}
+        subhead="Use this space to make the case for the work: the problem worth solving, the change you drove, and why it mattered."
+        authorName="Your name"
+        authorImageSrc={pullQuotePersonImage}
+        authorImageAlt="Illustrated profile placeholder for the case study author"
+        publishedAt="2025-01"
+        monthYear="January 2025"
+        readDuration="6 min read"
       />
       <figure className="case-study__hero-image">
         <img
@@ -87,6 +88,15 @@ export default function CaseStudy() {
           attribution="Research participant"
         />
       </div>
+      <BeforeAfter
+        title="From friction to a focused experience"
+        description="Use this comparison to make the transformation tangible. Drag the handle to reveal the updated design."
+        beforeSrc={advanceLocalBeforeImage}
+        beforeAlt="Advance Local's original subscription management screen with navigation tabs and a contextual action menu"
+        afterSrc={advanceLocalAfterImage}
+        afterAlt="Advance Local's redesigned subscription screen showing account status and subscription management options"
+        caption="Advance Local subscription management experience before and after the redesign."
+      />
       {sections.map(({ title, body, imageCaption }) => (
         <Fragment key={title}>
           <CaseStudySection
