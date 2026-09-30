@@ -1,5 +1,6 @@
 .case-study {
   --fg-accent: oklab(39.569260% -0.029137 -0.151398);
+  --bg-accent: var(--fg-accent);
   --bg-surface-accent: oklab(from var(--fg-accent) l a b / 0.1);
   --border-accent: oklab(from var(--fg-accent) l a b / 0.5);
 }
