@@ -1,4 +1,4 @@
-.case-study-header {
+.page-template-header {
   display: grid;
   gap: 2.5rem;
   padding: clamp(3rem, 8vw, 7rem) var(--page-gutter);
@@ -7,39 +7,39 @@
   clip-path: inset(0 -100vmax);
 }
 
-.case-study-header__intro {
+.page-template-header__intro {
   max-width: 56rem;
-  animation: case-study-header-reveal 500ms ease-out both;
+  animation: page-template-header-reveal 500ms ease-out both;
 }
 
-.case-study-header__label {
+.page-template-header__label {
   color: var(--fg-inverse);
   font: var(--font-label-eyebrow);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.case-study-header__title {
+.page-template-header__title {
   margin: 0.75rem 0 1.25rem;
   color: var(--fg-inverse);
   font: var(--font-title-large);
   letter-spacing: -0.05em;
 }
 
-.case-study-header__subhead {
+.page-template-header__subhead {
   max-width: 46rem;
   color: var(--fg-inverse);
   font: var(--font-body-large);
 }
 
-.case-study-header__byline {
+.page-template-header__byline {
   display: flex;
   gap: 0.875rem;
   align-items: center;
-  animation: case-study-header-reveal 500ms 150ms ease-out both;
+  animation: page-template-header-reveal 500ms 150ms ease-out both;
 }
 
-.case-study-header__author-image {
+.page-template-header__author-image {
   flex: 0 0 3rem;
   width: 3rem;
   height: 3rem;
@@ -49,22 +49,22 @@
   object-fit: cover;
 }
 
-.case-study-header__metadata {
+.page-template-header__metadata {
   display: grid;
   gap: 0.25rem;
 }
 
-.case-study-header__author {
+.page-template-header__author {
   color: var(--fg-inverse);
   font: var(--font-label-medium);
 }
 
-.case-study-header__details {
+.page-template-header__details {
   color: var(--fg-inverse);
   font: var(--font-body-small);
 }
 
-@keyframes case-study-header-reveal {
+@keyframes page-template-header-reveal {
   from {
     opacity: 0;
     transform: translateY(0.75rem);
@@ -77,18 +77,18 @@
 }
 
 @media (min-width: 1280px) {
-  .case-study-header {
+  .page-template-header {
     min-height: min(38rem, calc(100svh - 5rem));
     align-content: center;
   }
 }
 
 @media (max-width: 30rem) {
-  .case-study-header {
+  .page-template-header {
     gap: 2.5rem;
   }
 
-  .case-study-header__subhead {
+  .page-template-header__subhead {
     font: var(--font-body-medium);
   }
 }

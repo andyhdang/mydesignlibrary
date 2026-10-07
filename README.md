@@ -60,15 +60,15 @@ import PullQuote from "./components/pull-quote/PullQuote";
 `quote` is required. Supply `imageSrc` and `imageAlt` to show the portrait, and
 use `attribution` for the speaker's name or a short description.
 
-### CaseStudyNumbers
+### PageTemplateNumbers
 
-`CaseStudyNumbers` presents a project metric or group of metrics with optional
+`PageTemplateNumbers` presents a project metric or group of metrics with optional
 supporting context.
 
 ```jsx
-import CaseStudyNumbers from "./components/case-study-numbers/CaseStudyNumbers";
+import PageTemplateNumbers from "./components/page-template-numbers/PageTemplateNumbers";
 
-<CaseStudyNumbers
+<PageTemplateNumbers
   title="Results at a glance"
   items={[
     { value: "32%", label: "Increase in task completion" },
