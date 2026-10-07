@@ -68,26 +68,46 @@
 
   /* Spacing */
   --space-base: 0.5rem;
-  --space-01: 0.25rem;
-  --space-02: 0.375rem;
-  --space-03: 0.5rem;
-  --space-04: 0.75rem;
-  --space-05: 1rem;
-  --space-06: 1.25rem;
-  --space-07: 1.5rem;
-  --space-08: 1.75rem;
-  --space-09: 2rem;
-  --space-10: 2.25rem;
-  --space-11: 2.5rem;
-  --space-12: 3rem;
-  --space-13: 4rem;
-  --space-14: 6rem;
-  --padding-compact: var(--space-02);
-  --padding-default: var(--space-03);
-  --padding-spacious: var(--space-07);
-  --margin-compact: var(--space-02);
-  --margin-default: var(--space-03);
-  --margin-spacious: var(--space-07);
+  --space-01: 0.125rem;
+  --space-02: 0.25rem;
+  --space-03: 0.375rem;
+  --space-04: 0.5rem;
+  --space-05: 0.75rem;
+  --space-06: 1rem;
+  --space-07: 1.25rem;
+  --space-08: 1.5rem;
+  --space-09: 1.75rem;
+  --space-10: 2rem;
+  --space-11: 2.25rem;
+  --space-12: 2.5rem;
+  --space-13: 3rem;
+  --space-14: 4rem;
+  --space-15: 6rem;
+  --inset-xs: var(--space-02);
+  --inset-s: var(--space-04);
+  --inset-m: var(--space-06);
+  --inset-l: var(--space-08);
+  --inset-xl: var(--space-10);
+  --inset-squish-xs: var(--space-01) var(--space-02);
+  --inset-squish-s: var(--space-02) var(--space-04);
+  --inset-squish-m: var(--space-04) var(--space-06);
+  --inset-squish-l: var(--space-06) var(--space-08);
+  --inset-squish-xl: var(--space-08) var(--space-10);
+  --inset-stretch-xs: var(--space-02) var(--space-01);
+  --inset-stretch-s: var(--space-04) var(--space-02);
+  --inset-stretch-m: var(--space-06) var(--space-04);
+  --inset-stretch-l: var(--space-08) var(--space-06);
+  --inset-stretch-xl: var(--space-10) var(--space-08);
+  --inline-xs: var(--space-02);
+  --inline-s: var(--space-04);
+  --inline-m: var(--space-06);
+  --inline-l: var(--space-08);
+  --inline-xl: var(--space-10);
+  --stack-xs: var(--space-02);
+  --stack-s: var(--space-04);
+  --stack-m: var(--space-06);
+  --stack-l: var(--space-08);
+  --stack-xl: var(--space-10);
 
   /* Shadows & Elevations */
   --shadow:
@@ -134,40 +154,42 @@
 @media (min-width: 64rem) {
   :root {
     --space-base: 0.75rem;
-    --space-01: 0.375rem;
-    --space-02: 0.625rem;
-    --space-03: 0.75rem;
-    --space-04: 1.125rem;
-    --space-05: 1.5rem;
-    --space-06: 1.875rem;
-    --space-07: 2.25rem;
-    --space-08: 2.625rem;
-    --space-09: 3rem;
-    --space-10: 3.375rem;
-    --space-11: 3.75rem;
-    --space-12: 4.5rem;
-    --space-13: 6rem;
-    --space-14: 9rem;
+    --space-01: 0.25rem;
+    --space-02: 0.375rem;
+    --space-03: 0.625rem;
+    --space-04: 0.75rem;
+    --space-05: 1.125rem;
+    --space-06: 1.5rem;
+    --space-07: 1.875rem;
+    --space-08: 2.25rem;
+    --space-09: 2.625rem;
+    --space-10: 3rem;
+    --space-11: 3.375rem;
+    --space-12: 3.75rem;
+    --space-13: 4.5rem;
+    --space-14: 6rem;
+    --space-15: 9rem;
   }
 }
 
 @media (min-width: 96rem) {
   :root {
     --space-base: 1.25rem;
-    --space-01: 0.5rem;
-    --space-02: 0.75rem;
-    --space-03: 1rem;
-    --space-04: 1.5rem;
-    --space-05: 2rem;
-    --space-06: 2.5rem;
-    --space-07: 3rem;
-    --space-08: 3.5rem;
-    --space-09: 4rem;
-    --space-10: 4.5rem;
-    --space-11: 5rem;
-    --space-12: 6rem;
-    --space-13: 8rem;
-    --space-14: 12rem;
+    --space-01: 0.25rem;
+    --space-02: 0.5rem;
+    --space-03: 0.75rem;
+    --space-04: 1rem;
+    --space-05: 1.5rem;
+    --space-06: 2rem;
+    --space-07: 2.5rem;
+    --space-08: 3rem;
+    --space-09: 3.5rem;
+    --space-10: 4rem;
+    --space-11: 4.5rem;
+    --space-12: 5rem;
+    --space-13: 6rem;
+    --space-14: 8rem;
+    --space-15: 12rem;
   }
 }
 
