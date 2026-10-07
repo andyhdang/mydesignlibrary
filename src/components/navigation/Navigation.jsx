@@ -48,8 +48,8 @@ export default function Navigation() {
           <Link to="/style-guide" onClick={() => setIsMenuOpen(false)}>Style Guide</Link>
         </li>
         <li>
-          <Link to="/case-study-template" onClick={() => setIsMenuOpen(false)}>
-            Case Study Template
+          <Link to="/page-template" onClick={() => setIsMenuOpen(false)}>
+            Page Template
           </Link>
         </li>
       </ul>

@@ -1,28 +1,26 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { NavLink, useParams } from "react-router-dom";
-import Accessibility from "./chapters/Accessibility";
 import Colors from "./chapters/Colors";
-import Elevation from "./chapters/Elevation";
-import Forms from "./chapters/Forms";
-import Media from "./chapters/Media";
+import Spacing from "./chapters/Spacing";
 import Tokens from "./chapters/Tokens";
 import Typography from "./chapters/Typography";
-import { colorAnchors, typographyAnchors } from "./sectionAnchors";
+import { colorAnchors, spacingAnchors, typographyAnchors } from "./sectionAnchors";
 import "./StyleGuide.css";
 
 const chapters = [
   { slug: "overview", title: "Overview", description: "A quick reference for the foundations shared across the application.", Component: Overview },
   { slug: "typography", title: "Typography", description: "Font stacks and a fluid type scale used throughout the interface.", Component: Typography },
   { slug: "colors", title: "Colors", description: "The core palette is defined as reusable theme tokens.", Component: Colors },
-  { slug: "forms", title: "Forms", description: "Controls inherit the body typeface and color.", Component: Forms },
-  { slug: "media", title: "Media defaults", description: "Images are responsive by default and retain their aspect ratio.", Component: Media },
-  { slug: "elevation", title: "Elevation", description: "A shared shadow token separates floating surfaces.", Component: Elevation },
-  { slug: "accessibility", title: "Accessibility", description: "Built-in choices that make the foundation more inclusive.", Component: Accessibility },
+  { slug: "spacing", title: "Spacing", description: "A responsive spacing scale creates consistent rhythm and intentional relationships between elements, components, and layouts.", Component: Spacing },
   { slug: "tokens", title: "Design tokens", description: "Core variables that shape the interface.", Component: Tokens },
 ];
 
-const sectionAnchors = { typography: typographyAnchors, colors: colorAnchors };
+const sectionAnchors = {
+  typography: typographyAnchors,
+  colors: colorAnchors,
+  spacing: spacingAnchors,
+};
 
 export default function StyleGuide() {
   const { section = "overview" } = useParams();

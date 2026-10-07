@@ -14,7 +14,7 @@
 
    ✅ SETUP CHECKLIST:
    - [ ] 1. Fonts: Import your fonts (via Google Fonts in index.html, or local @font-face)
-   - [ ] 2. Fonts: Update the --sans, --heading, and --mono variables below.
+   - [ ] 2. Fonts: Update the --font-sans, --font-heading, and --font-mono variables below.
    - [ ] 3. Colors (Light): Define the base palette (text, bg, accents) in the standard :root.
    - [ ] 4. Colors (Dark): Update the dark palette.
    - [ ] 5. Theme Logic: Decide on dark mode behavior. 
@@ -66,14 +66,57 @@
   --control-selected-fg: var(--fg-accent);
   --control-selected-border: var(--fg-accent);
 
+  /* Spacing */
+  --space-base: 0.5rem;
+  --space-01: 0.125rem;
+  --space-02: 0.25rem;
+  --space-03: 0.375rem;
+  --space-04: 0.5rem;
+  --space-05: 0.75rem;
+  --space-06: 1rem;
+  --space-07: 1.25rem;
+  --space-08: 1.5rem;
+  --space-09: 1.75rem;
+  --space-10: 2rem;
+  --space-11: 2.25rem;
+  --space-12: 2.5rem;
+  --space-13: 3rem;
+  --space-14: 4rem;
+  --space-15: 6rem;
+  --space-inset-xs: var(--space-02);
+  --space-inset-s: var(--space-04);
+  --space-inset-m: var(--space-06);
+  --space-inset-l: var(--space-08);
+  --space-inset-xl: var(--space-10);
+  --space-inset-squish-xs: var(--space-01) var(--space-02);
+  --space-inset-squish-s: var(--space-02) var(--space-04);
+  --space-inset-squish-m: var(--space-04) var(--space-06);
+  --space-inset-squish-l: var(--space-06) var(--space-08);
+  --space-inset-squish-xl: var(--space-08) var(--space-10);
+  --space-inset-stretch-xs: var(--space-02) var(--space-01);
+  --space-inset-stretch-s: var(--space-04) var(--space-02);
+  --space-inset-stretch-m: var(--space-06) var(--space-04);
+  --space-inset-stretch-l: var(--space-08) var(--space-06);
+  --space-inset-stretch-xl: var(--space-10) var(--space-08);
+  --space-inline-xs: var(--space-02);
+  --space-inline-s: var(--space-04);
+  --space-inline-m: var(--space-06);
+  --space-inline-l: var(--space-08);
+  --space-inline-xl: var(--space-10);
+  --space-stack-xs: var(--space-02);
+  --space-stack-s: var(--space-04);
+  --space-stack-m: var(--space-06);
+  --space-stack-l: var(--space-08);
+  --space-stack-xl: var(--space-10);
+
   /* Shadows & Elevations */
   --shadow:
     oklch(0% 0 0 / 0.1) 0 10px 15px -3px, oklch(0% 0 0 / 0.05) 0 4px 6px -2px;
 
   /* Typography */
-  --sans: "Geologica", system-ui, sans-serif;
-  --heading: "Geologica", system-ui, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --font-sans: "Geologica", system-ui, sans-serif;
+  --font-heading: "Geologica", system-ui, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
   --font-size-100: 0.75rem;
   --font-size-200: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
   --font-size-300: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
@@ -82,30 +125,72 @@
   --font-size-600: clamp(1.5rem, 1.3rem + 1vw, 2rem);
   --font-size-700: clamp(2.25rem, 1.85rem + 2vw, 3.5rem);
   --font-size-800: clamp(3rem, 2rem + 4vw, 5rem);
-  --line-height-display: 1;
-  --line-height-heading: 1.18;
-  --line-height-label: 1.2;
-  --line-height-subtitle: 1.35;
-  --line-height-caption: 1.4;
-  --line-height-body: 1.5;
+  --font-line-height-display: 1;
+  --font-line-height-heading: 1.18;
+  --font-line-height-label: 1.2;
+  --font-line-height-subtitle: 1.35;
+  --font-line-height-caption: 1.4;
+  --font-line-height-body: 1.5;
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
-  --font-body-small: var(--font-weight-regular) var(--font-size-200) / var(--line-height-body) var(--sans);
-  --font-body-medium: var(--font-weight-regular) var(--font-size-300) / var(--line-height-body) var(--sans);
-  --font-body-large: var(--font-weight-regular) var(--font-size-400) / var(--line-height-body) var(--sans);
-  --font-title-small: var(--font-weight-medium) var(--font-size-400) / var(--line-height-heading) var(--heading);
-  --font-title-medium: var(--font-weight-medium) var(--font-size-500) / var(--line-height-heading) var(--heading);
-  --font-title-large: var(--font-weight-medium) var(--font-size-700) / var(--line-height-heading) var(--heading);
-  --font-caption: var(--font-weight-regular) var(--font-size-100) / var(--line-height-caption) var(--sans);
-  --font-subtitle: var(--font-weight-medium) var(--font-size-300) / var(--line-height-subtitle) var(--sans);
-  --font-display: var(--font-weight-bold) var(--font-size-800) / var(--line-height-display) var(--heading);
-  --font-code-block: var(--font-weight-regular) var(--font-size-200) / var(--line-height-body) var(--mono);
-  --font-label-small: var(--font-weight-medium) var(--font-size-100) / var(--line-height-label) var(--sans);
-  --font-label-medium: var(--font-weight-medium) var(--font-size-200) / var(--line-height-label) var(--sans);
-  --font-label-large: var(--font-weight-medium) var(--font-size-300) / var(--line-height-label) var(--sans);
-  --font-label-eyebrow: var(--font-weight-medium) var(--font-size-100) / var(--line-height-label) var(--mono);
+  --font-body-small: var(--font-weight-regular) var(--font-size-200) / var(--font-line-height-body) var(--font-sans);
+  --font-body-medium: var(--font-weight-regular) var(--font-size-300) / var(--font-line-height-body) var(--font-sans);
+  --font-body-large: var(--font-weight-regular) var(--font-size-400) / var(--font-line-height-body) var(--font-sans);
+  --font-title-small: var(--font-weight-medium) var(--font-size-400) / var(--font-line-height-heading) var(--font-heading);
+  --font-title-medium: var(--font-weight-medium) var(--font-size-500) / var(--font-line-height-heading) var(--font-heading);
+  --font-title-large: var(--font-weight-medium) var(--font-size-700) / var(--font-line-height-heading) var(--font-heading);
+  --font-caption: var(--font-weight-regular) var(--font-size-100) / var(--font-line-height-caption) var(--font-sans);
+  --font-subtitle: var(--font-weight-medium) var(--font-size-300) / var(--font-line-height-subtitle) var(--font-sans);
+  --font-display: var(--font-weight-bold) var(--font-size-800) / var(--font-line-height-display) var(--font-heading);
+  --font-code-block: var(--font-weight-regular) var(--font-size-200) / var(--font-line-height-body) var(--font-mono);
+  --font-label-small: var(--font-weight-medium) var(--font-size-100) / var(--font-line-height-label) var(--font-sans);
+  --font-label-medium: var(--font-weight-medium) var(--font-size-200) / var(--font-line-height-label) var(--font-sans);
+  --font-label-large: var(--font-weight-medium) var(--font-size-300) / var(--font-line-height-label) var(--font-sans);
+  --font-label-eyebrow: var(--font-weight-medium) var(--font-size-100) / var(--font-line-height-label) var(--font-mono);
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --space-base: 0.75rem;
+    --space-01: 0.25rem;
+    --space-02: 0.375rem;
+    --space-03: 0.625rem;
+    --space-04: 0.75rem;
+    --space-05: 1.125rem;
+    --space-06: 1.5rem;
+    --space-07: 1.875rem;
+    --space-08: 2.25rem;
+    --space-09: 2.625rem;
+    --space-10: 3rem;
+    --space-11: 3.375rem;
+    --space-12: 3.75rem;
+    --space-13: 4.5rem;
+    --space-14: 6rem;
+    --space-15: 9rem;
+  }
+}
+
+@media (min-width: 96rem) {
+  :root {
+    --space-base: 1.25rem;
+    --space-01: 0.25rem;
+    --space-02: 0.5rem;
+    --space-03: 0.75rem;
+    --space-04: 1rem;
+    --space-05: 1.5rem;
+    --space-06: 2rem;
+    --space-07: 2.5rem;
+    --space-08: 3rem;
+    --space-09: 3.5rem;
+    --space-10: 4rem;
+    --space-11: 4.5rem;
+    --space-12: 5rem;
+    --space-13: 6rem;
+    --space-14: 8rem;
+    --space-15: 12rem;
+  }
 }
 
 /* Dark Mode (System preference OR manual toggle) */
@@ -206,9 +291,9 @@ body {
   min-height: 100svh;
   color: var(--fg);
   background-color: var(--bg);
-  font-family: var(--sans);
+  font-family: var(--font-sans);
   font-size: var(--font-size-300);
-  line-height: var(--line-height-body);
+  line-height: var(--font-line-height-body);
 
   /* Font smoothing */
   font-synthesis: none;
@@ -253,8 +338,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--heading);
-  line-height: var(--line-height-heading);
+  font-family: var(--font-heading);
+  line-height: var(--font-line-height-heading);
   text-wrap: balance; /* Modern CSS: prevents uneven hanging words in titles */
 }
 
@@ -286,7 +371,7 @@ code,
 kbd,
 samp,
 pre {
-  font-family: var(--mono);
+  font-family: var(--font-mono);
 }
 
 code {

@@ -11,3 +11,9 @@ export const colorAnchors = [
   { id: "color-token-values", label: "Base set color tokens" },
   { id: "state-colors", label: "State colors" },
 ];
+
+export const spacingAnchors = [
+  { id: "primitive-spacing-tokens", label: "Primitive tokens" },
+  { id: "semantic-spacing-tokens", label: "Semantic tokens" },
+  { id: "spacing-references", label: "References" },
+];
