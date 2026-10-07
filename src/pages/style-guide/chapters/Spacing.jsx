@@ -24,7 +24,7 @@ const semanticSpacingTokenGroups = [
   {
     title: "Inset",
     diagram: "inset",
-    description: "Equal padding on all sides.",
+    description: "Equal padding on all sides, suited to cards, icon buttons, and square controls.",
     tokens: [
       ["--inset-xs", "space-02", "Extra-small equal inset"],
       ["--inset-s", "space-04", "Small equal inset"],
@@ -36,7 +36,7 @@ const semanticSpacingTokenGroups = [
   {
     title: "Inset squish",
     diagram: "inset-squish",
-    description: "Less block padding than inline padding.",
+    description: "Less block padding than inline padding, suited to buttons, text inputs, and compact pills.",
     tokens: [
       ["--inset-squish-xs", "space-01 space-02", "Extra-small squished inset"],
       ["--inset-squish-s", "space-02 space-04", "Small squished inset"],
@@ -48,7 +48,7 @@ const semanticSpacingTokenGroups = [
   {
     title: "Inset stretch",
     diagram: "inset-stretch",
-    description: "More block padding than inline padding.",
+    description: "More block padding than inline padding, suited to callouts, media frames, and spacious section headers.",
     tokens: [
       ["--inset-stretch-xs", "space-02 space-01", "Extra-small stretched inset"],
       ["--inset-stretch-s", "space-04 space-02", "Small stretched inset"],
@@ -141,11 +141,12 @@ export default function Spacing() {
 
   return (
     <div className="spacing-chapter" style={previewStyle}>
+      <SpacingIntroVisual />
       <SpacingTable
         title="Primitive spacing tokens"
         description={
           <>
-            Previewing a <span className="spacing-dynamic-value">{selectedScale.label.toLowerCase()}</span> base unit of <span className="spacing-dynamic-value">{selectedScale.basePixels}px</span> at space-04. Multipliers begin at 0.25×, 0.5×, 0.75×, and 1×, then grow to 12× with tighter middle steps. Every calculated value rounds to the nearest even pixel, preserving close steps through the middle of the scale before growing for larger layouts.
+            Multipliers begin at 0.25×, 0.5×, 0.75×, and 1×, then grow to 12× with tighter middle steps. Every calculated value rounds to the nearest even pixel, preserving close steps through the middle of the scale before growing for larger layouts.
           </>
         }
         tokens={primitiveTokens}
@@ -166,6 +167,9 @@ export default function Spacing() {
                 </button>
               ))}
             </div>
+            <p className="spacing-viewport-preview">
+              Previewing a <span className="spacing-dynamic-value">{selectedScale.label.toLowerCase()}</span> base unit of <span className="spacing-dynamic-value">{selectedScale.basePixels}px</span> at space-04.
+            </p>
             <SpacingCurve points={curvePoints} />
           </>
         }
@@ -217,6 +221,22 @@ export default function Spacing() {
           </li>
         </ul>
       </section>
+    </div>
+  );
+}
+
+function SpacingIntroVisual() {
+  const multipliers = [
+    0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 8, 12,
+  ];
+
+  return (
+    <div className="spacing-intro-visual" aria-hidden="true">
+      <div className="spacing-intro-visual__scale">
+        {multipliers.map((multiplier) => (
+          <span key={multiplier} style={{ flexGrow: multiplier }} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -372,9 +392,9 @@ function SpacingTypeDiagram({ type }) {
         {type.startsWith("inset") && (
           <>
             <rect className="spacing-type-diagram__container" x="60" y="20" width="240" height="120" />
-            {type === "inset" && <rect className="spacing-type-diagram__content" x="90" y="50" width="180" height="60" />}
-            {type === "inset-squish" && <rect className="spacing-type-diagram__content" x="125" y="35" width="110" height="90" />}
-            {type === "inset-stretch" && <rect className="spacing-type-diagram__content" x="85" y="57" width="190" height="46" />}
+            {type === "inset" && <rect className="spacing-type-diagram__content spacing-type-diagram__content--inset" x="90" y="50" width="180" height="60" />}
+            {type === "inset-squish" && <rect className="spacing-type-diagram__content spacing-type-diagram__content--inset" x="125" y="35" width="110" height="90" />}
+            {type === "inset-stretch" && <rect className="spacing-type-diagram__content spacing-type-diagram__content--inset" x="85" y="57" width="190" height="46" />}
             <MeasurementLine x1="60" y1="80" x2={type === "inset-stretch" ? "85" : type === "inset-squish" ? "125" : "90"} y2="80" />
             <MeasurementLine x1="180" y1="20" x2="180" y2={type === "inset-squish" ? "35" : type === "inset-stretch" ? "57" : "50"} />
             <text className="spacing-type-diagram__label" x="180" y="154">container</text>

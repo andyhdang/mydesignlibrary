@@ -395,6 +395,37 @@
   background: var(--fg-accent);
 }
 
+.spacing-intro-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 14rem;
+  margin-bottom: 3.5rem;
+  padding: clamp(2rem, 6vw, 4rem);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--bg-surface);
+}
+
+.spacing-intro-visual__scale {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-01);
+  width: min(100%, 40rem);
+}
+
+.spacing-intro-visual__scale span {
+  display: block;
+  flex-basis: 0;
+  aspect-ratio: 1;
+  border-radius: 0.25rem;
+  background: var(--bg-surface-accent);
+}
+
+.spacing-viewport-preview {
+  margin: var(--space-03) 0 var(--space-05);
+}
+
 .spacing-dynamic-value {
   display: inline-block;
   padding: 0.1em 0.3em;
@@ -534,6 +565,10 @@
   fill: var(--bg);
   stroke: var(--fg-accent);
   stroke-width: 2;
+}
+
+.spacing-type-diagram__content--inset {
+  stroke: none;
 }
 
 .spacing-type-diagram__measure {

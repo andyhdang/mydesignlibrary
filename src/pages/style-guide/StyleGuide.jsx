@@ -9,14 +9,14 @@ import Media from "./chapters/Media";
 import Spacing from "./chapters/Spacing";
 import Tokens from "./chapters/Tokens";
 import Typography from "./chapters/Typography";
-import { colorAnchors, typographyAnchors } from "./sectionAnchors";
+import { colorAnchors, spacingAnchors, typographyAnchors } from "./sectionAnchors";
 import "./StyleGuide.css";
 
 const chapters = [
   { slug: "overview", title: "Overview", description: "A quick reference for the foundations shared across the application.", Component: Overview },
   { slug: "typography", title: "Typography", description: "Font stacks and a fluid type scale used throughout the interface.", Component: Typography },
   { slug: "colors", title: "Colors", description: "The core palette is defined as reusable theme tokens.", Component: Colors },
-  { slug: "spacing", title: "Spacing", description: "Primitive spacing tokens create a consistent layout rhythm.", Component: Spacing },
+  { slug: "spacing", title: "Spacing", description: "A responsive spacing scale creates consistent rhythm and intentional relationships between elements, components, and layouts.", Component: Spacing },
   { slug: "forms", title: "Forms", description: "Controls inherit the body typeface and color.", Component: Forms },
   { slug: "media", title: "Media defaults", description: "Images are responsive by default and retain their aspect ratio.", Component: Media },
   { slug: "elevation", title: "Elevation", description: "A shared shadow token separates floating surfaces.", Component: Elevation },
@@ -24,7 +24,11 @@ const chapters = [
   { slug: "tokens", title: "Design tokens", description: "Core variables that shape the interface.", Component: Tokens },
 ];
 
-const sectionAnchors = { typography: typographyAnchors, colors: colorAnchors };
+const sectionAnchors = {
+  typography: typographyAnchors,
+  colors: colorAnchors,
+  spacing: spacingAnchors,
+};
 
 export default function StyleGuide() {
   const { section = "overview" } = useParams();
