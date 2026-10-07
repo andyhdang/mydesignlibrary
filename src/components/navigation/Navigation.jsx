@@ -49,7 +49,7 @@ export default function Navigation() {
         </li>
         <li>
           <Link to="/page-template" onClick={() => setIsMenuOpen(false)}>
-            Page Documentation Template
+            Page Template
           </Link>
         </li>
       </ul>

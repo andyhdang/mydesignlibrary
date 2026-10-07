@@ -154,6 +154,9 @@ export default function Spacing() {
         visual={
           <>
             <SpacingMultiplierCurve />
+            <p className="spacing-viewport-preview">
+              Previewing a <span className="spacing-dynamic-value">{selectedScale.label.toLowerCase()}</span> base unit of <span className="spacing-dynamic-value">{selectedScale.basePixels}px</span> at space-04.
+            </p>
             <div className="spacing-viewport-toggle" role="group" aria-label="Spacing viewport preview">
               {viewportScales.map(({ id, label, basePixels }) => (
                 <button
@@ -167,9 +170,6 @@ export default function Spacing() {
                 </button>
               ))}
             </div>
-            <p className="spacing-viewport-preview">
-              Previewing a <span className="spacing-dynamic-value">{selectedScale.label.toLowerCase()}</span> base unit of <span className="spacing-dynamic-value">{selectedScale.basePixels}px</span> at space-04.
-            </p>
             <SpacingCurve points={curvePoints} />
           </>
         }

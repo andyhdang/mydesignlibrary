@@ -354,6 +354,14 @@
   border-radius: 0.75rem;
 }
 
+.table-scroll {
+  overflow-x: auto;
+}
+
+.table-scroll > table {
+  min-width: 48rem;
+}
+
 .token-table table {
   min-width: 48rem;
   border: 0;
@@ -385,6 +393,16 @@
 
 .spacing-token-table table {
   min-width: 36rem;
+}
+
+.spacing-token-table,
+.semantic-spacing-group {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.spacing-token-table > .table-scroll {
+  max-width: 100%;
 }
 
 .spacing-token-sample {
@@ -423,7 +441,7 @@
 }
 
 .spacing-viewport-preview {
-  margin: var(--space-03) 0 var(--space-05);
+  margin: 0 0 var(--space-05);
 }
 
 .spacing-dynamic-value {
