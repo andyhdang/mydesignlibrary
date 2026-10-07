@@ -462,6 +462,10 @@
   background: var(--bg-surface-accent);
 }
 
+.spacing-curve--neutral {
+  background: var(--bg-surface);
+}
+
 .spacing-curve svg {
   display: block;
   width: 100%;

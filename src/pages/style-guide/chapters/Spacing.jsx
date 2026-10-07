@@ -26,11 +26,11 @@ const semanticSpacingTokenGroups = [
     diagram: "inset",
     description: "Equal padding on all sides, suited to cards, icon buttons, and square controls.",
     tokens: [
-      ["--inset-xs", "space-02", "Extra-small equal inset"],
-      ["--inset-s", "space-04", "Small equal inset"],
-      ["--inset-m", "space-06", "Medium equal inset"],
-      ["--inset-l", "space-08", "Large equal inset"],
-      ["--inset-xl", "space-10", "Extra-large equal inset"],
+      ["--space-inset-xs", "space-02", "Extra-small equal inset"],
+      ["--space-inset-s", "space-04", "Small equal inset"],
+      ["--space-inset-m", "space-06", "Medium equal inset"],
+      ["--space-inset-l", "space-08", "Large equal inset"],
+      ["--space-inset-xl", "space-10", "Extra-large equal inset"],
     ],
   },
   {
@@ -38,11 +38,11 @@ const semanticSpacingTokenGroups = [
     diagram: "inset-squish",
     description: "Less block padding than inline padding, suited to buttons, text inputs, and compact pills.",
     tokens: [
-      ["--inset-squish-xs", "space-01 space-02", "Extra-small squished inset"],
-      ["--inset-squish-s", "space-02 space-04", "Small squished inset"],
-      ["--inset-squish-m", "space-04 space-06", "Medium squished inset"],
-      ["--inset-squish-l", "space-06 space-08", "Large squished inset"],
-      ["--inset-squish-xl", "space-08 space-10", "Extra-large squished inset"],
+      ["--space-inset-squish-xs", "space-01 space-02", "Extra-small squished inset"],
+      ["--space-inset-squish-s", "space-02 space-04", "Small squished inset"],
+      ["--space-inset-squish-m", "space-04 space-06", "Medium squished inset"],
+      ["--space-inset-squish-l", "space-06 space-08", "Large squished inset"],
+      ["--space-inset-squish-xl", "space-08 space-10", "Extra-large squished inset"],
     ],
   },
   {
@@ -50,11 +50,11 @@ const semanticSpacingTokenGroups = [
     diagram: "inset-stretch",
     description: "More block padding than inline padding, suited to callouts, media frames, and spacious section headers.",
     tokens: [
-      ["--inset-stretch-xs", "space-02 space-01", "Extra-small stretched inset"],
-      ["--inset-stretch-s", "space-04 space-02", "Small stretched inset"],
-      ["--inset-stretch-m", "space-06 space-04", "Medium stretched inset"],
-      ["--inset-stretch-l", "space-08 space-06", "Large stretched inset"],
-      ["--inset-stretch-xl", "space-10 space-08", "Extra-large stretched inset"],
+      ["--space-inset-stretch-xs", "space-02 space-01", "Extra-small stretched inset"],
+      ["--space-inset-stretch-s", "space-04 space-02", "Small stretched inset"],
+      ["--space-inset-stretch-m", "space-06 space-04", "Medium stretched inset"],
+      ["--space-inset-stretch-l", "space-06 space-08", "Large stretched inset"],
+      ["--space-inset-stretch-xl", "space-08 space-10", "Extra-large stretched inset"],
     ],
   },
   {
@@ -62,11 +62,11 @@ const semanticSpacingTokenGroups = [
     diagram: "inline",
     description: "Horizontal gaps between adjacent elements.",
     tokens: [
-      ["--inline-xs", "space-02", "Extra-small inline gap"],
-      ["--inline-s", "space-04", "Small inline gap"],
-      ["--inline-m", "space-06", "Medium inline gap"],
-      ["--inline-l", "space-08", "Large inline gap"],
-      ["--inline-xl", "space-10", "Extra-large inline gap"],
+      ["--space-inline-xs", "space-02", "Extra-small inline gap"],
+      ["--space-inline-s", "space-04", "Small inline gap"],
+      ["--space-inline-m", "space-06", "Medium inline gap"],
+      ["--space-inline-l", "space-08", "Large inline gap"],
+      ["--space-inline-xl", "space-10", "Extra-large inline gap"],
     ],
   },
   {
@@ -74,11 +74,11 @@ const semanticSpacingTokenGroups = [
     diagram: "stack",
     description: "Vertical gaps between stacked elements.",
     tokens: [
-      ["--stack-xs", "space-02", "Extra-small stack gap"],
-      ["--stack-s", "space-04", "Small stack gap"],
-      ["--stack-m", "space-06", "Medium stack gap"],
-      ["--stack-l", "space-08", "Large stack gap"],
-      ["--stack-xl", "space-10", "Extra-large stack gap"],
+      ["--space-stack-xs", "space-02", "Extra-small stack gap"],
+      ["--space-stack-s", "space-04", "Small stack gap"],
+      ["--space-stack-m", "space-06", "Medium stack gap"],
+      ["--space-stack-l", "space-08", "Large stack gap"],
+      ["--space-stack-xl", "space-10", "Extra-large stack gap"],
     ],
   },
 ];
@@ -258,7 +258,7 @@ function SpacingTable({ title, description, tokens, valueLabel, visual, semantic
           <thead>
             <tr>
               <th>Token</th>
-              <th>{semantic ? "References" : valueLabel}</th>
+              <th>{semantic ? "Value" : valueLabel}</th>
               {semantic ? <><th>Pixels</th><th>Use</th></> : <><th>Pixels</th><th>Preview</th></>}
             </tr>
           </thead>
@@ -331,7 +331,7 @@ function SpacingMultiplierCurve() {
   const linePoints = points.map(({ x, y }) => `${x},${y}`).join(" ");
 
   return (
-    <figure className="spacing-curve">
+    <figure className="spacing-curve spacing-curve--neutral">
       <svg viewBox="0 0 640 208" role="img" aria-labelledby="spacing-multiplier-curve-title spacing-multiplier-curve-description">
         <title id="spacing-multiplier-curve-title">Spacing progression multipliers</title>
         <desc id="spacing-multiplier-curve-description">A line chart showing the balanced progression multipliers across ten spacing steps.</desc>
