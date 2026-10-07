@@ -14,7 +14,7 @@
 
    ✅ SETUP CHECKLIST:
    - [ ] 1. Fonts: Import your fonts (via Google Fonts in index.html, or local @font-face)
-   - [ ] 2. Fonts: Update the --sans, --heading, and --mono variables below.
+   - [ ] 2. Fonts: Update the --font-sans, --font-heading, and --font-mono variables below.
    - [ ] 3. Colors (Light): Define the base palette (text, bg, accents) in the standard :root.
    - [ ] 4. Colors (Dark): Update the dark palette.
    - [ ] 5. Theme Logic: Decide on dark mode behavior. 
@@ -71,9 +71,9 @@
     oklch(0% 0 0 / 0.1) 0 10px 15px -3px, oklch(0% 0 0 / 0.05) 0 4px 6px -2px;
 
   /* Typography */
-  --sans: "Geologica", system-ui, sans-serif;
-  --heading: "Geologica", system-ui, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --font-sans: "Geologica", system-ui, sans-serif;
+  --font-heading: "Geologica", system-ui, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
   --font-size-100: 0.75rem;
   --font-size-200: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
   --font-size-300: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
@@ -82,30 +82,30 @@
   --font-size-600: clamp(1.5rem, 1.3rem + 1vw, 2rem);
   --font-size-700: clamp(2.25rem, 1.85rem + 2vw, 3.5rem);
   --font-size-800: clamp(3rem, 2rem + 4vw, 5rem);
-  --line-height-display: 1;
-  --line-height-heading: 1.18;
-  --line-height-label: 1.2;
-  --line-height-subtitle: 1.35;
-  --line-height-caption: 1.4;
-  --line-height-body: 1.5;
+  --font-line-height-display: 1;
+  --font-line-height-heading: 1.18;
+  --font-line-height-label: 1.2;
+  --font-line-height-subtitle: 1.35;
+  --font-line-height-caption: 1.4;
+  --font-line-height-body: 1.5;
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
-  --font-body-small: var(--font-weight-regular) var(--font-size-200) / var(--line-height-body) var(--sans);
-  --font-body-medium: var(--font-weight-regular) var(--font-size-300) / var(--line-height-body) var(--sans);
-  --font-body-large: var(--font-weight-regular) var(--font-size-400) / var(--line-height-body) var(--sans);
-  --font-title-small: var(--font-weight-medium) var(--font-size-400) / var(--line-height-heading) var(--heading);
-  --font-title-medium: var(--font-weight-medium) var(--font-size-500) / var(--line-height-heading) var(--heading);
-  --font-title-large: var(--font-weight-medium) var(--font-size-700) / var(--line-height-heading) var(--heading);
-  --font-caption: var(--font-weight-regular) var(--font-size-100) / var(--line-height-caption) var(--sans);
-  --font-subtitle: var(--font-weight-medium) var(--font-size-300) / var(--line-height-subtitle) var(--sans);
-  --font-display: var(--font-weight-bold) var(--font-size-800) / var(--line-height-display) var(--heading);
-  --font-code-block: var(--font-weight-regular) var(--font-size-200) / var(--line-height-body) var(--mono);
-  --font-label-small: var(--font-weight-medium) var(--font-size-100) / var(--line-height-label) var(--sans);
-  --font-label-medium: var(--font-weight-medium) var(--font-size-200) / var(--line-height-label) var(--sans);
-  --font-label-large: var(--font-weight-medium) var(--font-size-300) / var(--line-height-label) var(--sans);
-  --font-label-eyebrow: var(--font-weight-medium) var(--font-size-100) / var(--line-height-label) var(--mono);
+  --font-body-small: var(--font-weight-regular) var(--font-size-200) / var(--font-line-height-body) var(--font-sans);
+  --font-body-medium: var(--font-weight-regular) var(--font-size-300) / var(--font-line-height-body) var(--font-sans);
+  --font-body-large: var(--font-weight-regular) var(--font-size-400) / var(--font-line-height-body) var(--font-sans);
+  --font-title-small: var(--font-weight-medium) var(--font-size-400) / var(--font-line-height-heading) var(--font-heading);
+  --font-title-medium: var(--font-weight-medium) var(--font-size-500) / var(--font-line-height-heading) var(--font-heading);
+  --font-title-large: var(--font-weight-medium) var(--font-size-700) / var(--font-line-height-heading) var(--font-heading);
+  --font-caption: var(--font-weight-regular) var(--font-size-100) / var(--font-line-height-caption) var(--font-sans);
+  --font-subtitle: var(--font-weight-medium) var(--font-size-300) / var(--font-line-height-subtitle) var(--font-sans);
+  --font-display: var(--font-weight-bold) var(--font-size-800) / var(--font-line-height-display) var(--font-heading);
+  --font-code-block: var(--font-weight-regular) var(--font-size-200) / var(--font-line-height-body) var(--font-mono);
+  --font-label-small: var(--font-weight-medium) var(--font-size-100) / var(--font-line-height-label) var(--font-sans);
+  --font-label-medium: var(--font-weight-medium) var(--font-size-200) / var(--font-line-height-label) var(--font-sans);
+  --font-label-large: var(--font-weight-medium) var(--font-size-300) / var(--font-line-height-label) var(--font-sans);
+  --font-label-eyebrow: var(--font-weight-medium) var(--font-size-100) / var(--font-line-height-label) var(--font-mono);
 }
 
 /* Dark Mode (System preference OR manual toggle) */
@@ -206,9 +206,9 @@ body {
   min-height: 100svh;
   color: var(--fg);
   background-color: var(--bg);
-  font-family: var(--sans);
+  font-family: var(--font-sans);
   font-size: var(--font-size-300);
-  line-height: var(--line-height-body);
+  line-height: var(--font-line-height-body);
 
   /* Font smoothing */
   font-synthesis: none;
@@ -253,8 +253,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--heading);
-  line-height: var(--line-height-heading);
+  font-family: var(--font-heading);
+  line-height: var(--font-line-height-heading);
   text-wrap: balance; /* Modern CSS: prevents uneven hanging words in titles */
 }
 
@@ -286,7 +286,7 @@ code,
 kbd,
 samp,
 pre {
-  font-family: var(--mono);
+  font-family: var(--font-mono);
 }
 
 code {

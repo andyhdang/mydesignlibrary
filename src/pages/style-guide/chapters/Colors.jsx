@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Table from "../../../components/table/Table";
+import formatTokenName from "../formatTokenName";
 
 const colorTokens = [
   { token: "--fg", light: "oklch(51.35% 0.0296 305.45)", dark: "oklch(71.37% 0.0192 261.32)", sampleType: "text" },
@@ -90,7 +91,7 @@ export default function Colors() {
       <section className="type-group" aria-labelledby="color-token-values">
         <div className="section-header"><h2 id="color-token-values" className="section-title">Base set color tokens</h2><p>Token values for the light and dark themes.</p></div>
         <div className="token-table color-token-table"><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
-          {colorTokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{token}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
+          {colorTokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{formatTokenName(token)}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="state-colors">
@@ -103,13 +104,13 @@ export default function Colors() {
         </div>
         <div className="button-token-tables">
           {[outlineButtonTokens, filledButtonTokens, accentButtonTokens].map((tokens) => <div className="token-table color-token-table" key={tokens[0].token}><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
-            {tokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{token}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
+            {tokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{formatTokenName(token)}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
           </tbody></Table></div>)}
         </div>
         <h3 className="state-color-subheading">Control states</h3>
         <ControlStateDemo />
         <div className="token-table color-token-table"><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
-          {controlStateColors.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{token}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
+          {controlStateColors.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{formatTokenName(token)}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
         </tbody></Table></div>
       </section>
     </>
@@ -154,7 +155,7 @@ function ColorSwatch({ name, variable, sampleType }) {
       ? { color: `var(${variable})` }
       : { backgroundColor: `var(${variable})` };
 
-  return <div className="color-card"><div className={`color-swatch color-swatch--${sampleType}`} style={style}>{sampleType === "text" && "Aa"}</div><div><strong>{name}</strong><code>{variable}</code></div></div>;
+  return <div className="color-card"><div className={`color-swatch color-swatch--${sampleType}`} style={style}>{sampleType === "text" && "Aa"}</div><div><strong>{name}</strong><code>{formatTokenName(variable)}</code></div></div>;
 }
 
 function ColorSample({ token, type }) {
