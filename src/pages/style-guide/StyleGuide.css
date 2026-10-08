@@ -333,6 +333,74 @@
   color: var(--fg);
 }
 
+.font-size-dynamic-value {
+  color: var(--fg-accent);
+}
+
+.font-size-clamp-explanation {
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+  color: var(--fg-muted);
+  font-size: 0.9em;
+}
+
+.font-size-clamp-explanation h3 {
+  margin-bottom: 0.5rem;
+  color: var(--fg-muted);
+  font: var(--font-label-medium);
+}
+
+.font-size-clamp-explanation p {
+  margin-bottom: 0.75rem;
+}
+
+.font-size-clamp-explanation p:last-child {
+  margin-bottom: 0;
+}
+
+.font-size-clamp-formula {
+  display: block;
+  width: fit-content;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  background: none;
+  color: var(--fg-muted);
+}
+
+.font-size-viewport-preview {
+  margin-bottom: 1rem;
+}
+
+.font-size-viewport-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.font-size-viewport-toggle button {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: var(--font-label-small);
+}
+
+.font-size-viewport-toggle button:hover {
+  border-color: var(--fg-accent);
+}
+
+.font-size-viewport-toggle button:active {
+  background: var(--control-bg-active);
+}
+
+.font-size-viewport-toggle button.is-active {
+  border-color: var(--control-selected-border);
+  color: var(--control-selected-fg);
+}
+
 .font-shorthand-value {
   display: grid;
   gap: 0.25rem;
@@ -500,7 +568,9 @@
 .spacing-curve__label,
 .spacing-curve__value {
   fill: var(--fg-muted);
-  font: var(--font-label-small);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
   text-anchor: middle;
 }
 
