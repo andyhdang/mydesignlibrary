@@ -410,6 +410,7 @@ code {
   padding: 0.125em 0.25em;
   background: var(--bg-code);
   border-radius: 0.25rem;
+  font: var(--font-code-block);
 }
 
 pre {
