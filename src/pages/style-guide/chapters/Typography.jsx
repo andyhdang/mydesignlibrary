@@ -19,14 +19,14 @@ const fontShorthands = [
 ];
 
 const fontSizes = [
-  { name: "100", token: "--font-size-100", value: "0.75rem" },
-  { name: "200", token: "--font-size-200", value: "clamp(0.875rem, 0.85rem + 0.125vw, 1rem)" },
-  { name: "300", token: "--font-size-300", value: "clamp(1rem, 0.95rem + 0.25vw, 1.125rem)" },
-  { name: "400", token: "--font-size-400", value: "clamp(1.125rem, 1rem + 0.5vw, 1.375rem)" },
-  { name: "500", token: "--font-size-500", value: "clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem)" },
-  { name: "600", token: "--font-size-600", value: "clamp(1.5rem, 1.3rem + 1vw, 2rem)" },
-  { name: "700", token: "--font-size-700", value: "clamp(2.25rem, 1.85rem + 2vw, 3.5rem)" },
-  { name: "800", token: "--font-size-800", value: "clamp(3rem, 2rem + 4vw, 5rem)" },
+  { name: "100", token: "--font-size-100", value: "0.75rem", pixels: "12px" },
+  { name: "200", token: "--font-size-200", value: "clamp(0.875rem, 0.85rem + 0.125vw, 1rem)", pixels: "14–16px" },
+  { name: "300", token: "--font-size-300", value: "clamp(1rem, 0.95rem + 0.25vw, 1.125rem)", pixels: "16–18px" },
+  { name: "400", token: "--font-size-400", value: "clamp(1.125rem, 1rem + 0.5vw, 1.375rem)", pixels: "18–22px" },
+  { name: "500", token: "--font-size-500", value: "clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem)", pixels: "20–24px" },
+  { name: "600", token: "--font-size-600", value: "clamp(1.5rem, 1.3rem + 1vw, 2rem)", pixels: "24–32px" },
+  { name: "700", token: "--font-size-700", value: "clamp(2.25rem, 1.85rem + 2vw, 3.5rem)", pixels: "36–56px" },
+  { name: "800", token: "--font-size-800", value: "clamp(3rem, 2rem + 4vw, 5rem)", pixels: "48–80px" },
 ];
 
 const lineHeights = [
@@ -65,8 +65,8 @@ export default function Typography() {
       </section>
       <section className="type-group" aria-labelledby="type-scale">
         <div className="section-header"><h2 id="type-scale" className="section-title">Fluid font sizes</h2><p>An agnostic numeric scale keeps font sizes reusable across components. Each size grows smoothly between its minimum and maximum value without breakpoint jumps.</p></div>
-        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Value</th><th>Preview</th></tr></thead><tbody>
-          {fontSizes.map(({ name, token, value }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{value}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
+        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
+          {fontSizes.map(({ name, token, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{value}</code></td><td><code>{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="line-heights">
