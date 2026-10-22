@@ -3,20 +3,20 @@ import Table from "../../../components/table/Table";
 import formatTokenName from "../formatTokenName";
 
 const fontShorthands = [
-  { name: "Body small", token: "--font-body-small", value: ["var(--font-weight-regular)", "var(--font-size-fluid-200)", "/ var(--font-line-height-body)", "var(--font-sans)"], sample: "Reading copy" },
-  { name: "Body medium", token: "--font-body-medium", value: ["var(--font-weight-regular)", "var(--font-size-fluid-300)", "/ var(--font-line-height-body)", "var(--font-sans)"], sample: "Reading copy" },
-  { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "var(--font-size-fluid-400)", "/ var(--font-line-height-body)", "var(--font-sans)"], sample: "Reading copy" },
-  { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "var(--font-size-fluid-400)", "/ var(--font-line-height-heading)", "var(--font-heading)"], sample: "Section title" },
-  { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "var(--font-size-fluid-500)", "/ var(--font-line-height-heading)", "var(--font-heading)"], sample: "Section title" },
-  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "var(--font-size-fluid-700)", "/ var(--font-line-height-heading)", "var(--font-heading)"], sample: "Page title" },
-  { name: "Caption", token: "--font-caption", value: ["var(--font-weight-regular)", "var(--font-size-fixed-050)", "/ var(--font-line-height-caption)", "var(--font-sans)"], sample: "Supporting detail" },
-  { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-medium)", "var(--font-size-fluid-300)", "/ var(--font-line-height-subtitle)", "var(--font-sans)"], sample: "Supporting copy" },
-  { name: "Display", token: "--font-display", value: ["var(--font-weight-bold)", "var(--font-size-fluid-800)", "/ var(--font-line-height-display)", "var(--font-heading)"], sample: "Make impact" },
-  { name: "Code block", token: "--font-code-block", value: ["var(--font-weight-regular)", "var(--font-size-fixed-200)", "/ var(--font-line-height-body)", "var(--font-mono)"], sample: "npm run dev" },
-  { name: "Label small", token: "--font-label-small", value: ["var(--font-weight-medium)", "var(--font-size-fixed-100)", "/ var(--font-line-height-label)", "var(--font-sans)"], sample: "Status" },
-  { name: "Label medium", token: "--font-label-medium", value: ["var(--font-weight-medium)", "var(--font-size-fixed-200)", "/ var(--font-line-height-label)", "var(--font-sans)"], sample: "Status" },
-  { name: "Label large", token: "--font-label-large", value: ["var(--font-weight-medium)", "var(--font-size-fixed-300)", "/ var(--font-line-height-label)", "var(--font-sans)"], sample: "Status" },
-  { name: "Label eyebrow", token: "--font-label-eyebrow", value: ["var(--font-weight-medium)", "var(--font-size-fixed-100)", "/ var(--font-line-height-label)", "var(--font-mono)"], sample: "FOUNDATION" },
+  { name: "Body small", token: "--font-body-small", value: ["var(--font-weight-regular)", "var(--font-size-fluid-200)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
+  { name: "Body medium", token: "--font-body-medium", value: ["var(--font-weight-regular)", "var(--font-size-fluid-300)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
+  { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "var(--font-size-fluid-400)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
+  { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "var(--font-size-fluid-400)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Section title" },
+  { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "var(--font-size-fluid-500)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Section title" },
+  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "var(--font-size-fluid-700)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Page title" },
+  { name: "Caption", token: "--font-caption", value: ["var(--font-weight-regular)", "var(--font-size-050)", "/ var(--font-line-height-caption)", "var(--font-family-sans)"], sample: "Supporting detail" },
+  { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-medium)", "var(--font-size-fluid-300)", "/ var(--font-line-height-subtitle)", "var(--font-family-sans)"], sample: "Supporting copy" },
+  { name: "Display", token: "--font-display", value: ["var(--font-weight-bold)", "var(--font-size-fluid-800)", "/ var(--font-line-height-display)", "var(--font-family-sans)"], sample: "Make impact" },
+  { name: "Code block", token: "--font-code-block", value: ["var(--font-weight-regular)", "var(--font-size-200)", "/ var(--font-line-height-body)", "var(--font-family-mono)"], sample: "npm run dev" },
+  { name: "Label small", token: "--font-label-small", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
+  { name: "Label medium", token: "--font-label-medium", value: ["var(--font-weight-medium)", "var(--font-size-200)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
+  { name: "Label large", token: "--font-label-large", value: ["var(--font-weight-medium)", "var(--font-size-300)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
+  { name: "Label eyebrow", token: "--font-label-eyebrow", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-mono)"], sample: "FOUNDATION" },
 ];
 
 const secondMajorRatio = 1.125;
@@ -34,6 +34,23 @@ const fontSizeSteps = [
   { token: "--font-size-fluid-800", multiplier: secondMajorRatio ** 7 },
 ];
 
+const fixedFontSizeSteps = [
+  { name: "000", token: "--font-size-000", pixels: 10 },
+  { name: "025", token: "--font-size-025", pixels: 12 },
+  { name: "050", token: "--font-size-050", pixels: 14 },
+  { name: "100", token: "--font-size-100", pixels: 16 },
+  { name: "200", token: "--font-size-200", pixels: 18 },
+  { name: "300", token: "--font-size-300", pixels: 20 },
+  { name: "400", token: "--font-size-400", pixels: 22 },
+  { name: "500", token: "--font-size-500", pixels: 26 },
+  { name: "600", token: "--font-size-600", pixels: 28 },
+  { name: "700", token: "--font-size-700", pixels: 32 },
+  { name: "800", token: "--font-size-800", pixels: 36 },
+  { name: "900", token: "--font-size-900", pixels: 40 },
+  { name: "1000", token: "--font-size-1000", pixels: 42 },
+  { name: "1100", token: "--font-size-1100", pixels: 46 },
+];
+
 const viewportScales = [
   { id: "mobile", label: "Mobile", basePixels: 14, maximumBasePixels: 16, minimumViewport: 768, maximumViewport: 1024 },
   { id: "tablet", label: "Tablet", basePixels: 14, maximumBasePixels: 16, minimumViewport: 768, maximumViewport: 1024 },
@@ -46,24 +63,34 @@ function formatRem(pixels) {
   return `${Number((pixels / 16).toFixed(4))}rem`;
 }
 
+function getFixedFontSizeToken(pixels) {
+  const fixedSize = fixedFontSizeSteps.find((step) => step.pixels === pixels);
+
+  if (!fixedSize) {
+    throw new Error(`Missing fixed font size token for ${pixels}px.`);
+  }
+
+  return `var(${fixedSize.token})`;
+}
+
 function getFluidValue(minimum, maximum, minimumViewport, maximumViewport) {
   if (minimum === maximum) {
-    return formatRem(minimum);
+    return getFixedFontSizeToken(minimum);
   }
 
   const viewportCoefficient = ((maximum - minimum) / (maximumViewport - minimumViewport)) * 100;
   const intercept = minimum - (viewportCoefficient / 100) * minimumViewport;
 
-  return `clamp(${formatRem(minimum)}, ${formatRem(intercept)} + ${Number(viewportCoefficient.toFixed(6))}vw, ${formatRem(maximum)})`;
+  return `clamp(${getFixedFontSizeToken(minimum)}, ${formatRem(intercept)} + ${Number(viewportCoefficient.toFixed(6))}vw, ${getFixedFontSizeToken(maximum)})`;
 }
 
 const lineHeights = [
   { name: "Display", token: "--font-line-height-display", value: "1", font: "--font-display", description: ["Use for oversized", "display text."] },
-  { name: "Heading", token: "--font-line-height-heading", value: "1.18", font: "--font-title-medium", description: ["Use for multi-line", "headings."] },
-  { name: "Label", token: "--font-line-height-label", value: "1.2", font: "--font-label-medium", description: ["Use for compact", "UI labels."] },
-  { name: "Subtitle", token: "--font-line-height-subtitle", value: "1.35", font: "--font-subtitle", description: ["Use for supporting", "title copy."] },
-  { name: "Caption", token: "--font-line-height-caption", value: "1.4", font: "--font-caption", description: ["Use for concise", "captions."] },
+  { name: "Title", token: "--font-line-height-title", value: "1.25", font: "--font-title-medium", description: ["Use for multi-line", "titles."] },
+  { name: "Subtitle", token: "--font-line-height-subtitle", value: "1.25", font: "--font-subtitle", description: ["Use for supporting", "title copy."] },
   { name: "Body", token: "--font-line-height-body", value: "1.5", font: "--font-body-medium", description: ["Use for readable", "body text."] },
+  { name: "Label", token: "--font-line-height-label", value: "1.2", font: "--font-label-medium", description: ["Use for compact", "UI labels."] },
+  { name: "Caption", token: "--font-line-height-caption", value: "1.4", font: "--font-caption", description: ["Use for concise", "captions."] },
 ];
 
 const fontWeights = [
@@ -97,27 +124,21 @@ export default function Typography() {
   const previewStyle = Object.fromEntries(
     fontSizes.map(({ token, calculatedPixels }) => [token, formatRem(calculatedPixels)]),
   );
-  const fixedFontSizes = fontSizeSteps.map(({ token, multiplier }) => {
-    const pixels = Math.round((16 * multiplier) / 2) * 2;
-
-    return {
-      name: token.slice(-3),
-      token: token.replace("-fluid-", "-fixed-"),
-      multiplier,
-      value: formatRem(pixels),
-      pixels: `${pixels}px`,
-    };
-  });
+  const fixedFontSizes = fixedFontSizeSteps.map(({ name, token, pixels }) => ({
+    name,
+    token,
+    value: formatRem(pixels),
+    pixels: `${pixels}px`,
+  }));
 
   return (
     <div className="typography-chapter" style={previewStyle}>
       <TypographyIntroVisual />
       <section className="type-group" aria-labelledby="font-families">
-        <div className="section-header"><h2 id="font-families" className="section-title">Primary stacks and fallbacks</h2></div>
+        <div className="section-header"><h2 id="font-families" className="section-title">Font family</h2><p>Use the sans-serif stack for interface and editorial text, and the monospace stack for code.</p></div>
         <div className="token-table"><Table stickyFirstColumn><thead><tr><th>Use</th><th>Token</th><th>Font stack</th><th>Preview</th></tr></thead><tbody>
-          <FontFamily label="Body" token="--font-sans" stack={'"Geologica", system-ui, sans-serif'} className="font-sans" sample="The quick brown fox jumps over the lazy dog." />
-          <FontFamily label="Headings" token="--font-heading" stack={'"Geologica", system-ui, sans-serif'} className="font-heading" sample="Thoughtful typography creates hierarchy." />
-          <FontFamily label="Code" token="--font-mono" stack="ui-monospace, Consolas, monospace" className="font-mono" sample="const foundation = true;" />
+          <FontFamily label="Sans" token="--font-family-sans" stack={'"Geologica", system-ui, sans-serif'} className="font-sans" sample="The quick brown fox jumps over the lazy dog." />
+          <FontFamily label="Code" token="--font-family-mono" stack="ui-monospace, Consolas, monospace" className="font-mono" sample="const foundation = true;" />
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="font-shorthands">
@@ -126,8 +147,14 @@ export default function Typography() {
           {fontShorthands.map(({ name, token, value, sample }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><div className="font-shorthand-value">{value.map((part) => <code key={part}>{part}</code>)}</div></td><td><span className="font-shorthand-sample" style={{ font: `var(${token})` }}>{sample}</span></td></tr>)}
         </tbody></Table></div>
       </section>
+      <section className="type-group" aria-labelledby="fixed-font-sizes">
+        <div className="section-header"><h2 id="fixed-font-sizes" className="section-title">Font sizes</h2><p>These values anchor the fluid scale and support compact interface text such as buttons, pills, inputs, navigation, captions, and code. They use a 16px base and do not change with the viewport.</p></div>
+        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
+          {fixedFontSizes.map(({ name, token, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{value}</code></td><td><code>{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
+        </tbody></Table></div>
+      </section>
       <section className="type-group" aria-labelledby="type-scale">
-        <div className="section-header"><h2 id="type-scale" className="section-title">Fluid font sizes</h2><p>Use fluid sizes for body, subtitle, title, and display text. Values follow a 1.125 second-major scale and round to even pixels; step 025 uses 0.75× to remain distinct.</p></div>
+        <div className="section-header"><h2 id="type-scale" className="section-title">Fluid font sizes</h2><p>Use fluid sizes for body, subtitle, title, and display text. Each clamp references fixed primitives for its minimum and maximum while following a 1.125 second-major scale.</p></div>
         <FontSizeMultiplierCurve />
         <p className="font-size-viewport-preview">
           Previewing a <span className="font-size-dynamic-value">{selectedScale.label.toLowerCase()}</span> base of <span className="font-size-dynamic-value">{selectedScale.basePixels}px</span>.
@@ -146,23 +173,17 @@ export default function Typography() {
           ))}
         </div>
         <FontSizeCurve fontSizes={fontSizes} />
-        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Multiplier</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
-          {fontSizes.map(({ name, token, multiplier, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{Number(multiplier.toFixed(3))}×</code></td><td><code className="font-size-dynamic-value">{value}</code></td><td><code className="font-size-dynamic-value">{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
+        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
+          {fontSizes.map(({ name, token, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code className="font-size-dynamic-value">{value}</code></td><td><code className="font-size-dynamic-value">{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
         </tbody></Table></div>
         <div className="font-size-clamp-explanation">
           <h3>How the clamp is calculated</h3>
           <p>Example: scale from 14px to 16px as the viewport grows from 768px to 1024px.</p>
           <code className="font-size-clamp-formula">vw coefficient = (16 − 14) ÷ (1024 − 768) × 100 = 0.78125vw</code>
           <code className="font-size-clamp-formula">intercept = 14 − (0.0078125 × 768) = 8px = 0.5rem</code>
-          <code className="font-size-clamp-formula">clamp(0.875rem, 0.5rem + 0.78125vw, 1rem)</code>
-          <p>The middle value equals 14px at 768px and 16px at 1024px. The outer values keep the result within that range.</p>
+          <code className="font-size-clamp-formula">clamp(var(--font-size-050), 0.5rem + 0.78125vw, var(--font-size-100))</code>
+          <p>The middle value equals 14px at 768px and 16px at 1024px. The fixed tokens keep the result within that range and provide a single source of truth for each endpoint.</p>
         </div>
-      </section>
-      <section className="type-group" aria-labelledby="fixed-font-sizes">
-        <div className="section-header"><h2 id="fixed-font-sizes" className="section-title">Fixed font size primitives</h2><p>Use fixed sizes for compact interface text such as buttons, pills, inputs, navigation, captions, and code. These values use a 16px base and do not change with the viewport.</p></div>
-        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Multiplier</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
-          {fixedFontSizes.map(({ name, token, multiplier, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{Number(multiplier.toFixed(3))}×</code></td><td><code>{value}</code></td><td><code>{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
-        </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="line-heights">
         <div className="section-header"><h2 id="line-heights" className="section-title">Line heights</h2><p>Unitless values preserve the intended rhythm as text sizes respond to the viewport.</p></div>
