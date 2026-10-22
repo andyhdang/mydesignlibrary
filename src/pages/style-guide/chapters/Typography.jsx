@@ -127,7 +127,6 @@ export default function Typography() {
   const fixedFontSizes = fixedFontSizeSteps.map(({ name, token, pixels }) => ({
     name,
     token,
-    multiplier: pixels / 16,
     value: formatRem(pixels),
     pixels: `${pixels}px`,
   }));
@@ -149,9 +148,9 @@ export default function Typography() {
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="fixed-font-sizes">
-        <div className="section-header"><h2 id="fixed-font-sizes" className="section-title">Fixed font size primitives</h2><p>These values anchor the fluid scale and support compact interface text such as buttons, pills, inputs, navigation, captions, and code. They use a 16px base and do not change with the viewport.</p></div>
-        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Multiplier</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
-          {fixedFontSizes.map(({ name, token, multiplier, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{Number(multiplier.toFixed(3))}×</code></td><td><code>{value}</code></td><td><code>{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
+        <div className="section-header"><h2 id="fixed-font-sizes" className="section-title">Font sizes</h2><p>These values anchor the fluid scale and support compact interface text such as buttons, pills, inputs, navigation, captions, and code. They use a 16px base and do not change with the viewport.</p></div>
+        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
+          {fixedFontSizes.map(({ name, token, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{value}</code></td><td><code>{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="type-scale">
@@ -174,8 +173,8 @@ export default function Typography() {
           ))}
         </div>
         <FontSizeCurve fontSizes={fontSizes} />
-        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Multiplier</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
-          {fontSizes.map(({ name, token, multiplier, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{Number(multiplier.toFixed(3))}×</code></td><td><code className="font-size-dynamic-value">{value}</code></td><td><code className="font-size-dynamic-value">{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
+        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
+          {fontSizes.map(({ name, token, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code className="font-size-dynamic-value">{value}</code></td><td><code className="font-size-dynamic-value">{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
         </tbody></Table></div>
         <div className="font-size-clamp-explanation">
           <h3>How the clamp is calculated</h3>
