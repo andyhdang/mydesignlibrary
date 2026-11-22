@@ -8,7 +8,7 @@
 
 .carousel__viewport {
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-l);
 }
 
 .carousel__track {
@@ -62,7 +62,7 @@
   width: 2.5rem;
   height: 2.5rem;
   border: 1px solid var(--control-border);
-  border-radius: 50%;
+  border-radius: var(--radius-m);
   color: var(--control-fg);
   background: var(--control-bg);
   place-items: center;

@@ -48,6 +48,15 @@ const tokenGroups = [
     ],
   },
   {
+    title: "Radii",
+    description: "Subtle corner radii for surfaces, controls, and inline elements.",
+    tokens: [
+      ["--radius-s", "Small corner radius"],
+      ["--radius-m", "Medium corner radius"],
+      ["--radius-l", "Large corner radius"],
+    ],
+  },
+  {
     title: "Elevation",
     description: "Shadow used to separate floating surfaces from the page.",
     tokens: [
