@@ -18,3 +18,8 @@ export const spacingAnchors = [
   { id: "semantic-spacing-tokens", label: "Semantic tokens" },
   { id: "spacing-references", label: "References" },
 ];
+
+export const carouselAnchors = [
+  { id: "carousel-anatomy", label: "Anatomy" },
+  { id: "carousel-variants", label: "Variants" },
+];
