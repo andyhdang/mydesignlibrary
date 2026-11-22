@@ -1,11 +1,12 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { NavLink, useParams } from "react-router-dom";
+import Carousel from "./chapters/Carousel";
 import Colors from "./chapters/Colors";
 import Spacing from "./chapters/Spacing";
 import Tokens from "./chapters/Tokens";
 import Typography from "./chapters/Typography";
-import { colorAnchors, spacingAnchors, typographyAnchors } from "./sectionAnchors";
+import { carouselAnchors, colorAnchors, spacingAnchors, typographyAnchors } from "./sectionAnchors";
 import "./StyleGuide.css";
 
 const chapters = [
@@ -13,6 +14,7 @@ const chapters = [
   { slug: "typography", title: "Typography", description: "Font stacks and a fluid type scale used throughout the interface.", Component: Typography },
   { slug: "colors", title: "Colors", description: "The core palette is defined as reusable theme tokens.", Component: Colors },
   { slug: "spacing", title: "Spacing", description: "A responsive spacing scale creates consistent rhythm and intentional relationships between elements, components, and layouts.", Component: Spacing },
+  { slug: "carousel", title: "Carousel", description: "The Carousel shows a set of related items one at a time in a single area, so people can browse them at their own pace.", Component: Carousel },
   { slug: "tokens", title: "Design tokens", description: "Core variables that shape the interface.", Component: Tokens },
 ];
 
@@ -20,6 +22,7 @@ const sectionAnchors = {
   typography: typographyAnchors,
   colors: colorAnchors,
   spacing: spacingAnchors,
+  carousel: carouselAnchors,
 };
 
 export default function StyleGuide() {

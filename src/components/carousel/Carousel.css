@@ -1,0 +1,134 @@
+.carousel {
+  width: 100%;
+}
+
+.carousel__stage {
+  position: relative;
+}
+
+.carousel__viewport {
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.carousel__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel__track:focus-visible {
+  outline: 2px solid var(--fg-accent);
+  outline-offset: -2px;
+}
+
+.carousel__slide {
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 14rem;
+  padding: var(--space-inset-l);
+  border: 1px dashed var(--border-accent);
+  background: var(--bg-surface-accent);
+  color: var(--fg-accent);
+  text-align: center;
+  scroll-snap-align: start;
+}
+
+.carousel__title {
+  margin-bottom: var(--space-stack-xs);
+  font: var(--font-label-eyebrow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-inline-m);
+  margin-top: var(--space-stack-s);
+}
+
+.carousel__button {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--control-border);
+  border-radius: 50%;
+  color: var(--control-fg);
+  background: var(--control-bg);
+  place-items: center;
+}
+
+.carousel__button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.carousel__button:hover:not(:disabled) {
+  background: var(--control-bg-hover);
+}
+
+.carousel__button:active:not(:disabled) {
+  background: var(--control-bg-active);
+}
+
+.carousel__button:disabled {
+  opacity: 0.4;
+}
+
+.carousel__dots {
+  display: flex;
+  gap: var(--space-inline-xs);
+}
+
+.carousel__dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  padding: 0;
+  border: 1px solid var(--control-border);
+  border-radius: 50%;
+  background: var(--control-bg);
+}
+
+.carousel__dot[aria-current="true"] {
+  border-color: var(--control-selected-border);
+  background: var(--bg-accent);
+}
+
+.carousel__button:focus-visible,
+.carousel__dot:focus-visible {
+  outline: 2px solid var(--fg-accent);
+  outline-offset: 2px;
+}
+
+.carousel--controls-overlay .carousel__button {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+
+.carousel--controls-overlay .carousel__button--previous {
+  left: var(--space-inline-s);
+}
+
+.carousel--controls-overlay .carousel__button--next {
+  right: var(--space-inline-s);
+}
+
+.carousel--controls-overlay .carousel__controls {
+  justify-content: center;
+}
+
+.carousel--controls-overlay .carousel__slide {
+  padding-inline: calc(2.5rem + var(--space-inline-s) * 2);
+}

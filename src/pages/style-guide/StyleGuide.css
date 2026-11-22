@@ -122,7 +122,7 @@
   padding: clamp(1.25rem, 4vw, 2.5rem);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: var(--bg-surface-accent);
+  background: var(--bg-surface);
   overflow-x: auto;
 }
 
@@ -1157,4 +1157,109 @@
   .color-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.carousel-variant-list {
+  display: grid;
+  gap: 3rem;
+}
+
+.carousel-variant-title {
+  font: var(--font-label-large);
+}
+
+.carousel-variant-list p {
+  margin-bottom: 1rem;
+  color: var(--fg-muted);
+}
+
+.carousel-variants > .preview {
+  margin-bottom: 5rem;
+}
+
+.carousel-anatomy {
+  --anatomy-highlight: oklch(62% 0.26 340);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16rem;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.carousel-anatomy__parts {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.carousel-anatomy__part {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  color: var(--fg);
+  background: var(--bg);
+  text-align: left;
+}
+
+.carousel-anatomy__part:hover {
+  background: var(--bg-surface);
+}
+
+.carousel-anatomy__part[aria-pressed="true"] {
+  border-color: var(--anatomy-highlight);
+  background: oklch(from var(--anatomy-highlight) l c h / 0.1);
+}
+
+.carousel-anatomy__part:focus-visible {
+  outline: 2px solid var(--fg-accent);
+  outline-offset: 2px;
+}
+
+.carousel-anatomy__name {
+  font: var(--font-label-medium);
+}
+
+.carousel-anatomy__description {
+  color: var(--fg-muted);
+  font: var(--font-caption);
+}
+
+.carousel-anatomy .carousel__viewport,
+.carousel-anatomy .carousel__button,
+.carousel-anatomy .carousel__dots {
+  transition: opacity 150ms ease, outline-color 150ms ease;
+}
+
+.carousel-anatomy[data-part] .carousel__viewport,
+.carousel-anatomy[data-part] .carousel__button,
+.carousel-anatomy[data-part] .carousel__dots {
+  opacity: 0.35;
+}
+
+.carousel-anatomy[data-part="slot"] .carousel__viewport,
+.carousel-anatomy[data-part="previous"] .carousel__button--previous,
+.carousel-anatomy[data-part="next"] .carousel__button--next,
+.carousel-anatomy[data-part="indicators"] .carousel__dots {
+  opacity: 1;
+  outline: 2px solid var(--anatomy-highlight);
+  outline-offset: 4px;
+}
+
+@media (max-width: 48rem) {
+  .carousel-anatomy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-anatomy .carousel__viewport,
+  .carousel-anatomy .carousel__button,
+  .carousel-anatomy .carousel__dots {
+    transition: none;
+  }
+}
+
+.preview .carousel {
+  max-width: 36rem;
+  margin-inline: auto;
 }
