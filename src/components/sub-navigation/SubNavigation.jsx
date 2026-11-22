@@ -1,15 +1,15 @@
 import { useEffect, useId, useState } from "react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import "./SubNavigation.css";
 
 export default function SubNavigation({ items, activeSlug, basePath, label }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuId = useId();
-  const pages = items.flatMap((item) => item.children ?? [item]);
+  const pages = items.flatMap((item) => (item.children ? [item, ...item.children] : [item]));
   const activeItem = pages.find((item) => item.slug === activeSlug) ?? pages[0];
   const anchors = activeItem.anchors;
-  const activeGroup = items.find((item) => item.children?.some((child) => child.slug === activeItem.slug))?.title ?? null;
+  const activeGroup = items.find((item) => item.children && (item.slug === activeItem.slug || item.children.some((child) => child.slug === activeItem.slug)))?.title ?? null;
   const [openGroup, setOpenGroup] = useState(activeGroup);
   const [trackedGroup, setTrackedGroup] = useState(activeGroup);
   const [collapsed, setCollapsed] = useState(() => new Set());
@@ -49,18 +49,26 @@ export default function SubNavigation({ items, activeSlug, basePath, label }) {
     const anchorsId = `${menuId}-${slug}`;
 
     return <div key={slug} className="sub-navigation__item">
-      <NavLink to={`${basePath}/${slug}`} end className={({ isActive: linkActive }) => (linkActive ? "active" : undefined)} aria-expanded={hasAnchors ? isExpanded : undefined} aria-controls={hasAnchors ? anchorsId : undefined} onClick={(event) => selectPage(event, slug, hasAnchors)}>{title}</NavLink>
+      <NavLink to={`${basePath}/${slug}`} end className={({ isActive: linkActive }) => (linkActive ? "active" : undefined)} aria-expanded={hasAnchors ? isExpanded : undefined} aria-controls={hasAnchors ? anchorsId : undefined} onClick={(event) => selectPage(event, slug, hasAnchors)}>{title}{hasAnchors && <ChevronDownIcon className="sub-navigation__chevron" aria-hidden="true" />}</NavLink>
       {hasAnchors && <Collapse id={anchorsId} isOpen={isExpanded}><PageAnchors anchors={anchors} label={`${title} sections`} /></Collapse>}
     </div>;
   };
 
-  const renderGroup = ({ title, children }) => {
-    const key = `group:${title}`;
+  const renderGroup = ({ title, slug, children }) => {
     const isExpanded = openGroup === title;
     const groupId = `${menuId}-${title.replace(/\s+/g, "-").toLowerCase()}`;
+    const toggleGroup = () => setOpenGroup(isExpanded ? null : title);
+    const header = slug
+      ? <NavLink to={`${basePath}/${slug}`} end className={({ isActive }) => `sub-navigation__group-toggle${isActive ? " active" : ""}`} aria-expanded={isExpanded} aria-controls={groupId} onClick={(event) => {
+        if (slug === activeItem.slug) {
+          event.preventDefault();
+          toggleGroup();
+        }
+      }}>{title}<ChevronDownIcon className="sub-navigation__chevron" aria-hidden="true" /></NavLink>
+      : <button className="sub-navigation__group-toggle" type="button" aria-expanded={isExpanded} aria-controls={groupId} onClick={toggleGroup}>{title}<ChevronDownIcon className="sub-navigation__chevron" aria-hidden="true" /></button>;
 
-    return <div key={key} className="sub-navigation__group">
-      <button className="sub-navigation__group-toggle" type="button" aria-expanded={isExpanded} aria-controls={groupId} onClick={() => setOpenGroup(isExpanded ? null : title)}>{title}</button>
+    return <div key={`group:${title}`} className="sub-navigation__group">
+      {header}
       <Collapse id={groupId} isOpen={isExpanded} className="sub-navigation__group-items">{children.map(renderPage)}</Collapse>
     </div>;
   };
