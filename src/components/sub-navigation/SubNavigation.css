@@ -1,0 +1,280 @@
+.sub-navigation {
+  --sub-navigation-strong: oklch(from var(--bg) calc(1 - l) 0 0);
+  position: sticky;
+  z-index: 4;
+  top: 1rem;
+  align-self: start;
+  width: calc(100% + 1rem);
+  margin-inline: -0.5rem;
+  padding: 1rem;
+  border: 1px solid oklch(from var(--border) l c h / 0.5);
+  border-radius: var(--radius-l);
+  background: oklch(from var(--bg) l c h / 0.82);
+  box-shadow:
+    oklch(0% 0 0 / 0.06) 0 8px 24px -6px,
+    oklch(0% 0 0 / 0.04) 0 2px 6px -2px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.sub-navigation__nav {
+  min-width: 0;
+}
+
+.sub-navigation__links,
+.page-anchors__links {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sub-navigation__item > a,
+.sub-navigation__group-toggle,
+.page-anchors__links a {
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    padding-left 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sub-navigation__item > a {
+  display: block;
+  padding: 0.625rem 0.75rem;
+  border-left: 2px solid transparent;
+  color: var(--fg);
+  font: var(--font-label-medium);
+  text-decoration: none;
+}
+
+.page-anchors__links a {
+  padding: 0.625rem 0.75rem;
+  color: var(--fg);
+  font: var(--font-label-medium);
+  text-decoration: none;
+}
+
+.sub-navigation__item > a.active {
+  border-left-color: var(--sub-navigation-strong);
+  color: var(--sub-navigation-strong);
+}
+
+.sub-navigation__item > a:hover,
+.sub-navigation__item > a:focus-visible {
+  padding-left: 1rem;
+  border-left-color: var(--sub-navigation-strong);
+}
+
+.sub-navigation__item > a:hover,
+.sub-navigation__item > a:focus-visible {
+  color: var(--sub-navigation-strong);
+  outline: none;
+}
+
+.sub-navigation__group-toggle {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 0;
+  border-left: 2px solid transparent;
+  background: transparent;
+  color: var(--fg);
+  font: var(--font-label-medium);
+  text-align: left;
+  cursor: pointer;
+}
+
+.sub-navigation__group-toggle:hover,
+.sub-navigation__group-toggle:focus-visible {
+  padding-left: 1rem;
+  border-left-color: var(--sub-navigation-strong);
+  color: var(--sub-navigation-strong);
+  outline: none;
+}
+
+.sub-navigation__collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease,
+    visibility 0.3s;
+}
+
+.sub-navigation__collapse.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+}
+
+.sub-navigation__collapse-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sub-navigation__group-items > .sub-navigation__collapse-inner {
+  display: grid;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.sub-navigation__group-items > .sub-navigation__collapse-inner > :first-child {
+  margin-top: 0.5rem;
+}
+
+.sub-navigation__toggle,
+.sub-navigation__backdrop {
+  display: none;
+}
+
+.sub-navigation__icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.page-anchors {
+  margin: 0.75rem 0 0.5rem 1rem;
+}
+
+.page-anchors .page-anchors__links a {
+  border: 0;
+  border-radius: 0;
+  padding: 0.375rem 0.5rem;
+  font: var(--font-label-small);
+}
+
+.page-anchors .page-anchors__links a.active,
+.page-anchors .page-anchors__links a:hover,
+.page-anchors .page-anchors__links a:focus-visible {
+  color: var(--sub-navigation-strong);
+  outline: none;
+}
+
+.page-anchors .page-anchors__links {
+  gap: 0.25rem;
+}
+
+@media (max-width: 64rem) {
+  .sub-navigation {
+    position: static;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .sub-navigation__toggle {
+    display: grid;
+    position: fixed;
+    z-index: 50;
+    bottom: 1.25rem;
+    left: 1.25rem;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border: 1px solid oklch(from var(--border) l c h / 0.5);
+    border-radius: var(--radius-m);
+    background: var(--bg);
+    color: var(--fg);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+  }
+
+  .sub-navigation__toggle:focus-visible {
+    outline: 2px solid var(--sub-navigation-strong);
+    outline-offset: 2px;
+  }
+
+  .sub-navigation__backdrop {
+    display: block;
+    position: fixed;
+    z-index: 30;
+    inset: 0;
+    visibility: hidden;
+  }
+
+  .sub-navigation__nav {
+    position: fixed;
+    z-index: 40;
+    bottom: 5rem;
+    left: 1.25rem;
+    width: min(18rem, calc(100vw - 2.5rem));
+    max-height: min(32rem, calc(100dvh - 7rem));
+    padding: 0.75rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid oklch(from var(--border) l c h / 0.5);
+    border-radius: var(--radius-l);
+    background: var(--bg);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.97);
+    transform-origin: bottom left;
+    visibility: hidden;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  }
+
+  .sub-navigation.is-open .sub-navigation__backdrop {
+    visibility: visible;
+  }
+
+  .sub-navigation.is-open .sub-navigation__nav {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+  }
+
+  .sub-navigation__item > a {
+    display: block;
+    min-height: 0;
+    padding: 0.625rem 0.75rem;
+  }
+}
+
+@media (max-width: 64rem) {
+  .sub-navigation.is-open .sub-navigation__links > * {
+    animation: sub-navigation-rise 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .sub-navigation.is-open .sub-navigation__links > :nth-child(2) {
+    animation-delay: 0.05s;
+  }
+
+  .sub-navigation.is-open .sub-navigation__links > :nth-child(3) {
+    animation-delay: 0.1s;
+  }
+}
+
+@keyframes sub-navigation-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sub-navigation__backdrop,
+  .sub-navigation__nav,
+  .sub-navigation__collapse,
+  .sub-navigation__item > a,
+  .sub-navigation__group-toggle,
+  .page-anchors__links a {
+    transition: none;
+  }
+
+  .sub-navigation.is-open .sub-navigation__links > * {
+    animation: none;
+  }
+}
+
+@media (max-width: 64rem) {
+  .sub-navigation__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}

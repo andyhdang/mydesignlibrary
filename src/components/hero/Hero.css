@@ -67,7 +67,7 @@
 .hero__image {
   width: 100%;
   max-width: 20rem;
-  border-radius: 0.75rem;
+  border-radius: var(--radius-l);
   object-fit: contain;
   box-shadow: var(--shadow);
 }

@@ -137,7 +137,7 @@ export default function Typography() {
       <section className="type-group" aria-labelledby="font-families">
         <div className="section-header"><h2 id="font-families" className="section-title">Font family</h2><p>Use the sans-serif stack for interface and editorial text, and the monospace stack for code.</p></div>
         <div className="token-table"><Table stickyFirstColumn><thead><tr><th>Use</th><th>Token</th><th>Font stack</th><th>Preview</th></tr></thead><tbody>
-          <FontFamily label="Sans" token="--font-family-sans" stack={'"Geologica", system-ui, sans-serif'} className="font-sans" sample="The quick brown fox jumps over the lazy dog." />
+          <FontFamily label="Sans" token="--font-family-sans" stack={'"Figtree", system-ui, sans-serif'} className="font-sans" sample="The quick brown fox jumps over the lazy dog." />
           <FontFamily label="Code" token="--font-family-mono" stack="ui-monospace, Consolas, monospace" className="font-mono" sample="const foundation = true;" />
         </tbody></Table></div>
       </section>
@@ -192,7 +192,7 @@ export default function Typography() {
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="font-weights">
-        <div className="section-header"><h2 id="font-weights" className="section-title">Font weights</h2><p>Geologica is a variable font with a supported range from 100 to 900. These are the weights used across the interface.</p></div>
+        <div className="section-header"><h2 id="font-weights" className="section-title">Font weights</h2><p>Figtree is a variable font with a supported range from 300 to 900. These are the weights used across the interface.</p></div>
         <div className="token-table"><Table stickyFirstColumn><thead><tr><th>Weight</th><th>Token</th><th>Value</th><th>Preview</th></tr></thead><tbody>
           {fontWeights.map(({ name, token, value }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{value}</code></td><td><span className="token-sample" style={{ fontWeight: `var(${token})` }}>The quick brown fox</span></td></tr>)}
         </tbody></Table></div>
