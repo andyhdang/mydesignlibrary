@@ -49,6 +49,11 @@
   --bg-annotation: var(--fg-annotation);
   --bg-surface-annotation: oklch(from var(--fg-annotation) l c h / 0.3);
   --border-annotation: var(--fg-annotation);
+  --fg-note: oklch(42% 0.09 80);
+  --fg-on-note: oklch(25% 0.05 80);
+  --bg-note: oklch(86% 0.17 92);
+  --bg-surface-note: oklch(from var(--bg-note) l c h / 0.3);
+  --border-note: oklch(60% 0.13 85);
 
   /* Interaction states */
   --bg-hover: oklch(from var(--bg) calc(l - 0.04) c h);
@@ -211,6 +216,8 @@
     --bg-code: oklch(24.6% 0.0152 279.6);
     --fg-accent: oklch(72% 0.12 190);
     --bg-accent: var(--fg-accent);
+    --fg-note: oklch(88% 0.14 92);
+    --border-note: oklch(75% 0.14 90);
     --bg-surface-accent: oklch(from var(--fg-accent) l c h / 0.15);
     --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
     --bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);
@@ -238,6 +245,8 @@
   --bg-code: oklch(24.6% 0.0152 279.6);
   --fg-accent: oklch(72% 0.12 190);
   --bg-accent: var(--fg-accent);
+  --fg-note: oklch(88% 0.14 92);
+  --border-note: oklch(75% 0.14 90);
   --bg-surface-accent: oklch(from var(--fg-accent) l c h / 0.15);
   --border-accent: oklch(from var(--fg-accent) l c h / 0.5);
   --bg-hover: oklch(from var(--bg) calc(l + 0.04) c h);

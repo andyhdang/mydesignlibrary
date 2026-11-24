@@ -23,6 +23,11 @@ const tokenGroups = [
       ["--bg-annotation", "Annotation background color"],
       ["--bg-surface-annotation", "Annotation surface background color"],
       ["--border-annotation", "Annotation border color"],
+      ["--fg-note", "Personal note foreground color"],
+      ["--fg-on-note", "Foreground color on the personal note background"],
+      ["--bg-note", "Personal note background color"],
+      ["--bg-surface-note", "Personal note surface background color"],
+      ["--border-note", "Personal note border color"],
     ],
   },
   {

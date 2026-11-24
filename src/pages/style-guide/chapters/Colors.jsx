@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon, PlusIcon } from "@heroicons/react/24/outline";
+import PersonalNote from "../../../components/personal-note/PersonalNote";
 import Table from "../../../components/table/Table";
 import formatTokenName from "../formatTokenName";
 
@@ -33,6 +34,8 @@ const documentationColorPairs = [
   { name: "Code", foreground: "--fg", background: "--bg-code" },
   { name: "Annotation", foreground: "--fg-inverse", background: "--bg-annotation" },
   { name: "Annotation surface", foreground: "--fg-annotation", background: "--bg-surface-annotation", border: "--border-annotation" },
+  { name: "Note", foreground: "--fg-on-note", background: "--bg-note" },
+  { name: "Note surface", foreground: "--fg-note", background: "--bg-surface-note", border: "--border-note" },
 ];
 
 const documentationColorTokens = [
@@ -41,11 +44,24 @@ const documentationColorTokens = [
   { token: "--bg-annotation", light: "var(--fg-annotation)", dark: "var(--fg-annotation)", sampleType: "fill" },
   { token: "--bg-surface-annotation", light: "oklch(from var(--fg-annotation) l c h / 0.3)", dark: "oklch(from var(--fg-annotation) l c h / 0.3)", sampleType: "fill" },
   { token: "--border-annotation", light: "var(--fg-annotation)", dark: "var(--fg-annotation)", sampleType: "border" },
+  { token: "--fg-note", light: "oklch(42% 0.09 80)", dark: "oklch(88% 0.14 92)", sampleType: "text" },
+  { token: "--fg-on-note", light: "oklch(25% 0.05 80)", dark: "oklch(25% 0.05 80)", sampleType: "text" },
+  { token: "--bg-note", light: "oklch(86% 0.17 92)", dark: "oklch(86% 0.17 92)", sampleType: "fill" },
+  { token: "--bg-surface-note", light: "oklch(from var(--bg-note) l c h / 0.3)", dark: "oklch(from var(--bg-note) l c h / 0.3)", sampleType: "fill" },
+  { token: "--border-note", light: "oklch(60% 0.13 85)", dark: "oklch(75% 0.14 90)", sampleType: "border" },
 ];
 
 const statePairs = [
   { name: "Hover", foreground: "--fg", background: "--bg-hover" },
-  { name: "Pressed", foreground: "--fg-pressed", background: "--bg-pressed" },
+  {
+    name: "Pressed",
+    foreground: "--fg-pressed",
+    background: "--bg-pressed",
+    note: {
+      title: "Why \"pressed\" and not \"active\"?",
+      body: "\"Active\" can also describe the current tab or nav item. \"Pressed\" names only the momentary feedback while an element is held down, which keeps it distinct from the persistent selected state.",
+    },
+  },
   { name: "Selected", foreground: "--fg-selected", background: "--bg", border: "--border-selected" },
   { name: "Inverse hover", foreground: "--fg-inverse", background: "--bg-inverse-hover" },
   { name: "Inverse pressed", foreground: "--fg-inverse", background: "--bg-inverse-pressed" },
@@ -149,10 +165,10 @@ function StateColorPreview() {
   </div>;
 }
 
-function ColorPair({ name, foreground, background, border }) {
+function ColorPair({ name, foreground, background, border, note }) {
   const style = { backgroundColor: `var(${background})`, color: `var(${foreground})`, ...(border && { borderColor: `var(${border})`, borderWidth: "2px" }) };
 
-  return <article className="color-card"><div className="color-swatch" style={style} aria-hidden="true">Aa</div><div className="color-card__body"><h4>{name}</h4><dl className="color-card__tokens">{[["Foreground", foreground], ["Background", background], ["Border", border]].filter(([, token]) => token).map(([role, token]) => <div key={role}><dt>{role}</dt><dd><code>{formatTokenName(token)}</code></dd></div>)}</dl></div></article>;
+  return <article className="color-card"><div className="color-swatch" style={style} aria-hidden="true">Aa</div><div className="color-card__body"><h4>{name}{note && <PersonalNote title={note.title}>{note.body}</PersonalNote>}</h4><dl className="color-card__tokens">{[["Foreground", foreground], ["Background", background], ["Border", border]].filter(([, token]) => token).map(([role, token]) => <div key={role}><dt>{role}</dt><dd><code>{formatTokenName(token)}</code></dd></div>)}</dl></div></article>;
 }
 
 function ColorSample({ token, type }) {
