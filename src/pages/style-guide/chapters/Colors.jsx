@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronLeftIcon, ChevronRightIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Table from "../../../components/table/Table";
 import formatTokenName from "../formatTokenName";
 
@@ -11,7 +12,6 @@ const colorTokens = [
   { token: "--bg-inverse", light: "oklch(from var(--fg) calc(l - 0.1) c h)", dark: "oklch(from var(--fg) calc(l + 0.1) c h)", sampleType: "fill" },
   { token: "--border", light: "oklch(92.05% 0.0042 301.42)", dark: "oklch(31.13% 0.0181 276.38)", sampleType: "border" },
   { token: "--border-muted", light: "oklch(from var(--border) calc(l + 0.03) c h)", dark: "oklch(from var(--border) calc(l - 0.06) c h)", sampleType: "border" },
-  { token: "--bg-code", light: "oklch(96.3% 0.0093 99.98)", dark: "oklch(24.6% 0.0152 279.6)", sampleType: "fill" },
   { token: "--fg-accent", light: "oklch(50% 0.12 190)", dark: "oklch(72% 0.12 190)", sampleType: "text" },
   { token: "--bg-accent", light: "var(--fg-accent)", dark: "var(--fg-accent)", sampleType: "fill" },
   { token: "--bg-surface-accent", light: "oklch(from var(--fg-accent) l c h / 0.1)", dark: "oklch(from var(--fg-accent) l c h / 0.15)", sampleType: "fill" },
@@ -29,37 +29,40 @@ const baseColorPairs = [
   { name: "Muted border", foreground: "--fg-muted", background: "--bg", border: "--border-muted" },
 ];
 
-const outlineButtonTokens = [
-  { token: "--button-outline-fg", light: "var(--fg)", dark: "var(--fg)", sampleType: "text" },
-  { token: "--button-outline-bg", light: "var(--bg)", dark: "var(--bg)", sampleType: "fill" },
-  { token: "--button-outline-border", light: "var(--border)", dark: "var(--border)", sampleType: "border" },
-  { token: "--button-outline-bg-hover", light: "oklch(from var(--bg) calc(l - 0.04) c h)", dark: "oklch(from var(--bg) calc(l + 0.04) c h)", sampleType: "fill" },
-  { token: "--button-outline-fg-active", light: "oklch(from var(--fg) calc(l - 0.14) c h)", dark: "oklch(from var(--fg) calc(l + 0.14) c h)", sampleType: "text" },
-  { token: "--button-outline-bg-active", light: "oklch(from var(--bg) calc(l - 0.08) c h)", dark: "oklch(from var(--bg) calc(l + 0.08) c h)", sampleType: "fill" },
+const documentationColorPairs = [
+  { name: "Code", foreground: "--fg", background: "--bg-code" },
+  { name: "Annotation", foreground: "--fg-inverse", background: "--bg-annotation" },
+  { name: "Annotation surface", foreground: "--fg-annotation", background: "--bg-surface-annotation", border: "--border-annotation" },
 ];
 
-const filledButtonTokens = [
-  { token: "--button-filled-fg", light: "var(--fg-inverse)", dark: "var(--fg-inverse)", sampleType: "text" },
-  { token: "--button-filled-bg", light: "var(--bg-inverse)", dark: "var(--bg-inverse)", sampleType: "fill" },
-  { token: "--button-filled-bg-hover", light: "oklch(from var(--bg-inverse) calc(l + 0.06) c h)", dark: "oklch(from var(--bg-inverse) calc(l - 0.06) c h)", sampleType: "fill" },
-  { token: "--button-filled-bg-active", light: "oklch(from var(--bg-inverse) calc(l - 0.06) c h)", dark: "oklch(from var(--bg-inverse) calc(l - 0.12) c h)", sampleType: "fill" },
+const documentationColorTokens = [
+  { token: "--bg-code", light: "oklch(96.3% 0.0093 99.98)", dark: "oklch(24.6% 0.0152 279.6)", sampleType: "fill" },
+  { token: "--fg-annotation", light: "oklch(65% 0.25 330)", dark: "oklch(65% 0.25 330)", sampleType: "text" },
+  { token: "--bg-annotation", light: "var(--fg-annotation)", dark: "var(--fg-annotation)", sampleType: "fill" },
+  { token: "--bg-surface-annotation", light: "oklch(from var(--fg-annotation) l c h / 0.3)", dark: "oklch(from var(--fg-annotation) l c h / 0.3)", sampleType: "fill" },
+  { token: "--border-annotation", light: "var(--fg-annotation)", dark: "var(--fg-annotation)", sampleType: "border" },
 ];
 
-const accentButtonTokens = [
-  { token: "--button-accent-fg", light: "var(--fg-inverse)", dark: "var(--fg-inverse)", sampleType: "text" },
-  { token: "--button-accent-bg", light: "var(--bg-accent)", dark: "var(--bg-accent)", sampleType: "fill" },
-  { token: "--button-accent-bg-hover", light: "oklch(from var(--fg-accent) calc(l + 0.06) c h)", dark: "oklch(from var(--fg-accent) calc(l - 0.06) c h)", sampleType: "fill" },
-  { token: "--button-accent-bg-active", light: "oklch(from var(--fg-accent) calc(l - 0.06) c h)", dark: "oklch(from var(--fg-accent) calc(l - 0.06) c h)", sampleType: "fill" },
+const statePairs = [
+  { name: "Hover", foreground: "--fg", background: "--bg-hover" },
+  { name: "Pressed", foreground: "--fg-pressed", background: "--bg-pressed" },
+  { name: "Selected", foreground: "--fg-selected", background: "--bg", border: "--border-selected" },
+  { name: "Inverse hover", foreground: "--fg-inverse", background: "--bg-inverse-hover" },
+  { name: "Inverse pressed", foreground: "--fg-inverse", background: "--bg-inverse-pressed" },
+  { name: "Accent hover", foreground: "--fg-inverse", background: "--bg-accent-hover" },
+  { name: "Accent pressed", foreground: "--fg-inverse", background: "--bg-accent-pressed" },
 ];
 
-const controlStateColors = [
-  { token: "--control-fg", light: "var(--fg)", dark: "var(--fg)", sampleType: "text" },
-  { token: "--control-bg", light: "var(--bg)", dark: "var(--bg)", sampleType: "fill" },
-  { token: "--control-border", light: "var(--border)", dark: "var(--border)", sampleType: "border" },
-  { token: "--control-bg-hover", light: "oklch(from var(--bg) calc(l - 0.04) c h)", dark: "oklch(from var(--bg) calc(l + 0.04) c h)", sampleType: "fill" },
-  { token: "--control-bg-active", light: "oklch(from var(--bg) calc(l - 0.08) c h)", dark: "oklch(from var(--bg) calc(l + 0.08) c h)", sampleType: "fill" },
-  { token: "--control-selected-fg", light: "var(--fg-accent)", dark: "var(--fg-accent)", sampleType: "text" },
-  { token: "--control-selected-border", light: "var(--fg-accent)", dark: "var(--fg-accent)", sampleType: "border" },
+const stateColorTokens = [
+  { token: "--bg-hover", light: "oklch(from var(--bg) calc(l - 0.04) c h)", dark: "oklch(from var(--bg) calc(l + 0.04) c h)", sampleType: "fill" },
+  { token: "--bg-pressed", light: "oklch(from var(--bg) calc(l - 0.08) c h)", dark: "oklch(from var(--bg) calc(l + 0.08) c h)", sampleType: "fill" },
+  { token: "--fg-pressed", light: "oklch(from var(--fg) calc(l - 0.14) c h)", dark: "oklch(from var(--fg) calc(l + 0.14) c h)", sampleType: "text" },
+  { token: "--bg-inverse-hover", light: "oklch(from var(--bg-inverse) calc(l + 0.06) c h)", dark: "oklch(from var(--bg-inverse) calc(l - 0.06) c h)", sampleType: "fill" },
+  { token: "--bg-inverse-pressed", light: "oklch(from var(--bg-inverse) calc(l - 0.06) c h)", dark: "oklch(from var(--bg-inverse) calc(l - 0.12) c h)", sampleType: "fill" },
+  { token: "--bg-accent-hover", light: "oklch(from var(--fg-accent) calc(l + 0.06) c h)", dark: "oklch(from var(--fg-accent) calc(l - 0.06) c h)", sampleType: "fill" },
+  { token: "--bg-accent-pressed", light: "oklch(from var(--fg-accent) calc(l - 0.06) c h)", dark: "oklch(from var(--fg-accent) calc(l - 0.06) c h)", sampleType: "fill" },
+  { token: "--fg-selected", light: "var(--fg-accent)", dark: "var(--fg-accent)", sampleType: "text" },
+  { token: "--border-selected", light: "var(--fg-accent)", dark: "var(--fg-accent)", sampleType: "border" },
 ];
 
 export default function Colors() {
@@ -69,31 +72,33 @@ export default function Colors() {
       <section className="type-group" aria-labelledby="base-set-colors">
         <div className="section-header"><h2 id="base-set-colors" className="section-title">Base set colors</h2><p>Foreground and background pairs used for most content across the site.</p></div>
         <div className="color-grid">{baseColorPairs.map((pair) => <ColorPair key={pair.name} {...pair} />)}</div>
-      </section>
-      <section className="type-group" aria-labelledby="color-token-values">
-        <div className="section-header"><h2 id="color-token-values" className="section-title">Base set color tokens</h2><p>Token values for the light and dark themes.</p></div>
+        <div className="color-subsection">
+        <div className="section-header"><h3>Base set color tokens</h3><p>Token values for the light and dark themes.</p></div>
         <div className="token-table color-token-table"><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
           {colorTokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{formatTokenName(token)}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
         </tbody></Table></div>
+        </div>
       </section>
       <section className="type-group" aria-labelledby="state-colors">
-        <div className="section-header"><h2 id="state-colors" className="section-title">State colors</h2><p>Hover and active states use fully opaque relative OKLCH values, preserving base hue and chroma while adjusting lightness.</p></div>
-        <h3 className="state-color-subheading">Button states</h3>
-        <div className="state-color-demo" aria-label="State color button examples">
-          <button className="state-color-button state-color-button--outline" type="button">Outline button</button>
-          <button className="state-color-button state-color-button--filled" type="button">Filled button</button>
-          <button className="state-color-button state-color-button--accent" type="button">Accent button</button>
-        </div>
-        <div className="button-token-tables">
-          {[outlineButtonTokens, filledButtonTokens, accentButtonTokens].map((tokens) => <div className="token-table color-token-table" key={tokens[0].token}><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
-            {tokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{formatTokenName(token)}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
-          </tbody></Table></div>)}
-        </div>
-        <h3 className="state-color-subheading">Control states</h3>
-        <ControlStateDemo />
+        <div className="section-header"><h2 id="state-colors" className="section-title">State colors</h2><p>Hover and pressed states use fully opaque relative OKLCH values, preserving base hue and chroma while adjusting lightness.</p></div>
+        <StateColorPreview />
+        <div className="color-grid">{statePairs.map((pair) => <ColorPair key={pair.name} {...pair} />)}</div>
+        <div className="color-subsection">
+        <div className="section-header"><h3>State color tokens</h3><p>Token values for the light and dark themes.</p></div>
         <div className="token-table color-token-table"><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
-          {controlStateColors.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{formatTokenName(token)}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
+          {stateColorTokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{formatTokenName(token)}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
         </tbody></Table></div>
+        </div>
+      </section>
+      <section className="type-group" aria-labelledby="documentation-colors">
+        <div className="section-header"><h2 id="documentation-colors" className="section-title">Documentation colors</h2><p>Colors reserved for presenting code and calling out annotations in the documentation.</p></div>
+        <div className="color-grid">{documentationColorPairs.map((pair) => <ColorPair key={pair.name} {...pair} />)}</div>
+        <div className="color-subsection">
+        <div className="section-header"><h3>Documentation color tokens</h3><p>Token values for the light and dark themes.</p></div>
+        <div className="token-table color-token-table"><Table stickyFirstColumn><colgroup><col /><col /><col /><col /></colgroup><thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Sample</th></tr></thead><tbody>
+          {documentationColorTokens.map(({ token, light, dark, sampleType }) => <tr key={token}><td><code>{formatTokenName(token)}</code></td><td><code>{light}</code></td><td><code>{dark}</code></td><td><ColorSample token={token} type={sampleType} /></td></tr>)}
+        </tbody></Table></div>
+        </div>
       </section>
     </>
   );
@@ -117,16 +122,30 @@ function ColorIntroVisual() {
   </div>;
 }
 
-function ControlStateDemo() {
-  const [selectedControl, setSelectedControl] = useState("Articles");
-  const controls = ["Articles", "Projects", "Writing"];
+function StateColorPreview() {
+  const [selectedTab, setSelectedTab] = useState("Overview");
+  const tabs = ["Overview", "Details", "Activity", "Settings"];
 
-  return <div className="control-color-demo" role="group" aria-label="Control state examples">
-    {controls.map((control) => {
-      const isSelected = control === selectedControl;
-
-      return <button key={control} className={`control-color-pill${isSelected ? " is-selected" : ""}`} type="button" aria-pressed={isSelected} onClick={() => setSelectedControl(control)}>{control}</button>;
-    })}
+  return <div className="state-color-preview">
+    <div className="state-color-preview__group">
+      <h3 className="state-color-preview__label">Buttons</h3>
+      <div className="state-color-preview__row">
+        <button className="state-color-button state-color-button--outline" type="button">Outline button</button>
+        <button className="state-color-button state-color-button--filled" type="button">Filled button</button>
+        <button className="state-color-button state-color-button--accent" type="button">Accent button</button>
+      </div>
+      <div className="state-color-preview__row">
+        <button className="state-color-button state-color-button--outline state-color-button--icon" type="button" aria-label="Outline icon button"><ChevronLeftIcon aria-hidden="true" /></button>
+        <button className="state-color-button state-color-button--filled state-color-button--icon" type="button" aria-label="Filled icon button"><ChevronRightIcon aria-hidden="true" /></button>
+        <button className="state-color-button state-color-button--accent state-color-button--icon" type="button" aria-label="Accent icon button"><PlusIcon aria-hidden="true" /></button>
+      </div>
+    </div>
+    <div className="state-color-preview__group">
+      <h3 className="state-color-preview__label">Pill tabs</h3>
+      <div className="state-color-tabs" role="tablist" aria-label="Pill tab state examples">
+        {tabs.map((tab) => <button key={tab} className="state-color-tab" type="button" role="tab" aria-selected={tab === selectedTab} onClick={() => setSelectedTab(tab)}>{tab}</button>)}
+      </div>
+    </div>
   </div>;
 }
 
