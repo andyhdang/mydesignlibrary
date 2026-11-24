@@ -9,8 +9,8 @@ export const typographyAnchors = [
 
 export const colorAnchors = [
   { id: "base-set-colors", label: "Base set colors" },
-  { id: "color-token-values", label: "Base set color tokens" },
   { id: "state-colors", label: "State colors" },
+  { id: "documentation-colors", label: "Documentation colors" },
 ];
 
 export const spacingAnchors = [

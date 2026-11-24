@@ -59,10 +59,10 @@
   display: grid;
   width: 2.5rem;
   height: 2.5rem;
-  border: 1px solid var(--control-border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-m);
-  color: var(--control-fg);
-  background: var(--control-bg);
+  color: var(--fg);
+  background: var(--bg);
   place-items: center;
 }
 
@@ -72,11 +72,11 @@
 }
 
 .carousel__button:hover:not(:disabled) {
-  background: var(--control-bg-hover);
+  background: var(--bg-hover);
 }
 
 .carousel__button:active:not(:disabled) {
-  background: var(--control-bg-active);
+  background: var(--bg-pressed);
 }
 
 .carousel__button:disabled {
@@ -92,13 +92,13 @@
   width: 0.625rem;
   height: 0.625rem;
   padding: 0;
-  border: 1px solid var(--control-border);
+  border: 1px solid var(--border);
   border-radius: 50%;
-  background: var(--control-bg);
+  background: var(--bg);
 }
 
 .carousel__dot[aria-current="true"] {
-  border-color: var(--control-selected-border);
+  border-color: var(--border-selected);
   background: var(--bg-accent);
 }
 

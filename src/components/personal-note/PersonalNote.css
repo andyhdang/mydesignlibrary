@@ -1,0 +1,109 @@
+.personal-note {
+  display: inline-grid;
+  position: relative;
+  vertical-align: middle;
+}
+
+.personal-note__trigger {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 1px solid var(--border-note);
+  border-radius: 50%;
+  background: var(--bg-surface-note);
+  color: var(--fg-note);
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.personal-note__trigger:hover {
+  background: var(--bg-note);
+  color: var(--fg-on-note);
+}
+
+.personal-note__trigger:active {
+  background: var(--bg-note);
+  color: var(--fg-on-note);
+  filter: brightness(0.92);
+}
+
+.personal-note__trigger[aria-expanded="true"] {
+  border-color: var(--border-note);
+  background: var(--bg-note);
+  color: var(--fg-on-note);
+}
+
+.personal-note__trigger:focus-visible {
+  outline: 2px solid var(--border-note);
+  outline-offset: 2px;
+}
+
+.personal-note__trigger svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.personal-note__popover {
+  display: grid;
+  position: fixed;
+  z-index: 60;
+  width: min(20rem, calc(100vw - 1.5rem));
+  max-height: calc(100vh - 1.5rem);
+  overflow-y: auto;
+  padding: var(--space-inset-m);
+  border: 1px solid var(--border-note);
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  color: var(--fg-muted);
+  font: var(--font-body-small);
+  gap: var(--space-02);
+  letter-spacing: normal;
+  text-align: left;
+  text-transform: none;
+  text-wrap: wrap;
+  transform-origin: var(--note-origin, top left);
+  visibility: hidden;
+  animation: personal-note-pop 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes personal-note-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--note-offset, 8px)) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(calc(var(--note-offset, 8px) * -0.25)) scale(1.03);
+  }
+  80% {
+    transform: translateY(calc(var(--note-offset, 8px) * 0.1)) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.personal-note__eyebrow {
+  color: var(--fg-note);
+  font: var(--font-label-small);
+}
+
+.personal-note__popover strong {
+  color: var(--fg);
+  font: var(--font-label-medium);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .personal-note__trigger {
+    transition: none;
+  }
+
+  .personal-note__popover {
+    animation: none;
+  }
+}

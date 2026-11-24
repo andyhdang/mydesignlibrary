@@ -76,9 +76,37 @@ export default function PageAnchorTabs({ anchors, label }) {
       track.style.setProperty("--active-tab-x", `${activeTab.offsetLeft}px`);
       track.style.setProperty("--active-tab-width", `${activeTab.offsetWidth}px`);
     };
-    const resizeObserver = new ResizeObserver(updateIndicator);
+    const revealActiveTab = () => {
+      const edgePadding = Number.parseFloat(getComputedStyle(activeTab).paddingInlineStart) || 0;
+      const tabLeft = activeTab.offsetLeft;
+      const tabRight = tabLeft + activeTab.offsetWidth;
+      const visibleLeft = track.scrollLeft;
+      const visibleRight = visibleLeft + track.clientWidth;
+      let nextScrollLeft;
 
-    updateIndicator();
+      if (tabLeft < visibleLeft + edgePadding) {
+        nextScrollLeft = Math.max(0, tabLeft - edgePadding);
+      } else if (tabRight > visibleRight - edgePadding) {
+        nextScrollLeft = Math.min(
+          track.scrollWidth - track.clientWidth,
+          tabRight - track.clientWidth + edgePadding,
+        );
+      }
+
+      if (nextScrollLeft !== undefined) {
+        track.scrollTo({
+          left: nextScrollLeft,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        });
+      }
+    };
+    const updateTabLayout = () => {
+      updateIndicator();
+      revealActiveTab();
+    };
+    const resizeObserver = new ResizeObserver(updateTabLayout);
+
+    updateTabLayout();
     resizeObserver.observe(track);
     resizeObserver.observe(activeTab);
     return () => resizeObserver.disconnect();
