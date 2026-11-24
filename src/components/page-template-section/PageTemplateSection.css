@@ -37,7 +37,7 @@
 .page-template-section__caption {
   margin-top: 0.75rem;
   color: var(--fg-muted);
-  font: var(--font-caption);
+  font: var(--font-supporting);
 }
 
 @media (min-width: 48rem) {

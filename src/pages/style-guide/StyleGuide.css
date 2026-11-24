@@ -299,7 +299,7 @@
 
 .font-nomenclature__mock-caption {
   color: var(--fg-muted);
-  font: var(--font-caption);
+  font: var(--font-supporting);
 }
 
 .font-nomenclature__mock-label {
@@ -558,7 +558,7 @@
 
 .font-size-curve figcaption {
   color: var(--fg-muted);
-  font: var(--font-caption);
+  font: var(--font-supporting);
 }
 
 .token-table {
@@ -730,7 +730,7 @@
 .spacing-curve figcaption {
   margin-top: 0.5rem;
   color: var(--fg-muted);
-  font: var(--font-caption);
+  font: var(--font-supporting);
 }
 
 .spacing-viewport-toggle {
@@ -826,7 +826,7 @@
 .spacing-type-diagram figcaption {
   margin-top: 0.5rem;
   color: var(--fg-muted);
-  font: var(--font-caption);
+  font: var(--font-supporting);
   text-align: center;
 }
 
@@ -1282,7 +1282,7 @@
 
 .carousel-anatomy__description {
   color: var(--fg-muted);
-  font: var(--font-caption);
+  font: var(--font-supporting);
 }
 
 .carousel-anatomy .carousel__viewport,
@@ -1431,7 +1431,7 @@
   border-radius: var(--radius-s);
   background: var(--bg-code);
   color: var(--fg);
-  font: var(--font-caption);
+  font: var(--font-supporting);
   font-family: var(--font-family-mono);
 }
 

@@ -12,7 +12,7 @@ const fontShorthands = [
   { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "clamp(var(--font-size-200), 0.5rem + 1.5625vw, var(--font-size-300))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "20–24 px", sample: "Section title" },
   { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "clamp(var(--font-size-300), 1.166667rem + 0.694444vw, var(--font-size-500))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "24–32 px", sample: "Section title" },
   { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "clamp(var(--font-size-500), 1.5rem + 1.041667vw, var(--font-size-800))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "32–44 px", sample: "Page title" },
-  { name: "Caption", token: "--font-caption", value: ["var(--font-weight-regular)", "var(--font-size-050)", "/ var(--font-line-height-caption)", "var(--font-family-sans)"], fontSize: "14 px", sample: "Supporting detail" },
+  { name: "Supporting", token: "--font-supporting", value: ["var(--font-weight-regular)", "var(--font-size-050)", "/ var(--font-line-height-supporting)", "var(--font-family-sans)"], fontSize: "14 px", sample: "Helper text" },
   { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-regular)", "clamp(var(--font-size-100), 0.25rem + 1.5625vw, var(--font-size-200))", "/ var(--font-line-height-subtitle)", "var(--font-family-sans)"], fontSize: "16–20 px", sample: "Supporting copy" },
   { name: "Display", token: "--font-display", value: ["var(--font-weight-medium)", "clamp(var(--font-size-600), 1.75rem + 1.041667vw, var(--font-size-900))", "/ var(--font-line-height-display)", "var(--font-family-sans)"], fontSize: "36–48 px", sample: "Make impact" },
   { name: "Code block", token: "--font-code-block", value: ["var(--font-weight-regular)", "var(--font-size-100)", "/ var(--font-line-height-body)", "var(--font-family-mono)"], fontSize: "16 px", sample: "npm run dev" },
@@ -31,8 +31,8 @@ const fontNomenclature = [
     description: "Supporting copy paired with a title to add context or clarify its meaning.",
   },
   {
-    name: "Caption",
-    description: "Concise supporting information attached to media, data, or another element.",
+    name: "Supporting",
+    description: "Secondary information such as captions, helper text, and legal copy.",
   },
   {
     name: "Title",
@@ -75,7 +75,7 @@ const lineHeights = [
   { name: "Subtitle", token: "--font-line-height-subtitle", value: "1.25", font: "--font-subtitle", description: ["Use for supporting", "title copy."] },
   { name: "Body", token: "--font-line-height-body", value: "1.5", font: "--font-body-medium", description: ["Use for readable", "body text."] },
   { name: "Label", token: "--font-line-height-label", value: "1.2", font: "--font-label-medium", description: ["Use for compact", "UI labels."] },
-  { name: "Caption", token: "--font-line-height-caption", value: "1.4", font: "--font-caption", description: ["Use for concise", "captions."] },
+  { name: "Supporting", token: "--font-line-height-supporting", value: "1.1", font: "--font-supporting", description: ["Use for captions, helper", "and legal text."] },
 ];
 
 const fontWeights = [
@@ -148,7 +148,7 @@ export default function Typography() {
             <div className="font-nomenclature__mock-content">
               <figure>
                 <div className="font-nomenclature__mock-visual"><img src={aardvarkImage} alt="An aardvark walking across red soil" /></div>
-                <figcaption className="font-nomenclature__mock-caption"><span className={mockHighlightClass("Caption")}>Aardvarks can close their nostrils to keep out dust while digging.</span>{nomenclatureTrigger("Caption", "end")}</figcaption>
+                <figcaption className="font-nomenclature__mock-caption"><span className={mockHighlightClass("Supporting")}>Aardvarks can close their nostrils to keep out dust while digging.</span>{nomenclatureTrigger("Supporting", "end")}</figcaption>
               </figure>
               <div>
                 <h4 className="font-nomenclature__mock-title"><span className={mockHighlightClass("Title")}>Built for the night</span>{nomenclatureTrigger("Title")}</h4>

@@ -140,14 +140,14 @@ const tokenGroups = [
   },
   {
     title: "Line heights",
-    description: "Line-height values for display, title, subtitle, body, label, and caption text.",
+    description: "Line-height values for display, title, subtitle, body, label, and supporting text.",
     tokens: [
       ["--font-line-height-display", "Display line height"],
       ["--font-line-height-title", "Title line height"],
       ["--font-line-height-subtitle", "Subtitle line height"],
       ["--font-line-height-body", "Body line height"],
       ["--font-line-height-label", "Label line height"],
-      ["--font-line-height-caption", "Caption line height"],
+      ["--font-line-height-supporting", "Supporting line height"],
     ],
   },
   {
@@ -170,7 +170,7 @@ const tokenGroups = [
       ["--font-title-small", "Small title text"],
       ["--font-title-medium", "Medium title text"],
       ["--font-title-large", "Large title text"],
-      ["--font-caption", "Caption text"],
+      ["--font-supporting", "Supporting text"],
       ["--font-subtitle", "Subtitle text"],
       ["--font-display", "Display text"],
       ["--font-code-block", "Code block text"],

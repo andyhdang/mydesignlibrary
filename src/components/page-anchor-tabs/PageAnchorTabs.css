@@ -105,18 +105,20 @@
 
 @media (max-width: 30rem) {
   .page-anchor-tabs {
-    width: calc(100% + (2 * var(--page-gutter)));
-    margin-inline: calc(-1 * var(--page-gutter));
-    border-inline: 0;
-    border-radius: 0;
+    width: 100%;
+    margin-inline: 0;
   }
 
   .page-anchor-tabs.is-stuck {
-    width: 100vw;
+    width: 100%;
+    border-inline: 1px solid oklch(from var(--border) l c h / 0.7);
+    border-radius: 999px;
+    transform: none;
   }
 
   .page-anchor-tabs__track {
-    padding-inline: var(--page-gutter);
+    width: 100%;
+    min-width: 0;
   }
 }
 

@@ -14,7 +14,7 @@ const chapters = [
   { slug: "overview", title: "Overview", description: "A quick reference for the foundations shared across the application.", Component: WorkInProgress },
   { slug: "change-log", title: "Change Log", description: "Updates and changes to the design library.", Component: ChangeLog },
   { slug: "foundations", title: "Foundations", description: "The core styles and tokens that every component is built from.", Component: ChapterCards },
-  { slug: "typography", title: "Typography", description: "Font stacks and a fluid type scale used throughout the interface.", Component: Typography },
+  { slug: "typography", title: "Typography", description: "Consistent type gives every interface a clear voice and makes content effortless to read.", Component: Typography },
   { slug: "colors", title: "Colors", description: "The core palette is defined as reusable theme tokens.", Component: Colors },
   { slug: "spacing", title: "Spacing", description: "A responsive spacing scale creates consistent rhythm and intentional relationships between elements, components, and layouts.", Component: Spacing },
   { slug: "components", title: "Components", description: "Reusable interface components built from the foundations.", Component: ChapterCards },

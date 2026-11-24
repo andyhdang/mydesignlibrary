@@ -137,7 +137,7 @@
 
 .before-after__caption {
   margin-top: 0.75rem;
-  font: var(--font-caption);
+  font: var(--font-supporting);
 }
 
 @media (max-width: 30rem) {

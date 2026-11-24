@@ -140,7 +140,7 @@
   --font-line-height-subtitle: 1.25;
   --font-line-height-body: 1.5;
   --font-line-height-label: 1.2;
-  --font-line-height-caption: 1.4;
+  --font-line-height-supporting: 1.1;
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -151,7 +151,7 @@
   --font-title-small: var(--font-weight-medium) clamp(var(--font-size-200), 0.5rem + 1.5625vw, var(--font-size-300)) / var(--font-line-height-title) var(--font-family-sans);
   --font-title-medium: var(--font-weight-medium) clamp(var(--font-size-300), 1.166667rem + 0.694444vw, var(--font-size-500)) / var(--font-line-height-title) var(--font-family-sans);
   --font-title-large: var(--font-weight-medium) clamp(var(--font-size-500), 1.5rem + 1.041667vw, var(--font-size-800)) / var(--font-line-height-title) var(--font-family-sans);
-  --font-caption: var(--font-weight-regular) var(--font-size-050) / var(--font-line-height-caption) var(--font-family-sans);
+  --font-supporting: var(--font-weight-regular) var(--font-size-050) / var(--font-line-height-supporting) var(--font-family-sans);
   --font-subtitle: var(--font-weight-regular) clamp(var(--font-size-100), 0.25rem + 1.5625vw, var(--font-size-200)) / var(--font-line-height-subtitle) var(--font-family-sans);
   --font-display: var(--font-weight-medium) clamp(var(--font-size-600), 1.75rem + 1.041667vw, var(--font-size-900)) / var(--font-line-height-display) var(--font-family-sans);
   --font-code-block: var(--font-weight-regular) var(--font-size-100) / var(--font-line-height-body) var(--font-family-mono);
