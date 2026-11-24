@@ -1,12 +1,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import PersonalNote from "../../../components/personal-note/PersonalNote";
 import Table from "../../../components/table/Table";
 import formatTokenName from "../formatTokenName";
 
 const aardvarkImage = `${import.meta.env.BASE_URL}images/aardvark.jpeg`;
 
 const fontShorthands = [
-  { name: "Body small", token: "--font-body-small", value: ["var(--font-weight-regular)", "clamp(var(--font-size-050), 0.5rem + 0.78125vw, var(--font-size-100))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "14–16 px", sample: "Reading copy" },
+  { name: "Body small", token: "--font-body-small", value: ["var(--font-weight-regular)", "clamp(var(--font-size-050), 0.5rem + 0.78125vw, var(--font-size-100))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "14–16 px", sample: "Reading copy", note: { title: "Clamp for editorial copy", body: "Fluid sizing with clamp suits editorial copy: text scales smoothly between a minimum and maximum size, so long-form reading stays comfortable at any viewport without breakpoint jumps." } },
   { name: "Body medium", token: "--font-body-medium", value: ["var(--font-weight-regular)", "clamp(var(--font-size-100), 0.25rem + 1.5625vw, var(--font-size-200))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "16–20 px", sample: "Reading copy" },
   { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "clamp(var(--font-size-200), 0.5rem + 1.5625vw, var(--font-size-300))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "20–24 px", sample: "Reading copy" },
   { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "clamp(var(--font-size-200), 0.5rem + 1.5625vw, var(--font-size-300))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "20–24 px", sample: "Section title" },
@@ -166,7 +167,7 @@ export default function Typography() {
           <p>Each shorthand combines family, weight, size, and line height into a reusable font declaration for its role.</p>
         </div>
         <div className="font-shorthand-table"><Table stickyFirstColumn><thead><tr><th>Style</th><th>Token</th><th>Value</th><th>Font size</th><th>Preview</th></tr></thead><tbody>
-          {fontShorthands.map(({ name, token, value, fontSize, sample }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><div className="font-shorthand-value">{value.map((part) => <code key={part}>{part}</code>)}</div></td><td><code>{fontSize}</code></td><td><span className="font-shorthand-sample" style={{ font: `var(${token})` }}>{sample}</span></td></tr>)}
+          {fontShorthands.map(({ name, token, value, fontSize, sample, note }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><div className="font-shorthand-value">{value.map((part) => note && part.startsWith("clamp") ? <span key={part} className="font-shorthand-note"><code>{part}</code><PersonalNote title={note.title}>{note.body}</PersonalNote></span> : <code key={part}>{part}</code>)}</div></td><td><code>{fontSize}</code></td><td><span className="font-shorthand-sample" style={{ font: `var(${token})` }}>{sample}</span></td></tr>)}
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="fixed-font-sizes">

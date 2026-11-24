@@ -28,18 +28,27 @@ export default function PersonalNote({ title, children }) {
       }
 
       const triggerBounds = trigger.getBoundingClientRect();
-      const popoverBounds = popover.getBoundingClientRect();
+      const popoverWidth = popover.offsetWidth;
+      const popoverHeight = popover.offsetHeight;
       const left = Math.min(
         Math.max(triggerBounds.left, viewportInset),
-        window.innerWidth - popoverBounds.width - viewportInset,
+        window.innerWidth - popoverWidth - viewportInset,
       );
       const spaceBelow = window.innerHeight - triggerBounds.bottom - gap - viewportInset;
-      const top = spaceBelow >= popoverBounds.height
+      const opensBelow = spaceBelow >= popoverHeight;
+      const top = opensBelow
         ? triggerBounds.bottom + gap
-        : Math.max(viewportInset, triggerBounds.top - popoverBounds.height - gap);
+        : triggerBounds.top - popoverHeight - gap;
+      const clampedTop = Math.min(
+        Math.max(top, viewportInset),
+        Math.max(viewportInset, window.innerHeight - popoverHeight - viewportInset),
+      );
+
+      popover.style.setProperty("--note-origin", `${Math.round(triggerBounds.left - left + triggerBounds.width / 2)}px ${opensBelow ? "0" : "100%"}`);
+      popover.style.setProperty("--note-offset", opensBelow ? "-8px" : "8px");
 
       popover.style.left = `${left}px`;
-      popover.style.top = `${top}px`;
+      popover.style.top = `${clampedTop}px`;
       popover.style.visibility = "visible";
     };
 

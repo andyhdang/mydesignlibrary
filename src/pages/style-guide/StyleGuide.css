@@ -474,6 +474,12 @@
   justify-items: start;
 }
 
+.font-shorthand-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .font-shorthand-table-header {
   margin-bottom: var(--space-stack-m);
 }
