@@ -1,37 +1,51 @@
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import Table from "../../../components/table/Table";
 import formatTokenName from "../formatTokenName";
 
+const aardvarkImage = `${import.meta.env.BASE_URL}images/aardvark.jpeg`;
+
 const fontShorthands = [
-  { name: "Body small", token: "--font-body-small", value: ["var(--font-weight-regular)", "var(--font-size-fluid-200)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
-  { name: "Body medium", token: "--font-body-medium", value: ["var(--font-weight-regular)", "var(--font-size-fluid-300)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
-  { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "var(--font-size-fluid-400)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
-  { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "var(--font-size-fluid-400)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Section title" },
-  { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "var(--font-size-fluid-500)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Section title" },
-  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "var(--font-size-fluid-700)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Page title" },
-  { name: "Caption", token: "--font-caption", value: ["var(--font-weight-regular)", "var(--font-size-050)", "/ var(--font-line-height-caption)", "var(--font-family-sans)"], sample: "Supporting detail" },
-  { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-medium)", "var(--font-size-fluid-300)", "/ var(--font-line-height-subtitle)", "var(--font-family-sans)"], sample: "Supporting copy" },
-  { name: "Display", token: "--font-display", value: ["var(--font-weight-bold)", "var(--font-size-fluid-800)", "/ var(--font-line-height-display)", "var(--font-family-sans)"], sample: "Make impact" },
-  { name: "Code block", token: "--font-code-block", value: ["var(--font-weight-regular)", "var(--font-size-200)", "/ var(--font-line-height-body)", "var(--font-family-mono)"], sample: "npm run dev" },
-  { name: "Label small", token: "--font-label-small", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
-  { name: "Label medium", token: "--font-label-medium", value: ["var(--font-weight-medium)", "var(--font-size-200)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
-  { name: "Label large", token: "--font-label-large", value: ["var(--font-weight-medium)", "var(--font-size-300)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
-  { name: "Label eyebrow", token: "--font-label-eyebrow", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-mono)"], sample: "FOUNDATION" },
+  { name: "Body small", token: "--font-body-small", value: ["var(--font-weight-regular)", "clamp(var(--font-size-050), 0.5rem + 0.78125vw, var(--font-size-100))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "14–16 px", sample: "Reading copy" },
+  { name: "Body medium", token: "--font-body-medium", value: ["var(--font-weight-regular)", "clamp(var(--font-size-100), 0.25rem + 1.5625vw, var(--font-size-200))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "16–20 px", sample: "Reading copy" },
+  { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "clamp(var(--font-size-200), 0.5rem + 1.5625vw, var(--font-size-300))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "20–24 px", sample: "Reading copy" },
+  { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "clamp(var(--font-size-200), 0.5rem + 1.5625vw, var(--font-size-300))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "20–24 px", sample: "Section title" },
+  { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "clamp(var(--font-size-300), 1.166667rem + 0.694444vw, var(--font-size-500))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "24–32 px", sample: "Section title" },
+  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "clamp(var(--font-size-500), 1.5rem + 1.041667vw, var(--font-size-800))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "32–44 px", sample: "Page title" },
+  { name: "Caption", token: "--font-caption", value: ["var(--font-weight-regular)", "var(--font-size-050)", "/ var(--font-line-height-caption)", "var(--font-family-sans)"], fontSize: "14 px", sample: "Supporting detail" },
+  { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-regular)", "clamp(var(--font-size-100), 0.25rem + 1.5625vw, var(--font-size-200))", "/ var(--font-line-height-subtitle)", "var(--font-family-sans)"], fontSize: "16–20 px", sample: "Supporting copy" },
+  { name: "Display", token: "--font-display", value: ["var(--font-weight-medium)", "clamp(var(--font-size-600), 1.75rem + 1.041667vw, var(--font-size-900))", "/ var(--font-line-height-display)", "var(--font-family-sans)"], fontSize: "36–48 px", sample: "Make impact" },
+  { name: "Code block", token: "--font-code-block", value: ["var(--font-weight-regular)", "var(--font-size-100)", "/ var(--font-line-height-body)", "var(--font-family-mono)"], fontSize: "16 px", sample: "npm run dev" },
+  { name: "Label small", token: "--font-label-small", value: ["var(--font-weight-medium)", "var(--font-size-050)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], fontSize: "14 px", sample: "Status" },
+  { name: "Label medium", token: "--font-label-medium", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], fontSize: "16 px", sample: "Status" },
+  { name: "Label large", token: "--font-label-large", value: ["var(--font-weight-medium)", "var(--font-size-200)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], fontSize: "20 px", sample: "Status" },
 ];
 
-const secondMajorRatio = 1.125;
-
-const fontSizeSteps = [
-  { token: "--font-size-fluid-025", multiplier: 0.75 },
-  { token: "--font-size-fluid-050", multiplier: secondMajorRatio ** -1 },
-  { token: "--font-size-fluid-100", multiplier: 1 },
-  { token: "--font-size-fluid-200", multiplier: secondMajorRatio },
-  { token: "--font-size-fluid-300", multiplier: secondMajorRatio ** 2 },
-  { token: "--font-size-fluid-400", multiplier: secondMajorRatio ** 3 },
-  { token: "--font-size-fluid-500", multiplier: secondMajorRatio ** 4 },
-  { token: "--font-size-fluid-600", multiplier: secondMajorRatio ** 5 },
-  { token: "--font-size-fluid-700", multiplier: secondMajorRatio ** 6 },
-  { token: "--font-size-fluid-800", multiplier: secondMajorRatio ** 7 },
+const fontNomenclature = [
+  {
+    name: "Display",
+    description: "Oversized, expressive text reserved for a short, high-impact message.",
+  },
+  {
+    name: "Subtitle",
+    description: "Supporting copy paired with a title to add context or clarify its meaning.",
+  },
+  {
+    name: "Caption",
+    description: "Concise supporting information attached to media, data, or another element.",
+  },
+  {
+    name: "Title",
+    description: "A heading that names a page, section, or distinct content block.",
+  },
+  {
+    name: "Body",
+    description: "Reading text used for sentences, paragraphs, and general content.",
+  },
+  {
+    name: "Label",
+    description: "Compact text used inside controls and interactive interface elements.",
+  },
 ];
 
 const fixedFontSizeSteps = [
@@ -39,53 +53,24 @@ const fixedFontSizeSteps = [
   { name: "025", token: "--font-size-025", pixels: 12 },
   { name: "050", token: "--font-size-050", pixels: 14 },
   { name: "100", token: "--font-size-100", pixels: 16 },
-  { name: "200", token: "--font-size-200", pixels: 18 },
-  { name: "300", token: "--font-size-300", pixels: 20 },
-  { name: "400", token: "--font-size-400", pixels: 22 },
-  { name: "500", token: "--font-size-500", pixels: 26 },
-  { name: "600", token: "--font-size-600", pixels: 28 },
-  { name: "700", token: "--font-size-700", pixels: 32 },
-  { name: "800", token: "--font-size-800", pixels: 36 },
-  { name: "900", token: "--font-size-900", pixels: 40 },
-  { name: "1000", token: "--font-size-1000", pixels: 42 },
-  { name: "1100", token: "--font-size-1100", pixels: 46 },
-];
-
-const viewportScales = [
-  { id: "mobile", label: "Mobile", basePixels: 14, maximumBasePixels: 16, minimumViewport: 768, maximumViewport: 1024 },
-  { id: "tablet", label: "Tablet", basePixels: 14, maximumBasePixels: 16, minimumViewport: 768, maximumViewport: 1024 },
-  { id: "desktop-small", label: "Desktop small", basePixels: 16, maximumBasePixels: 18, minimumViewport: 1024, maximumViewport: 1536 },
-  { id: "desktop-medium", label: "Desktop medium", basePixels: 16, maximumBasePixels: 18, minimumViewport: 1024, maximumViewport: 1536 },
-  { id: "desktop-large", label: "Desktop large", basePixels: 18, maximumBasePixels: 20, minimumViewport: 1536, maximumViewport: 1920 },
+  { name: "200", token: "--font-size-200", pixels: 20 },
+  { name: "300", token: "--font-size-300", pixels: 24 },
+  { name: "400", token: "--font-size-400", pixels: 28 },
+  { name: "500", token: "--font-size-500", pixels: 32 },
+  { name: "600", token: "--font-size-600", pixels: 36 },
+  { name: "700", token: "--font-size-700", pixels: 40 },
+  { name: "800", token: "--font-size-800", pixels: 44 },
+  { name: "900", token: "--font-size-900", pixels: 48 },
+  { name: "1000", token: "--font-size-1000", pixels: 56 },
+  { name: "1100", token: "--font-size-1100", pixels: 64 },
 ];
 
 function formatRem(pixels) {
   return `${Number((pixels / 16).toFixed(4))}rem`;
 }
 
-function getFixedFontSizeToken(pixels) {
-  const fixedSize = fixedFontSizeSteps.find((step) => step.pixels === pixels);
-
-  if (!fixedSize) {
-    throw new Error(`Missing fixed font size token for ${pixels}px.`);
-  }
-
-  return `var(${fixedSize.token})`;
-}
-
-function getFluidValue(minimum, maximum, minimumViewport, maximumViewport) {
-  if (minimum === maximum) {
-    return getFixedFontSizeToken(minimum);
-  }
-
-  const viewportCoefficient = ((maximum - minimum) / (maximumViewport - minimumViewport)) * 100;
-  const intercept = minimum - (viewportCoefficient / 100) * minimumViewport;
-
-  return `clamp(${getFixedFontSizeToken(minimum)}, ${formatRem(intercept)} + ${Number(viewportCoefficient.toFixed(6))}vw, ${getFixedFontSizeToken(maximum)})`;
-}
-
 const lineHeights = [
-  { name: "Display", token: "--font-line-height-display", value: "1", font: "--font-display", description: ["Use for oversized", "display text."] },
+  { name: "Display", token: "--font-line-height-display", value: "1.1", font: "--font-display", description: ["Use for oversized", "display text."] },
   { name: "Title", token: "--font-line-height-title", value: "1.25", font: "--font-title-medium", description: ["Use for multi-line", "titles."] },
   { name: "Subtitle", token: "--font-line-height-subtitle", value: "1.25", font: "--font-subtitle", description: ["Use for supporting", "title copy."] },
   { name: "Body", token: "--font-line-height-body", value: "1.5", font: "--font-body-medium", description: ["Use for readable", "body text."] },
@@ -101,28 +86,15 @@ const fontWeights = [
 ];
 
 export default function Typography() {
-  const [selectedScaleId, setSelectedScaleId] = useState("mobile");
-  const selectedScale = viewportScales.find(({ id }) => id === selectedScaleId);
-  const fontSizes = fontSizeSteps.map(({ token, multiplier }) => {
-    const pixels = Math.round((selectedScale.basePixels * multiplier) / 2) * 2;
-    const maximumPixels = Math.round((selectedScale.maximumBasePixels * multiplier) / 2) * 2;
-
-    return {
-      name: token.slice(-3),
-      token,
-      multiplier,
-      value: getFluidValue(
-        pixels,
-        maximumPixels,
-        selectedScale.minimumViewport,
-        selectedScale.maximumViewport,
-      ),
-      pixels: maximumPixels === pixels ? `${pixels}px` : `${pixels}–${maximumPixels}px`,
-      calculatedPixels: pixels,
-    };
-  });
-  const previewStyle = Object.fromEntries(
-    fontSizes.map(({ token, calculatedPixels }) => [token, formatRem(calculatedPixels)]),
+  const [selectedNomenclature, setSelectedNomenclature] = useState(null);
+  const mockHighlightClass = (name) => `font-nomenclature__mock-highlight${selectedNomenclature === name ? " is-highlighted" : ""}`;
+  const nomenclatureTrigger = (name, placement = "start") => (
+    <NomenclaturePopover
+      name={name}
+      placement={placement}
+      isOpen={selectedNomenclature === name}
+      onToggle={() => setSelectedNomenclature((current) => current === name ? null : name)}
+    />
   );
   const fixedFontSizes = fixedFontSizeSteps.map(({ name, token, pixels }) => ({
     name,
@@ -131,8 +103,32 @@ export default function Typography() {
     pixels: `${pixels}px`,
   }));
 
+  useEffect(() => {
+    if (!selectedNomenclature) {
+      return undefined;
+    }
+
+    const closeOnPointerDown = (event) => {
+      if (event.target instanceof Element && !event.target.closest(".font-nomenclature__annotation")) {
+        setSelectedNomenclature(null);
+      }
+    };
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setSelectedNomenclature(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", closeOnPointerDown);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnPointerDown);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [selectedNomenclature]);
+
   return (
-    <div className="typography-chapter" style={previewStyle}>
+    <div className="typography-chapter">
       <TypographyIntroVisual />
       <section className="type-group" aria-labelledby="font-families">
         <div className="section-header"><h2 id="font-families" className="section-title">Font family</h2><p>Use the sans-serif stack for interface and editorial text, and the monospace stack for code.</p></div>
@@ -141,49 +137,44 @@ export default function Typography() {
           <FontFamily label="Code" token="--font-family-mono" stack="ui-monospace, Consolas, monospace" className="font-mono" sample="const foundation = true;" />
         </tbody></Table></div>
       </section>
-      <section className="type-group" aria-labelledby="font-shorthands">
-        <div className="section-header"><h2 id="font-shorthands" className="section-title">Font shorthands</h2><p>Each token combines family, weight, size, and line height into a reusable font style.</p></div>
-        <div className="font-shorthand-table"><Table stickyFirstColumn><thead><tr><th>Style</th><th>Token</th><th>Font shorthand</th><th>Preview</th></tr></thead><tbody>
-          {fontShorthands.map(({ name, token, value, sample }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><div className="font-shorthand-value">{value.map((part) => <code key={part}>{part}</code>)}</div></td><td><span className="font-shorthand-sample" style={{ font: `var(${token})` }}>{sample}</span></td></tr>)}
+      <section className="type-group" aria-labelledby="font-roles">
+        <div className="section-header"><h2 id="font-roles" className="section-title">Font roles</h2><p>Font roles give text a clear purpose within the interface. Use them consistently to establish hierarchy and help people understand the relationship between content and controls.</p></div>
+        <div className="font-nomenclature">
+          <article className="font-nomenclature__mock-design" aria-label="Typography styles in context">
+            <header>
+              <h3 className="font-nomenclature__mock-display"><span className={mockHighlightClass("Display")}>Dig a little deeper.</span>{nomenclatureTrigger("Display")}</h3>
+              <p className="font-nomenclature__mock-subtitle"><span className={mockHighlightClass("Subtitle")}>Long ears. Strong claws. Serious appetite.</span>{nomenclatureTrigger("Subtitle", "end")}</p>
+            </header>
+            <div className="font-nomenclature__mock-content">
+              <figure>
+                <div className="font-nomenclature__mock-visual"><img src={aardvarkImage} alt="An aardvark walking across red soil" /></div>
+                <figcaption className="font-nomenclature__mock-caption"><span className={mockHighlightClass("Caption")}>Aardvarks can close their nostrils to keep out dust while digging.</span>{nomenclatureTrigger("Caption", "end")}</figcaption>
+              </figure>
+              <div>
+                <h4 className="font-nomenclature__mock-title"><span className={mockHighlightClass("Title")}>Built for the night</span>{nomenclatureTrigger("Title")}</h4>
+                <p className="font-nomenclature__mock-body"><span className={mockHighlightClass("Body")}>Aardvarks spend warm days curled inside cool burrows, then roam after dark using keen hearing and a remarkable sense of smell to find termites and ants.</span>{nomenclatureTrigger("Body", "end")}</p>
+                <div className="font-nomenclature__mock-action">
+                  <button className="font-nomenclature__mock-label" type="button"><span className={mockHighlightClass("Label")}>Meet the aardvark</span></button>
+                  {nomenclatureTrigger("Label")}
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div className="font-shorthand-table-header">
+          <h3 id="font-shorthands">Font shorthands</h3>
+          <p>Each shorthand combines family, weight, size, and line height into a reusable font declaration for its role.</p>
+        </div>
+        <div className="font-shorthand-table"><Table stickyFirstColumn><thead><tr><th>Style</th><th>Token</th><th>Value</th><th>Font size</th><th>Preview</th></tr></thead><tbody>
+          {fontShorthands.map(({ name, token, value, fontSize, sample }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><div className="font-shorthand-value">{value.map((part) => <code key={part}>{part}</code>)}</div></td><td><code>{fontSize}</code></td><td><span className="font-shorthand-sample" style={{ font: `var(${token})` }}>{sample}</span></td></tr>)}
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="fixed-font-sizes">
-        <div className="section-header"><h2 id="fixed-font-sizes" className="section-title">Font sizes</h2><p>These values anchor the fluid scale and support compact interface text such as buttons, pills, inputs, navigation, captions, and code. They use a 16px base and do not change with the viewport.</p></div>
+        <div className="section-header"><h2 id="fixed-font-sizes" className="section-title">Font sizes</h2><p>The scale starts at 16px on step 100 and follows an iterative second-major ratio. Steps above the base round to the nearest 4px; smaller steps round to the nearest even pixel.</p></div>
+        <FontSizeCurve />
         <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
           {fixedFontSizes.map(({ name, token, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{value}</code></td><td><code>{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
         </tbody></Table></div>
-      </section>
-      <section className="type-group" aria-labelledby="type-scale">
-        <div className="section-header"><h2 id="type-scale" className="section-title">Fluid font sizes</h2><p>Use fluid sizes for body, subtitle, title, and display text. Each clamp references fixed primitives for its minimum and maximum while following a 1.125 second-major scale.</p></div>
-        <FontSizeMultiplierCurve />
-        <p className="font-size-viewport-preview">
-          Previewing a <span className="font-size-dynamic-value">{selectedScale.label.toLowerCase()}</span> base of <span className="font-size-dynamic-value">{selectedScale.basePixels}px</span>.
-        </p>
-        <div className="font-size-viewport-toggle" role="group" aria-label="Font size viewport preview">
-          {viewportScales.map(({ id, label, basePixels }) => (
-            <button
-              className={id === selectedScaleId ? "is-active" : undefined}
-              type="button"
-              key={id}
-              aria-pressed={id === selectedScaleId}
-              onClick={() => setSelectedScaleId(id)}
-            >
-              {label} ({basePixels}px)
-            </button>
-          ))}
-        </div>
-        <FontSizeCurve fontSizes={fontSizes} />
-        <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
-          {fontSizes.map(({ name, token, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code className="font-size-dynamic-value">{value}</code></td><td><code className="font-size-dynamic-value">{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
-        </tbody></Table></div>
-        <div className="font-size-clamp-explanation">
-          <h3>How the clamp is calculated</h3>
-          <p>Example: scale from 14px to 16px as the viewport grows from 768px to 1024px.</p>
-          <code className="font-size-clamp-formula">vw coefficient = (16 − 14) ÷ (1024 − 768) × 100 = 0.78125vw</code>
-          <code className="font-size-clamp-formula">intercept = 14 − (0.0078125 × 768) = 8px = 0.5rem</code>
-          <code className="font-size-clamp-formula">clamp(var(--font-size-050), 0.5rem + 0.78125vw, var(--font-size-100))</code>
-          <p>The middle value equals 14px at 768px and 16px at 1024px. The fixed tokens keep the result within that range and provide a single source of truth for each endpoint.</p>
-        </div>
       </section>
       <section className="type-group" aria-labelledby="line-heights">
         <div className="section-header"><h2 id="line-heights" className="section-title">Line heights</h2><p>Unitless values preserve the intended rhythm as text sizes respond to the viewport.</p></div>
@@ -201,73 +192,113 @@ export default function Typography() {
   );
 }
 
-function FontSizeCurve({ fontSizes }) {
-  const maximum = fontSizes.at(-1).calculatedPixels;
-  const points = fontSizes.map(({ name, calculatedPixels: value }, index) => {
-    return {
-      label: name,
-      value,
-      x: 40 + (index * 560) / (fontSizes.length - 1),
-      y: 172 - (value / maximum) * 132,
+function NomenclaturePopover({ name, placement, isOpen, onToggle }) {
+  const triggerRef = useRef(null);
+  const popoverRef = useRef(null);
+  const description = fontNomenclature.find((item) => item.name === name)?.description;
+  const popoverId = `font-nomenclature-${name.toLowerCase()}-popover`;
+  const titleId = `${popoverId}-title`;
+
+  useLayoutEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const positionPopover = () => {
+      const trigger = triggerRef.current;
+      const popover = popoverRef.current;
+
+      if (!trigger || !popover) {
+        return;
+      }
+
+      const viewportInset = 12;
+      const gap = 8;
+      const triggerBounds = trigger.getBoundingClientRect();
+      const popoverBounds = popover.getBoundingClientRect();
+      const preferredLeft = placement === "end"
+        ? triggerBounds.right - popoverBounds.width
+        : triggerBounds.left;
+      const left = Math.min(
+        Math.max(preferredLeft, viewportInset),
+        window.innerWidth - popoverBounds.width - viewportInset,
+      );
+      const spaceBelow = window.innerHeight - triggerBounds.bottom - gap - viewportInset;
+      const top = spaceBelow >= popoverBounds.height
+        ? triggerBounds.bottom + gap
+        : Math.max(viewportInset, triggerBounds.top - popoverBounds.height - gap);
+
+      popover.style.left = `${left}px`;
+      popover.style.top = `${top}px`;
+      popover.style.visibility = "visible";
     };
-  });
-  const linePoints = points.map(({ x, y }) => `${x},${y}`).join(" ");
+
+    positionPopover();
+    window.addEventListener("resize", positionPopover);
+    window.addEventListener("scroll", positionPopover, true);
+    return () => {
+      window.removeEventListener("resize", positionPopover);
+      window.removeEventListener("scroll", positionPopover, true);
+    };
+  }, [isOpen, placement]);
 
   return (
-    <figure className="spacing-curve">
-      <svg viewBox="0 0 640 208" role="img" aria-labelledby="font-size-curve-title font-size-curve-description">
-        <title id="font-size-curve-title">Calculated font sizes</title>
-        <desc id="font-size-curve-description">A line chart showing the rounded font sizes for the selected viewport base.</desc>
-        <line className="spacing-curve__axis" x1="40" y1="172" x2="600" y2="172" />
-        <line className="spacing-curve__guide" x1="40" y1="106" x2="600" y2="106" />
-        <line className="spacing-curve__guide" x1="40" y1="40" x2="600" y2="40" />
-        <polyline className="spacing-curve__line" points={linePoints} />
-        {points.map(({ label, value, x, y }) => (
-          <g key={label}>
-            <circle className="spacing-curve__point" cx={x} cy={y} r="4" />
-            <text className="spacing-curve__value spacing-curve__value--dynamic" x={x} y={y - 10}>{value}px</text>
-            <text className="spacing-curve__label" x={x} y="194">{label}</text>
-          </g>
-        ))}
-      </svg>
-      <figcaption>Resulting font sizes, rounded to the nearest 2px.</figcaption>
-    </figure>
+    <span className={`font-nomenclature__annotation font-nomenclature__annotation--${placement}`}>
+      <button
+        ref={triggerRef}
+        className="font-nomenclature__trigger"
+        type="button"
+        aria-label={`About ${name} typography`}
+        aria-expanded={isOpen}
+        aria-controls={popoverId}
+        onClick={onToggle}
+      >
+        <InformationCircleIcon aria-hidden="true" />
+      </button>
+      {isOpen && (
+        <span ref={popoverRef} id={popoverId} className="font-nomenclature__popover" role="dialog" aria-labelledby={titleId}>
+          <strong id={titleId}>{name}</strong>
+          <span>{description}</span>
+        </span>
+      )}
+    </span>
   );
 }
 
-function FontSizeMultiplierCurve() {
-  const maximum = fontSizeSteps.at(-1).multiplier;
-  const points = fontSizeSteps.map(({ token, multiplier }, index) => {
-
-    return {
-      label: token.slice(-3),
-      multiplier,
-      x: 40 + (index * 560) / (fontSizeSteps.length - 1),
-      y: 172 - (multiplier / maximum) * 132,
-    };
-  });
+function FontSizeCurve() {
+  const chart = { left: 56, right: 888, top: 36, bottom: 202 };
+  const minimum = fixedFontSizeSteps[0].pixels;
+  const maximum = fixedFontSizeSteps.at(-1).pixels;
+  const points = fixedFontSizeSteps.map(({ name, pixels }, index) => ({
+    name,
+    pixels,
+    x: chart.left + (index * (chart.right - chart.left)) / (fixedFontSizeSteps.length - 1),
+    y: chart.bottom - ((pixels - minimum) / (maximum - minimum)) * (chart.bottom - chart.top),
+  }));
   const linePoints = points.map(({ x, y }) => `${x},${y}`).join(" ");
+  const guides = [16, 40, 64].map((pixels) => ({
+    pixels,
+    y: chart.bottom - ((pixels - minimum) / (maximum - minimum)) * (chart.bottom - chart.top),
+  }));
 
-  return (
-    <figure className="spacing-curve spacing-curve--neutral">
-      <svg viewBox="0 0 640 208" role="img" aria-labelledby="font-size-multiplier-curve-title font-size-multiplier-curve-description">
-        <title id="font-size-multiplier-curve-title">Font size progression multipliers</title>
-        <desc id="font-size-multiplier-curve-description">A line chart showing the progression multipliers across ten font size steps.</desc>
-        <line className="spacing-curve__axis" x1="40" y1="172" x2="600" y2="172" />
-        <line className="spacing-curve__guide" x1="40" y1="106" x2="600" y2="106" />
-        <line className="spacing-curve__guide" x1="40" y1="40" x2="600" y2="40" />
-        <polyline className="spacing-curve__line" points={linePoints} />
-        {points.map(({ label, multiplier, x, y }) => (
-          <g key={label}>
-            <circle className="spacing-curve__point" cx={x} cy={y} r="4" />
-            <text className="spacing-curve__value" x={x} y={y - 10}>{Number(multiplier.toFixed(3))}×</text>
-            <text className="spacing-curve__label" x={x} y="194">{label}</text>
-          </g>
-        ))}
-      </svg>
-      <figcaption>Second-major multipliers applied to the viewport base.</figcaption>
-    </figure>
-  );
+  return <figure className="font-size-curve">
+    <svg viewBox="0 0 920 250" role="img" aria-labelledby="font-size-curve-title font-size-curve-description">
+      <title id="font-size-curve-title">Primitive font-size scale curve</title>
+      <desc id="font-size-curve-description">A line chart showing font sizes increasing from 10 to 64 pixels across fourteen scale steps.</desc>
+      {guides.map(({ pixels, y }) => <g key={pixels}>
+        <line className="font-size-curve__guide" x1={chart.left} y1={y} x2={chart.right} y2={y} />
+        <text className="font-size-curve__guide-label" x={chart.left - 12} y={y + 4}>{pixels}</text>
+      </g>)}
+      <line className="font-size-curve__axis" x1={chart.left} y1={chart.bottom} x2={chart.right} y2={chart.bottom} />
+      <polyline className="font-size-curve__line" points={linePoints} />
+      {points.map(({ name, pixels, x, y }) => <g key={name}>
+        <circle className="font-size-curve__point" cx={x} cy={y} r="4" />
+        <text className="font-size-curve__value" x={x} y={y - 11}>{pixels}px</text>
+        <text className="font-size-curve__step" x={x} y="230">{name}</text>
+      </g>)}
+    </svg>
+    <figcaption>Each step applies a 1.125 ratio to the previously rounded value.</figcaption>
+  </figure>;
 }
 
 function TypographyIntroVisual() {

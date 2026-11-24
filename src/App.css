@@ -30,6 +30,7 @@ main {
 .section-header p {
   max-width: 42rem;
   color: var(--fg-muted);
+  font: var(--font-body-medium);
 }
 
 @media (max-width: 30rem) {
