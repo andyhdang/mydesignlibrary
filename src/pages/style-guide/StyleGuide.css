@@ -248,7 +248,7 @@
 .font-nomenclature {
   --font-highlight: oklch(65% 0.25 330);
   --font-highlight-soft: oklch(65% 0.25 330 / 0.3);
-  margin-bottom: var(--space-stack-xl);
+  margin-bottom: 3.5rem;
 }
 
 .font-nomenclature__mock-design {
@@ -261,6 +261,8 @@
 .font-nomenclature__mock-design header {
   max-width: 44rem;
   margin-bottom: var(--space-stack-l);
+  margin-inline: auto;
+  text-align: center;
 }
 
 .font-nomenclature__mock-display {
@@ -280,20 +282,19 @@
 }
 
 .font-nomenclature__mock-visual {
-  display: grid;
   width: 100%;
   aspect-ratio: 4 / 3;
   margin-bottom: var(--space-stack-xs);
+  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius-m);
   background: var(--bg);
-  color: var(--fg-muted);
-  place-items: center;
 }
 
-.font-nomenclature__mock-visual svg {
-  width: 3rem;
-  height: 3rem;
+.font-nomenclature__mock-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .font-nomenclature__mock-caption {
@@ -481,12 +482,13 @@
 
 .font-shorthand-table-header h3 {
   margin-bottom: var(--space-stack-s);
-  font: var(--font-title-small);
+  font: var(--font-title-medium);
 }
 
 .font-shorthand-table-header p {
   max-width: 42rem;
   color: var(--fg-muted);
+  font: var(--font-body-medium);
 }
 
 .font-size-table,
@@ -494,6 +496,69 @@
   overflow-x: auto;
   border: 1px solid var(--border);
   border-radius: var(--radius-l);
+}
+
+.font-size-curve {
+  margin: 0 0 var(--space-stack-l);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  background: var(--bg-surface);
+}
+
+.font-size-curve svg {
+  display: block;
+  width: 100%;
+  min-width: 52rem;
+  color: var(--fg-accent);
+}
+
+.font-size-curve__axis,
+.font-size-curve__guide {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.font-size-curve__guide {
+  stroke-dasharray: 3 4;
+}
+
+.font-size-curve__line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.font-size-curve__point {
+  fill: var(--bg);
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.font-size-curve__guide-label,
+.font-size-curve__step,
+.font-size-curve__value {
+  fill: var(--fg-muted);
+  font-family: var(--font-family-sans);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
+  text-anchor: middle;
+}
+
+.font-size-curve__guide-label {
+  text-anchor: end;
+}
+
+.font-size-curve__value {
+  fill: var(--fg-accent);
+}
+
+.font-size-curve figcaption {
+  color: var(--fg-muted);
+  font: var(--font-caption);
 }
 
 .token-table {

@@ -1,22 +1,24 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { InformationCircleIcon, PhotoIcon } from "@heroicons/react/24/outline";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import Table from "../../../components/table/Table";
 import formatTokenName from "../formatTokenName";
 
+const aardvarkImage = `${import.meta.env.BASE_URL}images/aardvark.jpeg`;
+
 const fontShorthands = [
   { name: "Body small", token: "--font-body-small", value: ["var(--font-weight-regular)", "clamp(var(--font-size-050), 0.5rem + 0.78125vw, var(--font-size-100))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "14–16 px", sample: "Reading copy" },
-  { name: "Body medium", token: "--font-body-medium", value: ["var(--font-weight-regular)", "clamp(var(--font-size-100), 0.625rem + 0.78125vw, var(--font-size-200))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "16–18 px", sample: "Reading copy" },
-  { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "clamp(var(--font-size-200), 0.75rem + 0.78125vw, var(--font-size-300))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "18–20 px", sample: "Reading copy" },
-  { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "clamp(var(--font-size-200), 0.75rem + 0.78125vw, var(--font-size-300))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "18–20 px", sample: "Section title" },
-  { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "clamp(var(--font-size-300), 0.916667rem + 0.694444vw, var(--font-size-600))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "20–28 px", sample: "Section title" },
-  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "clamp(var(--font-size-500), 1.208333rem + 0.868056vw, var(--font-size-800))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "26–36 px", sample: "Page title" },
+  { name: "Body medium", token: "--font-body-medium", value: ["var(--font-weight-regular)", "clamp(var(--font-size-100), 0.25rem + 1.5625vw, var(--font-size-200))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "16–20 px", sample: "Reading copy" },
+  { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "clamp(var(--font-size-200), 0.5rem + 1.5625vw, var(--font-size-300))", "/ var(--font-line-height-body)", "var(--font-family-sans)"], fontSize: "20–24 px", sample: "Reading copy" },
+  { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "clamp(var(--font-size-200), 0.5rem + 1.5625vw, var(--font-size-300))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "20–24 px", sample: "Section title" },
+  { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "clamp(var(--font-size-300), 1.166667rem + 0.694444vw, var(--font-size-500))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "24–32 px", sample: "Section title" },
+  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "clamp(var(--font-size-500), 1.5rem + 1.041667vw, var(--font-size-800))", "/ var(--font-line-height-title)", "var(--font-family-sans)"], fontSize: "32–44 px", sample: "Page title" },
   { name: "Caption", token: "--font-caption", value: ["var(--font-weight-regular)", "var(--font-size-050)", "/ var(--font-line-height-caption)", "var(--font-family-sans)"], fontSize: "14 px", sample: "Supporting detail" },
-  { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-regular)", "clamp(var(--font-size-100), 0.625rem + 0.78125vw, var(--font-size-200))", "/ var(--font-line-height-subtitle)", "var(--font-family-sans)"], fontSize: "16–18 px", sample: "Supporting copy" },
-  { name: "Display", token: "--font-display", value: ["var(--font-weight-medium)", "clamp(var(--font-size-600), 1.25rem + 1.041667vw, var(--font-size-900))", "/ var(--font-line-height-display)", "var(--font-family-sans)"], fontSize: "28–40 px", sample: "Make impact" },
-  { name: "Code block", token: "--font-code-block", value: ["var(--font-weight-regular)", "var(--font-size-200)", "/ var(--font-line-height-body)", "var(--font-family-mono)"], fontSize: "18 px", sample: "npm run dev" },
+  { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-regular)", "clamp(var(--font-size-100), 0.25rem + 1.5625vw, var(--font-size-200))", "/ var(--font-line-height-subtitle)", "var(--font-family-sans)"], fontSize: "16–20 px", sample: "Supporting copy" },
+  { name: "Display", token: "--font-display", value: ["var(--font-weight-medium)", "clamp(var(--font-size-600), 1.75rem + 1.041667vw, var(--font-size-900))", "/ var(--font-line-height-display)", "var(--font-family-sans)"], fontSize: "36–48 px", sample: "Make impact" },
+  { name: "Code block", token: "--font-code-block", value: ["var(--font-weight-regular)", "var(--font-size-100)", "/ var(--font-line-height-body)", "var(--font-family-mono)"], fontSize: "16 px", sample: "npm run dev" },
   { name: "Label small", token: "--font-label-small", value: ["var(--font-weight-medium)", "var(--font-size-050)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], fontSize: "14 px", sample: "Status" },
   { name: "Label medium", token: "--font-label-medium", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], fontSize: "16 px", sample: "Status" },
-  { name: "Label large", token: "--font-label-large", value: ["var(--font-weight-medium)", "var(--font-size-200)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], fontSize: "18 px", sample: "Status" },
+  { name: "Label large", token: "--font-label-large", value: ["var(--font-weight-medium)", "var(--font-size-200)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], fontSize: "20 px", sample: "Status" },
 ];
 
 const fontNomenclature = [
@@ -51,16 +53,16 @@ const fixedFontSizeSteps = [
   { name: "025", token: "--font-size-025", pixels: 12 },
   { name: "050", token: "--font-size-050", pixels: 14 },
   { name: "100", token: "--font-size-100", pixels: 16 },
-  { name: "200", token: "--font-size-200", pixels: 18 },
-  { name: "300", token: "--font-size-300", pixels: 20 },
-  { name: "400", token: "--font-size-400", pixels: 22 },
-  { name: "500", token: "--font-size-500", pixels: 26 },
-  { name: "600", token: "--font-size-600", pixels: 28 },
-  { name: "700", token: "--font-size-700", pixels: 32 },
-  { name: "800", token: "--font-size-800", pixels: 36 },
-  { name: "900", token: "--font-size-900", pixels: 40 },
-  { name: "1000", token: "--font-size-1000", pixels: 42 },
-  { name: "1100", token: "--font-size-1100", pixels: 46 },
+  { name: "200", token: "--font-size-200", pixels: 20 },
+  { name: "300", token: "--font-size-300", pixels: 24 },
+  { name: "400", token: "--font-size-400", pixels: 28 },
+  { name: "500", token: "--font-size-500", pixels: 32 },
+  { name: "600", token: "--font-size-600", pixels: 36 },
+  { name: "700", token: "--font-size-700", pixels: 40 },
+  { name: "800", token: "--font-size-800", pixels: 44 },
+  { name: "900", token: "--font-size-900", pixels: 48 },
+  { name: "1000", token: "--font-size-1000", pixels: 56 },
+  { name: "1100", token: "--font-size-1100", pixels: 64 },
 ];
 
 function formatRem(pixels) {
@@ -140,19 +142,19 @@ export default function Typography() {
         <div className="font-nomenclature">
           <article className="font-nomenclature__mock-design" aria-label="Typography styles in context">
             <header>
-              <h3 className="font-nomenclature__mock-display"><span className={mockHighlightClass("Display")}>Dink responsibly</span>{nomenclatureTrigger("Display")}</h3>
-              <p className="font-nomenclature__mock-subtitle"><span className={mockHighlightClass("Subtitle")}>A very serious guide to tiny paddles, kitchen drama, and one-more-game energy.</span>{nomenclatureTrigger("Subtitle", "end")}</p>
+              <h3 className="font-nomenclature__mock-display"><span className={mockHighlightClass("Display")}>Dig a little deeper.</span>{nomenclatureTrigger("Display")}</h3>
+              <p className="font-nomenclature__mock-subtitle"><span className={mockHighlightClass("Subtitle")}>Long ears. Strong claws. Serious appetite.</span>{nomenclatureTrigger("Subtitle", "end")}</p>
             </header>
             <div className="font-nomenclature__mock-content">
               <figure>
-                <div className="font-nomenclature__mock-visual" role="img" aria-label="Media placeholder"><PhotoIcon aria-hidden="true" /></div>
-                <figcaption className="font-nomenclature__mock-caption"><span className={mockHighlightClass("Caption")}>The kitchen: where patience wins points and volleys lose friends.</span>{nomenclatureTrigger("Caption", "end")}</figcaption>
+                <div className="font-nomenclature__mock-visual"><img src={aardvarkImage} alt="An aardvark walking across red soil" /></div>
+                <figcaption className="font-nomenclature__mock-caption"><span className={mockHighlightClass("Caption")}>Aardvarks can close their nostrils to keep out dust while digging.</span>{nomenclatureTrigger("Caption", "end")}</figcaption>
               </figure>
               <div>
-                <h4 className="font-nomenclature__mock-title"><span className={mockHighlightClass("Title")}>Own the kitchen</span>{nomenclatureTrigger("Title")}</h4>
-                <p className="font-nomenclature__mock-body"><span className={mockHighlightClass("Body")}>Keep your paddle up, your dinks low, and your victory dance ready. The softest shot can cause the loudest celebration.</span>{nomenclatureTrigger("Body", "end")}</p>
+                <h4 className="font-nomenclature__mock-title"><span className={mockHighlightClass("Title")}>Built for the night</span>{nomenclatureTrigger("Title")}</h4>
+                <p className="font-nomenclature__mock-body"><span className={mockHighlightClass("Body")}>Aardvarks spend warm days curled inside cool burrows, then roam after dark using keen hearing and a remarkable sense of smell to find termites and ants.</span>{nomenclatureTrigger("Body", "end")}</p>
                 <div className="font-nomenclature__mock-action">
-                  <button className="font-nomenclature__mock-label" type="button"><span className={mockHighlightClass("Label")}>Join the rally</span></button>
+                  <button className="font-nomenclature__mock-label" type="button"><span className={mockHighlightClass("Label")}>Meet the aardvark</span></button>
                   {nomenclatureTrigger("Label")}
                 </div>
               </div>
@@ -168,7 +170,8 @@ export default function Typography() {
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="fixed-font-sizes">
-        <div className="section-header"><h2 id="fixed-font-sizes" className="section-title">Font sizes</h2><p>These fixed primitives provide the minimum and maximum bounds for responsive roles and the exact sizes for captions, code, labels, and controls.</p></div>
+        <div className="section-header"><h2 id="fixed-font-sizes" className="section-title">Font sizes</h2><p>The scale starts at 16px on step 100 and follows an iterative second-major ratio. Steps above the base round to the nearest 4px; smaller steps round to the nearest even pixel.</p></div>
+        <FontSizeCurve />
         <div className="font-size-table"><Table stickyFirstColumn><thead><tr><th>Step</th><th>Token</th><th>Value</th><th>Pixels</th><th>Preview</th></tr></thead><tbody>
           {fixedFontSizes.map(({ name, token, value, pixels }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><code>{value}</code></td><td><code>{pixels}</code></td><td><span className="font-size-sample" style={{ fontSize: `var(${token})` }}>The quick brown fox</span></td></tr>)}
         </tbody></Table></div>
@@ -260,6 +263,42 @@ function NomenclaturePopover({ name, placement, isOpen, onToggle }) {
       )}
     </span>
   );
+}
+
+function FontSizeCurve() {
+  const chart = { left: 56, right: 888, top: 36, bottom: 202 };
+  const minimum = fixedFontSizeSteps[0].pixels;
+  const maximum = fixedFontSizeSteps.at(-1).pixels;
+  const points = fixedFontSizeSteps.map(({ name, pixels }, index) => ({
+    name,
+    pixels,
+    x: chart.left + (index * (chart.right - chart.left)) / (fixedFontSizeSteps.length - 1),
+    y: chart.bottom - ((pixels - minimum) / (maximum - minimum)) * (chart.bottom - chart.top),
+  }));
+  const linePoints = points.map(({ x, y }) => `${x},${y}`).join(" ");
+  const guides = [16, 40, 64].map((pixels) => ({
+    pixels,
+    y: chart.bottom - ((pixels - minimum) / (maximum - minimum)) * (chart.bottom - chart.top),
+  }));
+
+  return <figure className="font-size-curve">
+    <svg viewBox="0 0 920 250" role="img" aria-labelledby="font-size-curve-title font-size-curve-description">
+      <title id="font-size-curve-title">Primitive font-size scale curve</title>
+      <desc id="font-size-curve-description">A line chart showing font sizes increasing from 10 to 64 pixels across fourteen scale steps.</desc>
+      {guides.map(({ pixels, y }) => <g key={pixels}>
+        <line className="font-size-curve__guide" x1={chart.left} y1={y} x2={chart.right} y2={y} />
+        <text className="font-size-curve__guide-label" x={chart.left - 12} y={y + 4}>{pixels}</text>
+      </g>)}
+      <line className="font-size-curve__axis" x1={chart.left} y1={chart.bottom} x2={chart.right} y2={chart.bottom} />
+      <polyline className="font-size-curve__line" points={linePoints} />
+      {points.map(({ name, pixels, x, y }) => <g key={name}>
+        <circle className="font-size-curve__point" cx={x} cy={y} r="4" />
+        <text className="font-size-curve__value" x={x} y={y - 11}>{pixels}px</text>
+        <text className="font-size-curve__step" x={x} y="230">{name}</text>
+      </g>)}
+    </svg>
+    <figcaption>Each step applies a 1.125 ratio to the previously rounded value.</figcaption>
+  </figure>;
 }
 
 function TypographyIntroVisual() {
