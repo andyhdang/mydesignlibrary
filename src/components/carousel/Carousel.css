@@ -44,9 +44,8 @@
 
 .carousel__title {
   margin-bottom: var(--space-stack-xs);
-  font: var(--font-label-eyebrow);
+  font: var(--font-eyebrow);
   letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .carousel__controls {

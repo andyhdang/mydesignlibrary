@@ -1,22 +1,54 @@
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { InformationCircleIcon, PhotoIcon } from "@heroicons/react/24/outline";
 import Table from "../../../components/table/Table";
 import formatTokenName from "../formatTokenName";
 
 const fontShorthands = [
-  { name: "Body small", token: "--font-body-small", value: ["var(--font-weight-regular)", "var(--font-size-fluid-200)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
-  { name: "Body medium", token: "--font-body-medium", value: ["var(--font-weight-regular)", "var(--font-size-fluid-300)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
-  { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "var(--font-size-fluid-400)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
-  { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "var(--font-size-fluid-400)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Section title" },
-  { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "var(--font-size-fluid-500)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Section title" },
-  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "var(--font-size-fluid-700)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Page title" },
+  { name: "Body small", token: "--font-body-small", value: ["var(--font-weight-regular)", "var(--font-size-fluid-100)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
+  { name: "Body medium", token: "--font-body-medium", value: ["var(--font-weight-regular)", "var(--font-size-fluid-200)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
+  { name: "Body large", token: "--font-body-large", value: ["var(--font-weight-regular)", "var(--font-size-fluid-300)", "/ var(--font-line-height-body)", "var(--font-family-sans)"], sample: "Reading copy" },
+  { name: "Title small", token: "--font-title-small", value: ["var(--font-weight-medium)", "var(--font-size-fluid-300)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Section title" },
+  { name: "Title medium", token: "--font-title-medium", value: ["var(--font-weight-medium)", "var(--font-size-fluid-400)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Section title" },
+  { name: "Title large", token: "--font-title-large", value: ["var(--font-weight-medium)", "var(--font-size-fluid-600)", "/ var(--font-line-height-title)", "var(--font-family-sans)"], sample: "Page title" },
   { name: "Caption", token: "--font-caption", value: ["var(--font-weight-regular)", "var(--font-size-050)", "/ var(--font-line-height-caption)", "var(--font-family-sans)"], sample: "Supporting detail" },
-  { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-medium)", "var(--font-size-fluid-300)", "/ var(--font-line-height-subtitle)", "var(--font-family-sans)"], sample: "Supporting copy" },
-  { name: "Display", token: "--font-display", value: ["var(--font-weight-bold)", "var(--font-size-fluid-800)", "/ var(--font-line-height-display)", "var(--font-family-sans)"], sample: "Make impact" },
+  { name: "Subtitle", token: "--font-subtitle", value: ["var(--font-weight-regular)", "var(--font-size-fluid-200)", "/ var(--font-line-height-subtitle)", "var(--font-family-sans)"], sample: "Supporting copy" },
+  { name: "Display", token: "--font-display", value: ["var(--font-weight-medium)", "var(--font-size-fluid-700)", "/ var(--font-line-height-display)", "var(--font-family-sans)"], sample: "Make impact" },
   { name: "Code block", token: "--font-code-block", value: ["var(--font-weight-regular)", "var(--font-size-200)", "/ var(--font-line-height-body)", "var(--font-family-mono)"], sample: "npm run dev" },
-  { name: "Label small", token: "--font-label-small", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
-  { name: "Label medium", token: "--font-label-medium", value: ["var(--font-weight-medium)", "var(--font-size-200)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
-  { name: "Label large", token: "--font-label-large", value: ["var(--font-weight-medium)", "var(--font-size-300)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
-  { name: "Label eyebrow", token: "--font-label-eyebrow", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-mono)"], sample: "FOUNDATION" },
+  { name: "Label small", token: "--font-label-small", value: ["var(--font-weight-medium)", "var(--font-size-050)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
+  { name: "Label medium", token: "--font-label-medium", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
+  { name: "Label large", token: "--font-label-large", value: ["var(--font-weight-medium)", "var(--font-size-200)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
+  { name: "Eyebrow", token: "--font-eyebrow", value: ["var(--font-weight-regular)", "var(--font-size-050)", "/ var(--font-line-height-label)", "var(--font-family-mono)"], sample: "Foundation" },
+];
+
+const fontNomenclature = [
+  {
+    name: "Eyebrow",
+    description: "A short contextual phrase placed above a heading to signal category or sequence.",
+  },
+  {
+    name: "Display",
+    description: "Oversized, expressive text reserved for a short, high-impact message.",
+  },
+  {
+    name: "Subtitle",
+    description: "Supporting copy paired with a title to add context or clarify its meaning.",
+  },
+  {
+    name: "Caption",
+    description: "Concise supporting information attached to media, data, or another element.",
+  },
+  {
+    name: "Title",
+    description: "A heading that names a page, section, or distinct content block.",
+  },
+  {
+    name: "Body",
+    description: "Reading text used for sentences, paragraphs, and general content.",
+  },
+  {
+    name: "Label",
+    description: "Compact text used inside controls and interactive interface elements.",
+  },
 ];
 
 const secondMajorRatio = 1.125;
@@ -52,11 +84,9 @@ const fixedFontSizeSteps = [
 ];
 
 const viewportScales = [
-  { id: "mobile", label: "Mobile", basePixels: 14, maximumBasePixels: 16, minimumViewport: 768, maximumViewport: 1024 },
-  { id: "tablet", label: "Tablet", basePixels: 14, maximumBasePixels: 16, minimumViewport: 768, maximumViewport: 1024 },
-  { id: "desktop-small", label: "Desktop small", basePixels: 16, maximumBasePixels: 18, minimumViewport: 1024, maximumViewport: 1536 },
-  { id: "desktop-medium", label: "Desktop medium", basePixels: 16, maximumBasePixels: 18, minimumViewport: 1024, maximumViewport: 1536 },
-  { id: "desktop-large", label: "Desktop large", basePixels: 18, maximumBasePixels: 20, minimumViewport: 1536, maximumViewport: 1920 },
+  { id: "compact", label: "Mobile / tablet", basePixels: 14, maximumBasePixels: 16, minimumViewport: 768, maximumViewport: 1024 },
+  { id: "desktop", label: "Desktop", basePixels: 16, maximumBasePixels: 18, minimumViewport: 1024, maximumViewport: 1536, cappedReadingSizes: [12, 14, 16, 18, 20] },
+  { id: "wide", label: "Wide desktop", basePixels: 18, maximumBasePixels: 20, minimumViewport: 1536, maximumViewport: 1920, cappedReadingSizes: [12, 14, 16, 18, 20] },
 ];
 
 function formatRem(pixels) {
@@ -85,7 +115,7 @@ function getFluidValue(minimum, maximum, minimumViewport, maximumViewport) {
 }
 
 const lineHeights = [
-  { name: "Display", token: "--font-line-height-display", value: "1", font: "--font-display", description: ["Use for oversized", "display text."] },
+  { name: "Display", token: "--font-line-height-display", value: "1.1", font: "--font-display", description: ["Use for oversized", "display text."] },
   { name: "Title", token: "--font-line-height-title", value: "1.25", font: "--font-title-medium", description: ["Use for multi-line", "titles."] },
   { name: "Subtitle", token: "--font-line-height-subtitle", value: "1.25", font: "--font-subtitle", description: ["Use for supporting", "title copy."] },
   { name: "Body", token: "--font-line-height-body", value: "1.5", font: "--font-body-medium", description: ["Use for readable", "body text."] },
@@ -101,11 +131,22 @@ const fontWeights = [
 ];
 
 export default function Typography() {
-  const [selectedScaleId, setSelectedScaleId] = useState("mobile");
+  const [selectedScaleId, setSelectedScaleId] = useState("compact");
+  const [selectedNomenclature, setSelectedNomenclature] = useState(null);
   const selectedScale = viewportScales.find(({ id }) => id === selectedScaleId);
-  const fontSizes = fontSizeSteps.map(({ token, multiplier }) => {
-    const pixels = Math.round((selectedScale.basePixels * multiplier) / 2) * 2;
-    const maximumPixels = Math.round((selectedScale.maximumBasePixels * multiplier) / 2) * 2;
+  const mockHighlightClass = (name) => `font-nomenclature__mock-highlight${selectedNomenclature === name ? " is-highlighted" : ""}`;
+  const nomenclatureTrigger = (name, placement = "start") => (
+    <NomenclaturePopover
+      name={name}
+      placement={placement}
+      isOpen={selectedNomenclature === name}
+      onToggle={() => setSelectedNomenclature((current) => current === name ? null : name)}
+    />
+  );
+  const fontSizes = fontSizeSteps.map(({ token, multiplier }, index) => {
+    const cappedReadingSize = selectedScale.cappedReadingSizes?.[index];
+    const pixels = cappedReadingSize ?? Math.round((selectedScale.basePixels * multiplier) / 2) * 2;
+    const maximumPixels = cappedReadingSize ?? Math.round((selectedScale.maximumBasePixels * multiplier) / 2) * 2;
 
     return {
       name: token.slice(-3),
@@ -131,6 +172,30 @@ export default function Typography() {
     pixels: `${pixels}px`,
   }));
 
+  useEffect(() => {
+    if (!selectedNomenclature) {
+      return undefined;
+    }
+
+    const closeOnPointerDown = (event) => {
+      if (event.target instanceof Element && !event.target.closest(".font-nomenclature__annotation")) {
+        setSelectedNomenclature(null);
+      }
+    };
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setSelectedNomenclature(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", closeOnPointerDown);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnPointerDown);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [selectedNomenclature]);
+
   return (
     <div className="typography-chapter" style={previewStyle}>
       <TypographyIntroVisual />
@@ -143,6 +208,29 @@ export default function Typography() {
       </section>
       <section className="type-group" aria-labelledby="font-shorthands">
         <div className="section-header"><h2 id="font-shorthands" className="section-title">Font shorthands</h2><p>Each token combines family, weight, size, and line height into a reusable font style.</p></div>
+        <div className="font-nomenclature">
+          <article className="font-nomenclature__mock-design" aria-label="Typography styles in context">
+            <header>
+              <p className="font-nomenclature__mock-eyebrow"><span className={mockHighlightClass("Eyebrow")}>Court notes / 04</span>{nomenclatureTrigger("Eyebrow")}</p>
+              <h3 className="font-nomenclature__mock-display"><span className={mockHighlightClass("Display")}>Dink responsibly</span>{nomenclatureTrigger("Display")}</h3>
+              <p className="font-nomenclature__mock-subtitle"><span className={mockHighlightClass("Subtitle")}>A very serious guide to tiny paddles, kitchen drama, and one-more-game energy.</span>{nomenclatureTrigger("Subtitle", "end")}</p>
+            </header>
+            <div className="font-nomenclature__mock-content">
+              <figure>
+                <div className="font-nomenclature__mock-visual" role="img" aria-label="Media placeholder"><PhotoIcon aria-hidden="true" /></div>
+                <figcaption className="font-nomenclature__mock-caption"><span className={mockHighlightClass("Caption")}>The kitchen: where patience wins points and volleys lose friends.</span>{nomenclatureTrigger("Caption", "end")}</figcaption>
+              </figure>
+              <div>
+                <h4 className="font-nomenclature__mock-title"><span className={mockHighlightClass("Title")}>Own the kitchen</span>{nomenclatureTrigger("Title")}</h4>
+                <p className="font-nomenclature__mock-body"><span className={mockHighlightClass("Body")}>Keep your paddle up, your dinks low, and your victory dance ready. The softest shot can cause the loudest celebration.</span>{nomenclatureTrigger("Body", "end")}</p>
+                <div className="font-nomenclature__mock-action">
+                  <button className="font-nomenclature__mock-label" type="button"><span className={mockHighlightClass("Label")}>Join the rally</span></button>
+                  {nomenclatureTrigger("Label")}
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
         <div className="font-shorthand-table"><Table stickyFirstColumn><thead><tr><th>Style</th><th>Token</th><th>Font shorthand</th><th>Preview</th></tr></thead><tbody>
           {fontShorthands.map(({ name, token, value, sample }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><div className="font-shorthand-value">{value.map((part) => <code key={part}>{part}</code>)}</div></td><td><span className="font-shorthand-sample" style={{ font: `var(${token})` }}>{sample}</span></td></tr>)}
         </tbody></Table></div>
@@ -154,13 +242,13 @@ export default function Typography() {
         </tbody></Table></div>
       </section>
       <section className="type-group" aria-labelledby="type-scale">
-        <div className="section-header"><h2 id="type-scale" className="section-title">Fluid font sizes</h2><p>Use fluid sizes for body, subtitle, title, and display text. Each clamp references fixed primitives for its minimum and maximum while following a 1.125 second-major scale.</p></div>
+        <div className="section-header"><h2 id="type-scale" className="section-title">Fluid font sizes</h2><p>The compact scale follows a 1.125 second-major ratio. Reading sizes reach their caps at 1024px, while title and display sizes continue to respond on larger screens.</p></div>
         <FontSizeMultiplierCurve />
         <p className="font-size-viewport-preview">
-          Previewing a <span className="font-size-dynamic-value">{selectedScale.label.toLowerCase()}</span> base of <span className="font-size-dynamic-value">{selectedScale.basePixels}px</span>.
+          Previewing the <span className="font-size-dynamic-value">{selectedScale.label.toLowerCase()}</span> scale.
         </p>
         <div className="font-size-viewport-toggle" role="group" aria-label="Font size viewport preview">
-          {viewportScales.map(({ id, label, basePixels }) => (
+          {viewportScales.map(({ id, label }) => (
             <button
               className={id === selectedScaleId ? "is-active" : undefined}
               type="button"
@@ -168,7 +256,7 @@ export default function Typography() {
               aria-pressed={id === selectedScaleId}
               onClick={() => setSelectedScaleId(id)}
             >
-              {label} ({basePixels}px)
+              {label}
             </button>
           ))}
         </div>
@@ -198,6 +286,79 @@ export default function Typography() {
         </tbody></Table></div>
       </section>
     </div>
+  );
+}
+
+function NomenclaturePopover({ name, placement, isOpen, onToggle }) {
+  const triggerRef = useRef(null);
+  const popoverRef = useRef(null);
+  const description = fontNomenclature.find((item) => item.name === name)?.description;
+  const popoverId = `font-nomenclature-${name.toLowerCase()}-popover`;
+  const titleId = `${popoverId}-title`;
+
+  useLayoutEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const positionPopover = () => {
+      const trigger = triggerRef.current;
+      const popover = popoverRef.current;
+
+      if (!trigger || !popover) {
+        return;
+      }
+
+      const viewportInset = 12;
+      const gap = 8;
+      const triggerBounds = trigger.getBoundingClientRect();
+      const popoverBounds = popover.getBoundingClientRect();
+      const preferredLeft = placement === "end"
+        ? triggerBounds.right - popoverBounds.width
+        : triggerBounds.left;
+      const left = Math.min(
+        Math.max(preferredLeft, viewportInset),
+        window.innerWidth - popoverBounds.width - viewportInset,
+      );
+      const spaceBelow = window.innerHeight - triggerBounds.bottom - gap - viewportInset;
+      const top = spaceBelow >= popoverBounds.height
+        ? triggerBounds.bottom + gap
+        : Math.max(viewportInset, triggerBounds.top - popoverBounds.height - gap);
+
+      popover.style.left = `${left}px`;
+      popover.style.top = `${top}px`;
+      popover.style.visibility = "visible";
+    };
+
+    positionPopover();
+    window.addEventListener("resize", positionPopover);
+    window.addEventListener("scroll", positionPopover, true);
+    return () => {
+      window.removeEventListener("resize", positionPopover);
+      window.removeEventListener("scroll", positionPopover, true);
+    };
+  }, [isOpen, placement]);
+
+  return (
+    <span className={`font-nomenclature__annotation font-nomenclature__annotation--${placement}`}>
+      <button
+        ref={triggerRef}
+        className="font-nomenclature__trigger"
+        type="button"
+        aria-label={`About ${name} typography`}
+        aria-expanded={isOpen}
+        aria-controls={popoverId}
+        onClick={onToggle}
+      >
+        <InformationCircleIcon aria-hidden="true" />
+      </button>
+      {isOpen && (
+        <span ref={popoverRef} id={popoverId} className="font-nomenclature__popover" role="dialog" aria-labelledby={titleId}>
+          <strong id={titleId}>{name}</strong>
+          <span>{description}</span>
+        </span>
+      )}
+    </span>
   );
 }
 
@@ -265,7 +426,7 @@ function FontSizeMultiplierCurve() {
           </g>
         ))}
       </svg>
-      <figcaption>Second-major multipliers applied to the viewport base.</figcaption>
+      <figcaption>Second-major multipliers define the compact scale before reading sizes reach their caps.</figcaption>
     </figure>
   );
 }

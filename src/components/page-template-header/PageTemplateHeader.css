@@ -14,9 +14,8 @@
 
 .page-template-header__label {
   color: var(--fg-inverse);
-  font: var(--font-label-eyebrow);
+  font: var(--font-eyebrow);
   letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .page-template-header__title {

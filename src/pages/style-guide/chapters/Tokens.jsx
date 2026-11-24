@@ -193,7 +193,7 @@ const tokenGroups = [
       ["--font-label-small", "Small label text"],
       ["--font-label-medium", "Medium label text"],
       ["--font-label-large", "Large label text"],
-      ["--font-label-eyebrow", "Eyebrow label text"],
+      ["--font-eyebrow", "Eyebrow text"],
     ],
   },
 ];
