@@ -10,6 +10,7 @@ const colorTokens = [
   { token: "--fg-inverse", light: "oklch(from var(--bg) calc(l - 0.04) c h)", dark: "oklch(from var(--bg) calc(l + 0.04) c h)", sampleType: "text" },
   { token: "--bg-inverse", light: "oklch(from var(--fg) calc(l - 0.1) c h)", dark: "oklch(from var(--fg) calc(l + 0.1) c h)", sampleType: "fill" },
   { token: "--border", light: "oklch(92.05% 0.0042 301.42)", dark: "oklch(31.13% 0.0181 276.38)", sampleType: "border" },
+  { token: "--border-muted", light: "oklch(from var(--border) calc(l + 0.03) c h)", dark: "oklch(from var(--border) calc(l - 0.06) c h)", sampleType: "border" },
   { token: "--bg-code", light: "oklch(96.3% 0.0093 99.98)", dark: "oklch(24.6% 0.0152 279.6)", sampleType: "fill" },
   { token: "--fg-accent", light: "oklch(50% 0.12 190)", dark: "oklch(72% 0.12 190)", sampleType: "text" },
   { token: "--bg-accent", light: "var(--fg-accent)", dark: "var(--fg-accent)", sampleType: "fill" },
@@ -17,34 +18,15 @@ const colorTokens = [
   { token: "--border-accent", light: "oklch(from var(--fg-accent) l c h / 0.5)", dark: "oklch(from var(--fg-accent) l c h / 0.5)", sampleType: "border" },
 ];
 
-const baseColorGroups = [
-  {
-    name: "Foreground",
-    colors: [
-      { name: "Foreground", variable: "--fg", sampleType: "text" },
-      { name: "Muted foreground", variable: "--fg-muted", sampleType: "text" },
-      { name: "Inverse foreground", variable: "--fg-inverse", sampleType: "text" },
-      { name: "Accent foreground", variable: "--fg-accent", sampleType: "text" },
-    ],
-  },
-  {
-    name: "Background",
-    colors: [
-      { name: "Background", variable: "--bg", sampleType: "fill" },
-      { name: "Surface background", variable: "--bg-surface", sampleType: "fill" },
-      { name: "Inverse background", variable: "--bg-inverse", sampleType: "fill" },
-      { name: "Code background", variable: "--bg-code", sampleType: "fill" },
-      { name: "Accent background", variable: "--bg-accent", sampleType: "fill" },
-      { name: "Accent surface background", variable: "--bg-surface-accent", sampleType: "fill" },
-    ],
-  },
-  {
-    name: "Borders",
-    colors: [
-      { name: "Border", variable: "--border", sampleType: "border" },
-      { name: "Accent border", variable: "--border-accent", sampleType: "border" },
-    ],
-  },
+const baseColorPairs = [
+  { name: "Default", foreground: "--fg", background: "--bg" },
+  { name: "Muted", foreground: "--fg-muted", background: "--bg" },
+  { name: "Surface", foreground: "--fg", background: "--bg-surface" },
+  { name: "Inverse", foreground: "--fg-inverse", background: "--bg-inverse" },
+  { name: "Accent", foreground: "--fg-inverse", background: "--bg-accent" },
+  { name: "Accent surface", foreground: "--fg-accent", background: "--bg-surface-accent", border: "--border-accent" },
+  { name: "Border", foreground: "--fg", background: "--bg", border: "--border" },
+  { name: "Muted border", foreground: "--fg-muted", background: "--bg", border: "--border-muted" },
 ];
 
 const outlineButtonTokens = [
@@ -85,8 +67,8 @@ export default function Colors() {
     <>
       <ColorIntroVisual />
       <section className="type-group" aria-labelledby="base-set-colors">
-        <div className="section-header"><h2 id="base-set-colors" className="section-title">Base set colors</h2><p>The most frequently used colors throughout the site.</p></div>
-        <div className="color-groups">{baseColorGroups.map(({ name, colors }) => <section className="color-group" key={name}><h3>{name}</h3><div className="color-grid">{colors.map(({ name: colorName, variable, sampleType }) => <ColorSwatch key={variable} name={colorName} variable={variable} sampleType={sampleType} />)}</div></section>)}</div>
+        <div className="section-header"><h2 id="base-set-colors" className="section-title">Base set colors</h2><p>Foreground and background pairs used for most content across the site.</p></div>
+        <div className="color-grid">{baseColorPairs.map((pair) => <ColorPair key={pair.name} {...pair} />)}</div>
       </section>
       <section className="type-group" aria-labelledby="color-token-values">
         <div className="section-header"><h2 id="color-token-values" className="section-title">Base set color tokens</h2><p>Token values for the light and dark themes.</p></div>
@@ -148,14 +130,10 @@ function ControlStateDemo() {
   </div>;
 }
 
-function ColorSwatch({ name, variable, sampleType }) {
-  const style = sampleType === "border"
-    ? { borderColor: `var(${variable})` }
-    : sampleType === "text"
-      ? { color: `var(${variable})` }
-      : { backgroundColor: `var(${variable})` };
+function ColorPair({ name, foreground, background, border }) {
+  const style = { backgroundColor: `var(${background})`, color: `var(${foreground})`, ...(border && { borderColor: `var(${border})`, borderWidth: "2px" }) };
 
-  return <div className="color-card"><div className={`color-swatch color-swatch--${sampleType}`} style={style}>{sampleType === "text" && "Aa"}</div><div><strong>{name}</strong><code>{formatTokenName(variable)}</code></div></div>;
+  return <article className="color-card"><div className="color-swatch" style={style} aria-hidden="true">Aa</div><div className="color-card__body"><h4>{name}</h4><dl className="color-card__tokens">{[["Foreground", foreground], ["Background", background], ["Border", border]].filter(([, token]) => token).map(([role, token]) => <div key={role}><dt>{role}</dt><dd><code>{formatTokenName(token)}</code></dd></div>)}</dl></div></article>;
 }
 
 function ColorSample({ token, type }) {

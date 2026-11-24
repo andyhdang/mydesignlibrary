@@ -935,17 +935,8 @@
 
 .color-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
   gap: 1rem;
-}
-
-.color-groups {
-  display: grid;
-  gap: 2rem;
-}
-
-.color-group h3 {
-  font: var(--font-label-medium);
 }
 
 .state-color-demo {
@@ -1061,9 +1052,8 @@
 
 .color-card {
   display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
   gap: 1rem;
-  align-items: center;
   padding: 0.75rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-m);
@@ -1071,33 +1061,41 @@
 }
 
 .color-swatch {
-  min-height: 4rem;
+  display: grid;
+  place-items: center;
+  min-height: 6rem;
+  font-size: 1.5rem;
+  font-weight: 700;
   border: 1px solid var(--border);
   border-radius: var(--radius-m);
 }
 
-.color-swatch--text {
+.color-card__body {
   display: grid;
-  place-items: center;
-  background: var(--bg);
-  font-size: 1.5rem;
-  font-weight: 700;
+  align-content: start;
+  gap: var(--space-stack-xs);
 }
 
-.color-swatch--border {
-  border-width: 2px;
-  background: var(--bg);
+.color-card h4 {
+  font: var(--font-label-medium);
 }
 
-.color-card strong,
-.color-card code {
-  display: block;
+.color-card__tokens {
+  display: grid;
+  gap: var(--space-stack-xs);
 }
 
-.color-card code {
-  width: fit-content;
-  margin-top: 0.25rem;
-  font-size: 0.75rem;
+.color-card__tokens div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-inline-s);
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.color-card__tokens dt {
+  color: var(--fg-muted);
+  font: var(--font-body-small);
 }
 
 .elevation-preview {

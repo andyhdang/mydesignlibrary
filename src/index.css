@@ -35,6 +35,7 @@
   --fg-inverse: oklch(from var(--bg) calc(l - 0.04) c h);
   --bg-inverse: oklch(from var(--fg) calc(l - 0.1) c h);
   --border: oklch(92.05% 0.0042 301.42);
+  --border-muted: oklch(from var(--border) calc(l + 0.03) c h);
   --bg-code: oklch(96.3% 0.0093 99.98);
 
   /* Accents */
@@ -212,6 +213,7 @@
     --fg-inverse: oklch(from var(--bg) calc(l + 0.04) c h);
     --bg-inverse: oklch(from var(--fg) calc(l + 0.1) c h);
     --border: oklch(31.13% 0.0181 276.38);
+    --border-muted: oklch(from var(--border) calc(l - 0.06) c h);
     --bg-code: oklch(24.6% 0.0152 279.6);
     --fg-accent: oklch(72% 0.12 190);
     --bg-accent: var(--fg-accent);
@@ -240,6 +242,7 @@
   --fg-inverse: oklch(from var(--bg) calc(l + 0.04) c h);
   --bg-inverse: oklch(from var(--fg) calc(l + 0.1) c h);
   --border: oklch(31.13% 0.0181 276.38);
+  --border-muted: oklch(from var(--border) calc(l - 0.06) c h);
   --bg-code: oklch(24.6% 0.0152 279.6);
   --fg-accent: oklch(72% 0.12 190);
   --bg-accent: var(--fg-accent);

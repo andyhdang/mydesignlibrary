@@ -13,6 +13,7 @@ const tokenGroups = [
       ["--fg-inverse", "Foreground color for inverse surfaces"],
       ["--bg-inverse", "Inverse background color"],
       ["--border", "Standard border color"],
+      ["--border-muted", "Muted border color"],
       ["--bg-code", "Code background color"],
       ["--fg-accent", "Primary accent foreground color"],
       ["--bg-accent", "Primary accent background color"],
