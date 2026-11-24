@@ -1,8 +1,8 @@
 export const typographyAnchors = [
   { id: "font-families", label: "Font family" },
+  { id: "font-roles", label: "Font roles" },
   { id: "font-shorthands", label: "Font shorthands" },
   { id: "fixed-font-sizes", label: "Font sizes" },
-  { id: "type-scale", label: "Responsive scale" },
   { id: "line-heights", label: "Line heights" },
   { id: "font-weights", label: "Font weights" },
 ];

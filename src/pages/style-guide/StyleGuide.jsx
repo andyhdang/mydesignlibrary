@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import PageAnchorTabs from "../../components/page-anchor-tabs/PageAnchorTabs";
 import SubNavigation from "../../components/sub-navigation/SubNavigation";
 import Carousel from "./chapters/Carousel";
 import Colors from "./chapters/Colors";
@@ -36,7 +37,7 @@ const indexPages = { foundations: foundationPages, components: componentPages };
 
 const navPage = (slug) => {
   const { title } = chapters.find((chapter) => chapter.slug === slug);
-  return { slug, title, anchors: sectionAnchors[slug] };
+  return { slug, title };
 };
 
 const navItems = [
@@ -48,11 +49,13 @@ const navItems = [
 export default function StyleGuide() {
   const { section = "overview" } = useParams();
   const activeChapter = chapters.find((item) => item.slug === section) ?? chapters[0];
+  const activeAnchors = sectionAnchors[activeChapter.slug];
 
   return <main className="docs"><SubNavigation label="Style guide chapters" items={navItems} activeSlug={activeChapter.slug} basePath="/style-guide" /><div className="docs-content">
     {activeChapter.slug === "overview" && <header className="docs-header"><span className="docs-eyebrow">Foundation</span><h1 className="page-title">React Boilerplate Foundations</h1></header>}
+    {activeChapter.slug !== "overview" && <div className="page-header"><div><h1 className="page-title">{activeChapter.title}</h1><p>{activeChapter.description}</p></div></div>}
+    {activeAnchors && <PageAnchorTabs key={activeChapter.slug} anchors={activeAnchors} label={`${activeChapter.title} sections`} />}
     <section className="docs-section">
-      {activeChapter.slug !== "overview" && <div className="page-header"><div><h1 className="page-title">{activeChapter.title}</h1><p>{activeChapter.description}</p></div></div>}
       <activeChapter.Component pages={indexPages[activeChapter.slug]} />
     </section>
   </div></main>;

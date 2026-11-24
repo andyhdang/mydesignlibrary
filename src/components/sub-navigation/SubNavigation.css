@@ -21,15 +21,13 @@
   min-width: 0;
 }
 
-.sub-navigation__links,
-.page-anchors__links {
+.sub-navigation__links {
   display: grid;
   gap: 0.5rem;
 }
 
 .sub-navigation__item > a,
-.sub-navigation__group-toggle,
-.page-anchors__links a {
+.sub-navigation__group-toggle {
   transition:
     color 0.2s ease,
     border-color 0.2s ease,
@@ -68,13 +66,6 @@
   gap: 0.5rem;
   padding: 0.625rem 0.75rem 0.625rem 1.25rem;
   position: relative;
-  color: var(--fg);
-  font: var(--font-label-medium);
-  text-decoration: none;
-}
-
-.page-anchors__links a {
-  padding: 0.625rem 0.75rem;
   color: var(--fg);
   font: var(--font-label-medium);
   text-decoration: none;
@@ -178,28 +169,6 @@
 .sub-navigation__icon {
   width: 1rem;
   height: 1rem;
-}
-
-.page-anchors {
-  margin: 0.75rem 0 0.5rem 1rem;
-}
-
-.page-anchors .page-anchors__links a {
-  border: 0;
-  border-radius: 0;
-  padding: 0.375rem 0.5rem;
-  font: var(--font-label-small);
-}
-
-.page-anchors .page-anchors__links a.active,
-.page-anchors .page-anchors__links a:hover,
-.page-anchors .page-anchors__links a:focus-visible {
-  color: var(--sub-navigation-strong);
-  outline: none;
-}
-
-.page-anchors .page-anchors__links {
-  gap: 0.25rem;
 }
 
 @media (max-width: 64rem) {
@@ -311,8 +280,7 @@
   .sub-navigation__group-toggle,
   .sub-navigation__item > a::before,
   .sub-navigation__group-toggle::before,
-  .sub-navigation__chevron,
-  .page-anchors__links a {
+  .sub-navigation__chevron {
     transition: none;
   }
 
