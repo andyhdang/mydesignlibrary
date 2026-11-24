@@ -44,8 +44,7 @@
 
 .carousel__title {
   margin-bottom: var(--space-stack-xs);
-  font: var(--font-eyebrow);
-  letter-spacing: 0.1em;
+  font: var(--font-label-small);
 }
 
 .carousel__controls {

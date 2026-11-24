@@ -12,8 +12,7 @@
 
 .quick-facts dt {
   color: var(--fg-muted);
-  font: var(--font-eyebrow);
-  letter-spacing: 0.06em;
+  font: var(--font-label-small);
 }
 
 .quick-facts dd {

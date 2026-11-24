@@ -17,8 +17,7 @@
 
 .docs-eyebrow {
   color: var(--fg-accent);
-  font: var(--font-eyebrow);
-  letter-spacing: 0.1em;
+  font: var(--font-label-small);
 }
 
 .docs-section {
@@ -191,7 +190,7 @@
 .font-nomenclature {
   --font-highlight: oklch(65% 0.25 330);
   --font-highlight-soft: oklch(65% 0.25 330 / 0.3);
-  margin-bottom: var(--space-stack-l);
+  margin-bottom: var(--space-stack-xl);
 }
 
 .font-nomenclature__mock-design {
@@ -204,12 +203,6 @@
 .font-nomenclature__mock-design header {
   max-width: 44rem;
   margin-bottom: var(--space-stack-l);
-}
-
-.font-nomenclature__mock-eyebrow {
-  margin-bottom: var(--space-stack-s);
-  color: var(--fg-accent);
-  font: var(--font-eyebrow);
 }
 
 .font-nomenclature__mock-display {
@@ -497,7 +490,19 @@
   justify-items: start;
 }
 
+.font-shorthand-table-header {
+  margin-bottom: var(--space-stack-m);
+}
 
+.font-shorthand-table-header h3 {
+  margin-bottom: var(--space-stack-s);
+  font: var(--font-title-small);
+}
+
+.font-shorthand-table-header p {
+  max-width: 42rem;
+  color: var(--fg-muted);
+}
 
 .font-size-table,
 .font-shorthand-table {

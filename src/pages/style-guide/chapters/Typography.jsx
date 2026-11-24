@@ -17,14 +17,9 @@ const fontShorthands = [
   { name: "Label small", token: "--font-label-small", value: ["var(--font-weight-medium)", "var(--font-size-050)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
   { name: "Label medium", token: "--font-label-medium", value: ["var(--font-weight-medium)", "var(--font-size-100)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
   { name: "Label large", token: "--font-label-large", value: ["var(--font-weight-medium)", "var(--font-size-200)", "/ var(--font-line-height-label)", "var(--font-family-sans)"], sample: "Status" },
-  { name: "Eyebrow", token: "--font-eyebrow", value: ["var(--font-weight-regular)", "var(--font-size-050)", "/ var(--font-line-height-label)", "var(--font-family-mono)"], sample: "Foundation" },
 ];
 
 const fontNomenclature = [
-  {
-    name: "Eyebrow",
-    description: "A short contextual phrase placed above a heading to signal category or sequence.",
-  },
   {
     name: "Display",
     description: "Oversized, expressive text reserved for a short, high-impact message.",
@@ -206,12 +201,11 @@ export default function Typography() {
           <FontFamily label="Code" token="--font-family-mono" stack="ui-monospace, Consolas, monospace" className="font-mono" sample="const foundation = true;" />
         </tbody></Table></div>
       </section>
-      <section className="type-group" aria-labelledby="font-shorthands">
-        <div className="section-header"><h2 id="font-shorthands" className="section-title">Font shorthands</h2><p>Each token combines family, weight, size, and line height into a reusable font style.</p></div>
+      <section className="type-group" aria-labelledby="font-roles">
+        <div className="section-header"><h2 id="font-roles" className="section-title">Font roles</h2><p>Font roles give text a clear purpose within the interface. Use them consistently to establish hierarchy and help people understand the relationship between content and controls.</p></div>
         <div className="font-nomenclature">
           <article className="font-nomenclature__mock-design" aria-label="Typography styles in context">
             <header>
-              <p className="font-nomenclature__mock-eyebrow"><span className={mockHighlightClass("Eyebrow")}>Court notes / 04</span>{nomenclatureTrigger("Eyebrow")}</p>
               <h3 className="font-nomenclature__mock-display"><span className={mockHighlightClass("Display")}>Dink responsibly</span>{nomenclatureTrigger("Display")}</h3>
               <p className="font-nomenclature__mock-subtitle"><span className={mockHighlightClass("Subtitle")}>A very serious guide to tiny paddles, kitchen drama, and one-more-game energy.</span>{nomenclatureTrigger("Subtitle", "end")}</p>
             </header>
@@ -230,6 +224,10 @@ export default function Typography() {
               </div>
             </div>
           </article>
+        </div>
+        <div className="font-shorthand-table-header">
+          <h3>Font shorthands</h3>
+          <p>Each shorthand combines family, weight, size, and line height into a reusable font declaration for its role.</p>
         </div>
         <div className="font-shorthand-table"><Table stickyFirstColumn><thead><tr><th>Style</th><th>Token</th><th>Font shorthand</th><th>Preview</th></tr></thead><tbody>
           {fontShorthands.map(({ name, token, value, sample }) => <tr key={token}><td>{name}</td><td><code>{formatTokenName(token)}</code></td><td><div className="font-shorthand-value">{value.map((part) => <code key={part}>{part}</code>)}</div></td><td><span className="font-shorthand-sample" style={{ font: `var(${token})` }}>{sample}</span></td></tr>)}

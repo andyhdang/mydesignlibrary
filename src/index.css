@@ -168,7 +168,6 @@
   --font-label-small: var(--font-weight-medium) var(--font-size-050) / var(--font-line-height-label) var(--font-family-sans);
   --font-label-medium: var(--font-weight-medium) var(--font-size-100) / var(--font-line-height-label) var(--font-family-sans);
   --font-label-large: var(--font-weight-medium) var(--font-size-200) / var(--font-line-height-label) var(--font-family-sans);
-  --font-eyebrow: var(--font-weight-regular) var(--font-size-050) / var(--font-line-height-label) var(--font-family-mono);
 }
 
 @media (min-width: 64rem) {

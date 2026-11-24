@@ -15,8 +15,7 @@
 
 .hero__eyebrow {
   color: var(--fg-accent);
-  font: var(--font-eyebrow);
-  letter-spacing: 0.06em;
+  font: var(--font-label-small);
 }
 
 .hero__title {
